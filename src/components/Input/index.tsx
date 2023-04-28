@@ -4,9 +4,10 @@ export interface IInputProps {
     type: string;
     id: string;
     register: UseFormRegisterReturn<string>;
-    error?: FieldError
+    error?: FieldError,
+   
   }
-export const Input=({ type, id, register, error }:IInputProps)=>{
+export const Input=({ type, id, register, error}:IInputProps)=>{
 
     return(
         <div>

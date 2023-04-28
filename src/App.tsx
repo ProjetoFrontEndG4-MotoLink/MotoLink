@@ -1,4 +1,5 @@
 import { RounterMain } from './Routes/RouterMain'
+import { GlobalStyles } from './syles/global'
 
 export const App =()=>{
 
@@ -7,6 +8,7 @@ export const App =()=>{
     
     <>
       <RounterMain/>
+      <GlobalStyles/>
     
     </>
   )

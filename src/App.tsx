@@ -1,13 +1,13 @@
-import { RounterMain } from './assets/Routes/RouterMain'
+import { RounterMain } from './Routes/RouterMain'
 
-function App() {
-console.log("Develop")
+export const App =()=>{
 
-  return (
-   <>
-   <RounterMain/>
-   </>
+  return(
+
+    
+    <>
+      <RounterMain/>
+    
+    </>
   )
 }
-
-export default App

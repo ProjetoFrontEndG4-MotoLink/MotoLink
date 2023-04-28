@@ -4,6 +4,7 @@ import { useContext, useState } from "react";
 import { UserContext } from "../../providers/UserContext";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema } from "./loginSchema";
+import { StyledFormLogin } from "./style";
 
 export interface ILoginFormData {
   email: string;
@@ -25,22 +26,28 @@ export const LoginForm = () => {
     userLogin(formData,setLoading);
   };
   return (
-    <form onSubmit={handleSubmit(submit)}>
-      <Input
-        type="email"
-        id={"E-mail"}
-        register={register("email")}
-        error={errors.email}
-      />
+    <>
+      <StyledFormLogin>
+        <h3>Login</h3>
 
-      <Input
-        type="password"
-        id={"Senha"}
-        register={register("password")}
-        error={errors.password}
-      />
+        <form onSubmit={handleSubmit(submit)}>
+          <Input
+            type="email"
+            id={"E-mail"}
+            register={register("email")}
+            error={errors.email}
+          />
 
-      <button    disabled={loading} > {loading ? "Entrando..." : "Entrar"}</button>
-    </form>
+          <Input
+            type="password"
+            id={"Senha"}
+            register={register("password")}
+            error={errors.password}
+          />
+
+          <button disabled={loading} > {loading ? "Entrando..." : "Entrar"}</button>
+        </form>
+      </StyledFormLogin>
+    </>
   );
 };

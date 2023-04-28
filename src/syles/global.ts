@@ -6,7 +6,6 @@ export const GlobalStyles = createGlobalStyle`
         margin: 0;
         padding: 0;
         outline: none;
-        border: none;
         list-style: none;
         text-decoration: none;
         font-family: 'Inter', sans-serif;

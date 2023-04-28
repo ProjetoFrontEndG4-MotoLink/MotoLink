@@ -5,5 +5,5 @@ import { Navigate, Outlet } from "react-router-dom"
 export const ProtectedDashMotoboy=()=>{
     const {user}=useContext(UserContext)
 
-    return user && user.userType =="motoboy"?  <Outlet/> : <Navigate to={"/"}/>
+    return  user?.userType=="motoboy"? <Outlet/> : <Navigate to={"/"}/>
 }

@@ -1,15 +1,11 @@
-import { RounterMain } from './Routes/RouterMain'
-import { GlobalStyles } from './syles/global'
+import { RounterMain } from "./Routes/RouterMain";
+import { GlobalStyles } from "./styles/global";
 
-export const App =()=>{
-
-  return(
-
-    
-    <>
-      <RounterMain/>
-      <GlobalStyles/>
-    
-    </>
-  )
-}
+export const App = () => {
+  return (
+    <div className="App">
+      <RounterMain />
+      <GlobalStyles />
+    </div>
+  );
+};

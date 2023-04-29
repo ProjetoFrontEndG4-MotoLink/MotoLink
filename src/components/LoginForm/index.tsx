@@ -5,6 +5,7 @@ import { UserContext } from "../../providers/UserContext";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema } from "./loginSchema";
 import { StyledFormLogin } from "./style";
+import { ButtonDefault } from "../../styles/buttons";
 
 export interface ILoginFormData {
   email: string;
@@ -16,14 +17,14 @@ export const LoginForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ILoginFormData>({resolver:zodResolver(LoginSchema)});
+  } = useForm<ILoginFormData>({ resolver: zodResolver(LoginSchema) });
 
-  const {userLogin}=useContext(UserContext)
+  const { userLogin } = useContext(UserContext);
 
   const [loading, setLoading] = useState(false);
 
   const submit: SubmitHandler<ILoginFormData> = (formData) => {
-    userLogin(formData,setLoading);
+    userLogin(formData, setLoading);
   };
   return (
     <>
@@ -34,6 +35,7 @@ export const LoginForm = () => {
           <Input
             type="email"
             id={"E-mail"}
+            placeholder="Ex.: email@teste.com"
             register={register("email")}
             error={errors.email}
           />
@@ -41,11 +43,18 @@ export const LoginForm = () => {
           <Input
             type="password"
             id={"Senha"}
+            placeholder="Digite sua senha"
             register={register("password")}
             error={errors.password}
           />
-
-          <button disabled={loading} > {loading ? "Entrando..." : "Entrar"}</button>
+          <ButtonDefault
+            className="fullWidth"
+            buttonSize="default"
+            buttonStyle="grey"
+          >
+            {" "}
+            {loading ? "Entrando..." : "Entrar"}
+          </ButtonDefault>
         </form>
       </StyledFormLogin>
     </>

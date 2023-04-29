@@ -1,14 +1,20 @@
 import styled from "styled-components";
 
 export const StyledFormLogin = styled.div`
-  
-    border: 1px solid black;
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  justify-content: center;
+
+  h3 {
+    align-self: center;
+  }
+
+  form {
+    width: 100%;
     display: flex;
+    align-self: center;
+    gap: 20px;
     flex-direction: column;
-
-    h3 {
-        font-size: var(--title-2);
-        align-self: center;
-    }
-
-`
+  }
+`;

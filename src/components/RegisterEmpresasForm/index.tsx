@@ -20,56 +20,78 @@ export const RegisterFormEmpresas = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IRegisterEmpresasFormData>({resolver:zodResolver(SchemaEmpresas)});
+  } = useForm<IRegisterEmpresasFormData>({
+    resolver: zodResolver(SchemaEmpresas),
+  });
 
   const { registerEmpresa } = useContext(UserContext);
 
   const submit: SubmitHandler<IRegisterEmpresasFormData> = (formData) => {
-    console.log(formData);
+    registerEmpresa(formData);
+    
   };
   return (
     <form onSubmit={handleSubmit(submit)}>
       <Input
+        label="Nome"
         type="text"
         id={"Nome"}
-        register={register("name")}
+        {...register("name")}
         error={errors.name}
+        placeholder="Digite seu nome aqui"
       />
       <Input
+        label="E-mail"
         type="email"
         id={"E-mail"}
-        register={register("email")}
+        {...register("email")}
         error={errors.email}
+        placeholder="Ex.: email@teste.com"
       />
 
       <Input
+        label="Senha"
         type="password"
         id={"Senha"}
-        register={register("password")}
+        {...register("password")}
         error={errors.password}
+        placeholder="Digite sua senha"
       />
 
       <Input
+        label="Confirmar senha"
         type="password"
         id={"Confirmar Senha"}
-        register={register("confirmPassword")}
+        {...register("confirmPassword")}
         error={errors.confirmPassword}
+        placeholder="Confirme sua senha"
       />
       <Input
+        label="Foto do perfil"
         type="text"
         id={"Avatar"}
-        register={register("avatar")}
+        {...register("avatar")}
         error={errors.avatar}
+        placeholder="Insira sua foto do perfil"
+      />
+
+      <Input
+        label="Setor"
+        type="text"
+        id={"Setor"}
+        {...register("setor")}
+        error={errors.setor}
+        placeholder="Ex: pizzaria"
       />
 
       <Input
         type="text"
-        id={"Setor"}
-        register={register("setor")}
-        error={errors.setor}
+        {...register("userType")}
+        error={errors.userType}
+        id={"userType"}
+        value="empresa"
+        
       />
-
-      <input type="text" value="empresa" {...register("userType")} />
 
       <button>Cadastrar</button>
     </form>

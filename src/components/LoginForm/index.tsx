@@ -33,18 +33,20 @@ export const LoginForm = () => {
 
         <form onSubmit={handleSubmit(submit)}>
           <Input
+          label="E-mail"
             type="email"
             id={"E-mail"}
             placeholder="Ex.: email@teste.com"
-            register={register("email")}
+            {...register("email")}
             error={errors.email}
           />
 
           <Input
+          label="Senha"
             type="password"
             id={"Senha"}
             placeholder="Digite sua senha"
-            register={register("password")}
+            {...register("password")}
             error={errors.password}
           />
           <ButtonDefault
@@ -52,7 +54,7 @@ export const LoginForm = () => {
             buttonSize="default"
             buttonStyle="grey"
           >
-            {" "}
+            
             {loading ? "Entrando..." : "Entrar"}
           </ButtonDefault>
         </form>

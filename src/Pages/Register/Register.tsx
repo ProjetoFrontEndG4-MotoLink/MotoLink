@@ -26,9 +26,10 @@ export const Register = () => {
 
   return (
     <>
+    <h1>Com que objetivo você quer entrar na MotoLink?</h1>
       {firstStep ? (
         <div>
-          <h1>Com que objetivo você quer entrar na MotoLink?</h1>
+          
           <button onClick={() => openMotoboyForm()}>Sou motoboy</button>
           <button onClick={() => openCompanyForm()}>
             Sou uma empresa delivery

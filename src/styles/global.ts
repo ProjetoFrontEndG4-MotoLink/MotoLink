@@ -12,12 +12,13 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     body {
-        height: 100vh;
-    }
-
-    .App{
         width: 100vw;
         height: 100vh;
+    }
+    
+    .App{
+        width: 100vw;
+        min-height: 100vh;
     }
 
     :root {
@@ -37,6 +38,7 @@ export const GlobalStyles = createGlobalStyle`
         --error: #E83F5B;
         
         --title-1:  2.813rem; /* 45px */
+        --title-1-mobile: 1.56rem; /* 45px */
         --title-2: 1.5rem; /* 24px */
         --title-3: 1.25rem; /* 20px */
         --text-1: 1.125rem; /* 18px */
@@ -47,6 +49,8 @@ export const GlobalStyles = createGlobalStyle`
         --weight-2: 800;
         --weight-3: 700;
         --weight-4: 400;
+
+        --border-Radius: 5px;
     }
 
     
@@ -81,11 +85,34 @@ export const GlobalStyles = createGlobalStyle`
         color: var(--grey-1);
     }
 
+    .textSmall {
+        align-self: center;
+        font-size: var(--text-3);
+        font-weight: var(--weight-4);
+        color: var(--grey-1);
+
+        a {
+            color: inherit;
+        }
+    }
+
+    .textSmallBold {
+        font-size: var(--text-3);
+        font-weight: var(--weight-3);
+        color: var(--grey-1);
+    }
+
     button {
         cursor: pointer;
 
         a{
             color: inherit;
+        }
+    }
+
+    @media (max-width: 425px) {
+        :root {
+            --title-1: 1.56rem;
         }
     }
 

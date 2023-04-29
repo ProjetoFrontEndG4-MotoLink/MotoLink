@@ -2,21 +2,10 @@ import styled from "styled-components";
 
 export const StyledLoginPage = styled.div`
   display: flex;
-  height: 100%;
+  min-height: 100vh;
 
   .fullWidth {
     width: 100%;
-  }
-
-  .header__login {
-    height: 60px;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    margin-bottom: 27px;
   }
 
   .logo__column1 {
@@ -29,10 +18,14 @@ export const StyledLoginPage = styled.div`
     display: flex;
     justify-content: center;
     width: 50%;
-    height: 100%;
+    min-height: 100vh;
     padding: 20px;
 
     background-color: var(--brand-1);
+
+    img {
+      max-width: 100%;
+    }
 
     .column1__Content {
       display: flex;
@@ -55,10 +48,11 @@ export const StyledLoginPage = styled.div`
   }
 
   .column2 {
+    padding: 60px 0px;
     display: flex;
     justify-content: center;
     width: 50%;
-    height: 100%;
+    min-height: 100vh;
 
     .formContainer {
       display: flex;
@@ -87,13 +81,80 @@ export const StyledLoginPage = styled.div`
     height: auto;
   }
 
-  @media (min-width: 1024px) {
-    .header__login {
-      display: none;
+  .optionsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 380px;
+
+    .titleOptionsContainer {
+      font-size: 1.75rem;
+      font-weight: var(--weight-3);
+      color: var(--grey-2);
+
+      span {
+        color: var(--brand-1);
+        font-weight: var(--weight-2);
+      }
     }
 
-    .padding__default {
-      padding: 0px;
+    .optionsCard__container {
+      display: flex;
+      gap: 10px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
+    height: fit-content;
+
+    .header__login {
+      position: absolute;
+
+      box-sizing: border-box;
+      top: 0;
+      height: 60px;
+      width: 100%;
+      background-color: var(--whiteFixed);
+      box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      margin-bottom: 27px;
+      padding: 20px;
+
+      img {
+        height: 27px;
+      }
+    }
+
+    .column1 {
+      width: 100%;
+      height: fit-content;
+      padding: 60px 20px 60px;
+
+      .column1__Content img {
+        max-width: 90%;
+      }
+    }
+
+    .column2 {
+      width: 100%;
+      height: fit-content;
+      padding: 100px 20px 40px;
+
+      .optionsContainer {
+        align-self: center;
+        max-width: 90%;
+      }
+    }
+  }
+
+  @media (min-width: 768px) {
+    .header__login {
+      display: none;
     }
   }
 `;

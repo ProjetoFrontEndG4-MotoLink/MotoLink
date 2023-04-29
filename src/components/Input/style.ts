@@ -23,6 +23,13 @@ export const StyledInputContainer = styled.div`
     }
   }
 
+  .disabled {
+    border: 1px solid var(--brand-4);
+    font-weight: var(--weight-3);
+    background-color: var(--brand-4);
+    color: #985006;
+  }
+
   label {
     background-color: var(--whiteFixed);
     position: absolute;

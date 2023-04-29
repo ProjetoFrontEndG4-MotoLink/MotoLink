@@ -10,6 +10,11 @@ type IndexTemplateProps = {
 export const IndexDefaultTemplate = ({ children }: IndexTemplateProps) => {
   return (
     <StyledLoginPage>
+      <header className="header__login">
+        <div>
+          <img src={logo} alt="logo MotoLink" />
+        </div>
+      </header>
       <div className="column1">
         <div className="column1__Content">
           <div className="detail"></div>

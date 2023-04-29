@@ -20,7 +20,7 @@ export const Input = ({
     <StyledInputContainer>
       <label htmlFor={id}>{id}</label>
       <input type={type} id={id} placeholder={placeholder} {...register} />
-      {error ? <p>{error.message}</p> : null}
+      {error ? <p className="error">{error.message}</p> : null}
     </StyledInputContainer>
   );
 };

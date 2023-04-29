@@ -10,6 +10,7 @@ export const ButtonDefault = styled.button<IStyledButtonProps>`
   border-radius: 5px;
   font-size: var(--text-1);
   font-weight: var(--weight-3);
+  border: 2px solid var(--brand-3);
 
   .fullWidth {
     width: 100%;
@@ -20,7 +21,7 @@ export const ButtonDefault = styled.button<IStyledButtonProps>`
       case "default":
         return css`
           padding: 20px;
-          height: 64px;
+          height: 60px;
         `;
       case "medium":
         return css`
@@ -35,18 +36,32 @@ export const ButtonDefault = styled.button<IStyledButtonProps>`
       case "orange":
         return css`
           background-color: var(--brand-4);
+          border: 2px solid var(--brand-4);
+
+          :hover {
+            border: 2px solid var(--brand-4-shadow);
+            background-color: var(--brand-4-shadow);
+          }
         `;
       case "grey":
         return css`
           background-color: var(--brand-3);
+          border: 2px solid var(--brand-3);
+
+          :hover {
+            border: 2px solid var(--grey-1);
+            background-color: var(--grey-1);
+          }
         `;
       case "yellow":
         return css`
           background-color: var(--brand-1);
+          border: 2px solid var(--brand-1);
         `;
       case "lightGrey":
         return css`
           background-color: var(--grey-2);
+          border: 2px solid var(--grey-2);
         `;
     }
   }}

@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const StyledInputContainer = styled.div`
   width: 100%;
-  height: 3.75rem;
   position: relative;
 
   display: flex;
@@ -20,7 +19,7 @@ export const StyledInputContainer = styled.div`
 
     :focus {
       border: 2px solid var(--brand-1);
-      box-shadow: 0px 2px 2px 2px rgba(255, 208, 41, 0.4);
+      box-shadow: 0px 2px 2px 2px rgba(255, 208, 41, 0.1);
     }
   }
 
@@ -52,5 +51,11 @@ export const StyledInputContainer = styled.div`
 
     color: var(--whiteFixed);
     font-size: 1rem;
+  }
+
+  .error {
+    padding-top: 5px;
+    color: var(--error);
+    font-size: var(--text-3);
   }
 `;

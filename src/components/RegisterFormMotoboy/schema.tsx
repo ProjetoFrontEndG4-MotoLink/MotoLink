@@ -18,8 +18,9 @@ export const SchemaMotoboy = z
 
     confirmPassword: z.string().min(1, "Confirme sua senha"),
 
-    CNH: z.string().min(1, "Campo obrigatório"),
-    plate: z.string().min(1, "Campo obrigatório"),
+    CNH: z.string().min(9, "Pelo menos nove dígitos "),
+    plate: z.string().min(7, "Pelo menos sete dígitos"),
+    userType: z.string().min(1, "Campo obrigatório"),
   })
   .refine(({ password, confirmPassword }) => confirmPassword === password, {
     message: "As senhas não correspondem",

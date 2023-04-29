@@ -1,20 +1,19 @@
-import { FieldError, UseFormRegisterReturn } from "react-hook-form";
+import { FieldError} from "react-hook-form";
+import { StyledInputContainer } from "./style";
+import { ForwardedRef, InputHTMLAttributes, forwardRef } from "react";
 
-export interface IInputProps {
-    type: string;
-    id: string;
-    register: UseFormRegisterReturn<string>;
-    error?: FieldError,
-   
-  }
-export const Input=({ type, id, register, error}:IInputProps)=>{
-
-    return(
-        <div>
-               <label htmlFor={id}>{id}</label>
-            <input type={type} id={id} placeholder=" " {...register} />
-            {error ? (<p>{error.message}</p>) : null}
-
-        </div>
-    )
+export interface IInputProps extends InputHTMLAttributes<HTMLInputElement>{
+  label?:string;
+  error?:|FieldError
 }
+
+
+export const Input = forwardRef(({label,error, ...rest}: IInputProps,ref: ForwardedRef<HTMLInputElement>) => (
+
+    <StyledInputContainer>
+      {label? <label>{label}</label>:null}
+      <input ref={ref} {...rest} />
+      {error ? <p className="error">{error.message}</p> : null}
+    </StyledInputContainer>
+))
+

@@ -4,6 +4,8 @@ import { useContext, useState } from "react";
 import { UserContext } from "../../providers/UserContext";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema } from "./loginSchema";
+import { StyledFormLogin } from "./style";
+import { ButtonDefault } from "../../styles/buttons";
 
 export interface ILoginFormData {
   email: string;
@@ -15,32 +17,48 @@ export const LoginForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ILoginFormData>({resolver:zodResolver(LoginSchema)});
+  } = useForm<ILoginFormData>({ resolver: zodResolver(LoginSchema) });
 
-  const {userLogin}=useContext(UserContext)
+  const { userLogin } = useContext(UserContext);
 
   const [loading, setLoading] = useState(false);
 
   const submit: SubmitHandler<ILoginFormData> = (formData) => {
-    userLogin(formData,setLoading);
+    userLogin(formData, setLoading);
   };
   return (
-    <form onSubmit={handleSubmit(submit)}>
-      <Input
-        type="email"
-        id={"E-mail"}
-        register={register("email")}
-        error={errors.email}
-      />
+    <>
+      <StyledFormLogin>
+        <h3>Login</h3>
 
-      <Input
-        type="password"
-        id={"Senha"}
-        register={register("password")}
-        error={errors.password}
-      />
+        <form onSubmit={handleSubmit(submit)}>
+          <Input
+          label="E-mail"
+            type="email"
+            id={"E-mail"}
+            placeholder="Ex.: email@teste.com"
+            {...register("email")}
+            error={errors.email}
+          />
 
-      <button    disabled={loading} > {loading ? "Entrando..." : "Entrar"}</button>
-    </form>
+          <Input
+          label="Senha"
+            type="password"
+            id={"Senha"}
+            placeholder="Digite sua senha"
+            {...register("password")}
+            error={errors.password}
+          />
+          <ButtonDefault
+            className="fullWidth"
+            buttonSize="default"
+            buttonStyle="grey"
+          >
+            
+            {loading ? "Entrando..." : "Entrar"}
+          </ButtonDefault>
+        </form>
+      </StyledFormLogin>
+    </>
   );
 };

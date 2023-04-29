@@ -1,13 +1,14 @@
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 import { UserContext } from "../../providers/UserContext"
-import { Navigate, Outlet, useNavigate } from "react-router-dom"
+import { Navigate, Outlet} from "react-router-dom"
 
 export const ProtectedDashMotoboy=()=>{
-    const {user}=useContext(UserContext)
+    const {user,load}=useContext(UserContext)
 
-    const navigate= useNavigate()
-
-
+    if(load){
+    return <div>Carregando...</div>
+    }
+    
 
     return  user? <Outlet/> : <Navigate to={"/"}/>
 }

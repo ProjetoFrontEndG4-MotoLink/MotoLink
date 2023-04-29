@@ -19,6 +19,8 @@ export const SchemaEmpresas = z
     confirmPassword: z.string().min(1, "Confirme sua senha"),
 
     setor: z.string().min(1, "Campo obrigatório"),
+    userType: z.string().min(1, "Campo obrigatório"),
+    avatar: z.string().min(1, "Campo obrigatório")
   })
   .refine(({ password, confirmPassword }) => confirmPassword === password, {
     message: "As senhas não correspondem",

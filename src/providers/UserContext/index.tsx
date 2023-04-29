@@ -17,6 +17,7 @@ interface IUserContext {
   user: IUser | null;
   registerEmpresa: (FormData: IRegisterEmpresasFormData) => void;
   registerMotoboy: (FormData: IRegisterMotoboyFormData) => void;
+  load:boolean
 }
 interface IUser {
   email: string;
@@ -33,6 +34,7 @@ export const UserContext = createContext({} as IUserContext);
 
 export const UserProvider = ({ children }: IUserProvider) => {
   const [user, setUser] = useState<IUser | null>(null);
+  const [load,setLoad]=useState(true)
 
   const navigate = useNavigate();
 
@@ -40,7 +42,7 @@ useEffect(()=>{
   const token = localStorage.getItem("@TOKEN");
   const id = localStorage.getItem("@USERID");
 
-  const autoLogin=async()=>{
+  const autoLogin=async(setLoad:React.Dispatch<React.SetStateAction<boolean>>)=>{
     
     try {
       
@@ -53,7 +55,6 @@ useEffect(()=>{
 
       setUser(response.data)
 
-      console.log(response.data)
       if (response.data.userType === "empresa") {
         navigate("/dashboardempresas");
       }
@@ -65,11 +66,14 @@ useEffect(()=>{
       localStorage.removeItem("@TOKEN");
       localStorage.removeItem("@USERID");
     }
+    finally{
+      setLoad(false)
+    }
   }
   if(token && id){
-    autoLogin()
+    autoLogin(setLoad)
   }else{
-
+    setLoad(false)
     navigate('/')
   }
 
@@ -130,7 +134,7 @@ useEffect(()=>{
   };
   return (
     <UserContext.Provider
-      value={{ userLogin, logout, user, registerEmpresa, registerMotoboy }}
+      value={{ userLogin, logout, user, registerEmpresa, registerMotoboy,load}}
     >
       {children}
     </UserContext.Provider>

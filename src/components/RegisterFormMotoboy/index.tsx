@@ -26,58 +26,73 @@ export const RegisterFormMotoboy = () => {
   const { registerMotoboy } = useContext(UserContext);
 
   const submit: SubmitHandler<IRegisterMotoboyFormData> = (formData) => {
-    console.log(formData);
+    registerMotoboy(formData);
   };
   return (
     <form onSubmit={handleSubmit(submit)}>
       <Input
+      label="Nome"
         type="text"
         id={"Nome"}
-        register={register("name")}
+        {...register("name")}
         error={errors.name}
+        placeholder="Digite seu nome"
       />
       <Input
+      label="E-mail"
         type="email"
         id={"E-mail"}
-        register={register("email")}
+        {...register("email")}
         error={errors.email}
+placeholder="Ex.: email@teste.com"
       />
 
       <Input
+      label="Senha"
         type="password"
         id={"Senha"}
-        register={register("password")}
+        {...register("password")}
         error={errors.password}
+        placeholder="Digite uma senha"
       />
 
       <Input
+      label="Confirmar senha"
         type="password"
         id={"Confirmar Senha"}
-        register={register("confirmPassword")}
+        {...register("confirmPassword")}
         error={errors.confirmPassword}
+        placeholder="Confirme sua senha"
       />
       <Input
+      label="Foto do perfil"
         type="text"
         id={"Avatar"}
-        register={register("avatar")}
+        {...register("avatar")}
         error={errors.avatar}
+        placeholder="Insira sua foto do perfil"
       />
 
       <Input
+      label="CNH"
         type="text"
         id={"CNH"}
-        register={register("CNH")}
+        {...register("CNH")}
         error={errors.CNH}
+        placeholder="Ex:111222333"
+
       />
 
       <Input
+      label="Placa"
         type="text"
         id={"Placa da moto"}
-        register={register("plate")}
+        {...register("plate")}
         error={errors.plate}
+        placeholder="Ex:111W3J3"
       />
 
-      <input type="text" value="motoboy" {...register("userType")} />
+      <Input type="text" value="motoboy" {...register("userType")}  error={errors.userType}/>
 
       <button>Cadastrar</button>
     </form>

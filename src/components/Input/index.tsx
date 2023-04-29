@@ -1,20 +1,26 @@
 import { FieldError, UseFormRegisterReturn } from "react-hook-form";
+import { StyledInputContainer } from "./style";
 
 export interface IInputProps {
-    type: string;
-    id: string;
-    register: UseFormRegisterReturn<string>;
-    error?: FieldError,
-   
-  }
-export const Input=({ type, id, register, error}:IInputProps)=>{
-
-    return(
-        <div>
-               <label htmlFor={id}>{id}</label>
-            <input type={type} id={id} placeholder=" " {...register} />
-            {error ? (<p>{error.message}</p>) : null}
-
-        </div>
-    )
+  type: string;
+  id: string;
+  placeholder: string;
+  register: UseFormRegisterReturn<string>;
+  error?: FieldError;
 }
+
+export const Input = ({
+  type,
+  id,
+  placeholder,
+  register,
+  error,
+}: IInputProps) => {
+  return (
+    <StyledInputContainer>
+      <label htmlFor={id}>{id}</label>
+      <input type={type} id={id} placeholder={placeholder} {...register} />
+      {error ? <p>{error.message}</p> : null}
+    </StyledInputContainer>
+  );
+};

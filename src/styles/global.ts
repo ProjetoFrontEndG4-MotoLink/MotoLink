@@ -12,12 +12,13 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     body {
-        height: 100vh;
-    }
-
-    .App{
         width: 100vw;
         height: 100vh;
+    }
+    
+    .App{
+        width: 100vw;
+        min-height: 100vh;
     }
 
     :root {
@@ -48,6 +49,8 @@ export const GlobalStyles = createGlobalStyle`
         --weight-2: 800;
         --weight-3: 700;
         --weight-4: 400;
+
+        --border-Radius: 5px;
     }
 
     
@@ -78,6 +81,23 @@ export const GlobalStyles = createGlobalStyle`
 
     .textDefaultBold {
         font-size: var(--text-1);
+        font-weight: var(--weight-3);
+        color: var(--grey-1);
+    }
+
+    .textSmall {
+        align-self: center;
+        font-size: var(--text-3);
+        font-weight: var(--weight-4);
+        color: var(--grey-1);
+
+        a {
+            color: inherit;
+        }
+    }
+
+    .textSmallBold {
+        font-size: var(--text-3);
         font-weight: var(--weight-3);
         color: var(--grey-1);
     }

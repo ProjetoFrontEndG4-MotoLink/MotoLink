@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledLoginPage = styled.div`
   display: flex;
-  height: 100%;
+  min-height: 100vh;
 
   .fullWidth {
     width: 100%;
@@ -18,7 +18,7 @@ export const StyledLoginPage = styled.div`
     display: flex;
     justify-content: center;
     width: 50%;
-    height: 100%;
+    min-height: 100vh;
     padding: 20px;
 
     background-color: var(--brand-1);
@@ -48,10 +48,11 @@ export const StyledLoginPage = styled.div`
   }
 
   .column2 {
+    padding: 60px 0px;
     display: flex;
     justify-content: center;
     width: 50%;
-    height: 100%;
+    min-height: 100vh;
 
     .formContainer {
       display: flex;
@@ -78,6 +79,29 @@ export const StyledLoginPage = styled.div`
   .logo__motoLink {
     width: 63px;
     height: auto;
+  }
+
+  .optionsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 380px;
+
+    .titleOptionsContainer {
+      font-size: 1.75rem;
+      font-weight: var(--weight-3);
+      color: var(--grey-2);
+
+      span {
+        color: var(--brand-1);
+        font-weight: var(--weight-2);
+      }
+    }
+
+    .optionsCard__container {
+      display: flex;
+      gap: 10px;
+    }
   }
 
   @media (max-width: 768px) {
@@ -120,6 +144,11 @@ export const StyledLoginPage = styled.div`
       width: 100%;
       height: fit-content;
       padding: 100px 20px 40px;
+
+      .optionsContainer {
+        align-self: center;
+        max-width: 90%;
+      }
     }
   }
 

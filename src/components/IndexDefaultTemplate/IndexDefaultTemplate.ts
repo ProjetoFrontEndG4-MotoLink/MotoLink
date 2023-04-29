@@ -4,8 +4,12 @@ export const StyledLoginPage = styled.div`
   display: flex;
   height: 100%;
 
+  .fullWidth {
+    width: 100%;
+  }
+
   .header__login {
-    height: 82px;
+    height: 60px;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
 
     display: flex;
@@ -15,37 +19,62 @@ export const StyledLoginPage = styled.div`
     margin-bottom: 27px;
   }
 
+  .logo__column1 {
+    align-self: start;
+    height: 136px;
+    width: auto;
+  }
+
   .column1 {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    gap: 20px;
     width: 50%;
     height: 100%;
-    padding: 20px 60px;
+    padding: 20px;
 
     background-color: var(--brand-1);
 
-    .detail {
-      width: 64px;
-      height: 4px;
-      background-color: var(--brand-4);
+    .column1__Content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+      width: 32.68rem;
+
+      .logo__column1 {
+        width: 130px;
+        height: auto;
+      }
     }
 
-    .logo__motoLink {
-      width: 136px;
-      height: auto;
+    .detail {
+      width: 64px;
+      height: 6px;
+      background-color: var(--brand-4);
     }
   }
 
   .column2 {
     display: flex;
-    width: 50%;
     justify-content: center;
+    width: 50%;
+    height: 100%;
 
     .formContainer {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
       align-self: center;
-      width: 70%;
+      width: 29.68rem;
+
+      .registerRedirect__Container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        div {
+          text-align: center;
+        }
+      }
     }
   }
 

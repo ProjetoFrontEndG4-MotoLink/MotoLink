@@ -23,13 +23,14 @@ export const GlobalStyles = createGlobalStyle`
     :root {
         --brand-1: #FFD029;
         --brand-2: #FFDD66;
-        --brand-3: #1C1D01;
+        --brand-3: #0F1001;
         --brand-4: #FF8200;
+        --brand-4-shadow: #E27606;
 
         --grey-1: #3D3D3D;
         --grey-2:  #636363;
         --grey-3: #888888;
-        --grey-4: #F4F2F2;
+        --grey-4: #F2F7F2;
         --whiteFixed: #FFFFFF;
 
         --sucess: #3FE864;
@@ -53,7 +54,7 @@ export const GlobalStyles = createGlobalStyle`
     h1 {
         font-size: var( --title-1);
         font-weight: var(--weight-1);
-        color: var(--grey-1);
+        color: var(--brand-3);
     }
 
     h2 {
@@ -74,11 +75,19 @@ export const GlobalStyles = createGlobalStyle`
         color: var(--grey-1);
     }
 
-    button {
-        cursor: pointer;
+    .textDefaultBold {
+        font-size: var(--text-1);
+        font-weight: var(--weight-3);
+        color: var(--grey-1);
     }
 
-    
+    button {
+        cursor: pointer;
+
+        a{
+            color: inherit;
+        }
+    }
 
     @media (min-width: 1024px) {
         .container {

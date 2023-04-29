@@ -8,17 +8,6 @@ export const StyledLoginPage = styled.div`
     width: 100%;
   }
 
-  .header__login {
-    height: 60px;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    margin-bottom: 27px;
-  }
-
   .logo__column1 {
     align-self: start;
     height: 136px;
@@ -33,6 +22,10 @@ export const StyledLoginPage = styled.div`
     padding: 20px;
 
     background-color: var(--brand-1);
+
+    img {
+      max-width: 100%;
+    }
 
     .column1__Content {
       display: flex;
@@ -87,13 +80,52 @@ export const StyledLoginPage = styled.div`
     height: auto;
   }
 
-  @media (min-width: 1024px) {
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
+    height: fit-content;
+
     .header__login {
-      display: none;
+      position: absolute;
+
+      box-sizing: border-box;
+      top: 0;
+      height: 60px;
+      width: 100%;
+      background-color: var(--whiteFixed);
+      box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      margin-bottom: 27px;
+      padding: 20px;
+
+      img {
+        height: 27px;
+      }
     }
 
-    .padding__default {
-      padding: 0px;
+    .column1 {
+      width: 100%;
+      height: fit-content;
+      padding: 60px 20px 60px;
+
+      .column1__Content img {
+        max-width: 90%;
+      }
+    }
+
+    .column2 {
+      width: 100%;
+      height: fit-content;
+      padding: 100px 20px 40px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .header__login {
+      display: none;
     }
   }
 `;

@@ -37,6 +37,7 @@ export const GlobalStyles = createGlobalStyle`
         --error: #E83F5B;
         
         --title-1:  2.813rem; /* 45px */
+        --title-1-mobile: 1.56rem; /* 45px */
         --title-2: 1.5rem; /* 24px */
         --title-3: 1.25rem; /* 20px */
         --text-1: 1.125rem; /* 18px */
@@ -86,6 +87,12 @@ export const GlobalStyles = createGlobalStyle`
 
         a{
             color: inherit;
+        }
+    }
+
+    @media (max-width: 425px) {
+        :root {
+            --title-1: 1.56rem;
         }
     }
 

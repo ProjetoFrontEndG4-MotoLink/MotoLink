@@ -12,13 +12,16 @@ export const Login = () => {
           <p className="textDefaultBold">Não tem conta?</p>
           <p className="textDefault">Faça o seu cadastro</p>
         </div>
-        <ButtonDefault
-          className="fullWidth"
-          buttonSize="default"
-          buttonStyle="orange"
-        >
-          <Link to="/register">Cadastre-se</Link>
-        </ButtonDefault>
+        <Link to="/register">
+          <ButtonDefault
+            type="button"
+            className="fullWidth"
+            buttonSize="default"
+            buttonStyle="orange"
+          >
+            Cadastre-se
+          </ButtonDefault>
+        </Link>
       </div>
     </IndexDefaultTemplate>
   );

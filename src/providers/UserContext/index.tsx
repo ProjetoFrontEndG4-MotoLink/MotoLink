@@ -121,8 +121,8 @@ export const UserProvider = ({ children }: IUserProvider) => {
 
       alert("Empresa Cadastrada");
       navigate("/");
-    } catch (error) {
-      console.log(error);
+    } catch (error: AxiosError<APIError> | any) {
+      toast.error(error.response?.data);
     }
   };
 
@@ -131,8 +131,8 @@ export const UserProvider = ({ children }: IUserProvider) => {
       const response = await Api.post("/users", formData);
       alert("Motoboy Cadastrado");
       navigate("/");
-    } catch (error) {
-      console.log(error);
+    } catch (error: AxiosError<APIError> | any) {
+      toast.error(error.response?.data);
     }
   };
   return (

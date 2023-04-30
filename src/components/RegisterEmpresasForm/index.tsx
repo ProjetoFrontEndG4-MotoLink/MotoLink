@@ -15,7 +15,7 @@ export interface IRegisterEmpresasFormData {
   avatar: string;
   setor: string;
   userType: string;
-  telefone:number
+  telefone: number;
 }
 
 export const RegisterFormEmpresas = () => {
@@ -26,8 +26,7 @@ export const RegisterFormEmpresas = () => {
   } = useForm<IRegisterEmpresasFormData>({
     resolver: zodResolver(SchemaEmpresas),
   });
-  const [loading, setLoading] = useState(false);
-  const { registerEmpresa } = useContext(UserContext);
+  const { registerEmpresa, load } = useContext(UserContext);
 
   const submit: SubmitHandler<IRegisterEmpresasFormData> = (formData) => {
     registerEmpresa(formData);
@@ -52,7 +51,7 @@ export const RegisterFormEmpresas = () => {
           error={errors.email}
           placeholder="Ex.: email@teste.com"
         />
-           <Input
+        <Input
           label="Telefone"
           type="number"
           id={"Telefone"}
@@ -78,7 +77,7 @@ export const RegisterFormEmpresas = () => {
           error={errors.confirmPassword}
           placeholder="Confirme sua senha"
         />
-        
+
         <Input
           label="Foto do perfil"
           type="text"
@@ -110,7 +109,7 @@ export const RegisterFormEmpresas = () => {
           buttonSize="default"
           buttonStyle="grey"
         >
-          {loading ? "Entrando..." : "Fazer cadastro"}
+          {load ? "Entrando..." : "Fazer cadastro"}
         </ButtonDefault>
       </form>
     </StyledForm>

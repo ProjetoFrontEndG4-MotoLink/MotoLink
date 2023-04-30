@@ -27,7 +27,7 @@ export const RegisterFormMotoboy = () => {
   } = useForm<IRegisterMotoboyFormData>({
     resolver: zodResolver(SchemaMotoboy),
   });
-  const { registerMotoboy, loading } = useContext(UserContext);
+  const { registerMotoboy, load } = useContext(UserContext);
 
   const submit: SubmitHandler<IRegisterMotoboyFormData> = (formData) => {
     registerMotoboy(formData);
@@ -117,7 +117,7 @@ export const RegisterFormMotoboy = () => {
           buttonSize="default"
           buttonStyle="grey"
         >
-          {loading ? "Entrando..." : "Fazer cadastro"}
+          {load ? "Entrando..." : "Fazer cadastro"}
         </ButtonDefault>
       </form>
     </StyledForm>

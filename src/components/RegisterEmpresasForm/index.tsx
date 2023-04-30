@@ -15,6 +15,7 @@ export interface IRegisterEmpresasFormData {
   avatar: string;
   setor: string;
   userType: string;
+  telefone:number
 }
 
 export const RegisterFormEmpresas = () => {
@@ -51,6 +52,14 @@ export const RegisterFormEmpresas = () => {
           error={errors.email}
           placeholder="Ex.: email@teste.com"
         />
+           <Input
+          label="Telefone"
+          type="number"
+          id={"Telefone"}
+          {...register("telefone")}
+          error={errors.telefone}
+          placeholder="Ex.: (00) 00000-0000"
+        />
 
         <Input
           label="Senha"
@@ -69,6 +78,7 @@ export const RegisterFormEmpresas = () => {
           error={errors.confirmPassword}
           placeholder="Confirme sua senha"
         />
+        
         <Input
           label="Foto do perfil"
           type="text"

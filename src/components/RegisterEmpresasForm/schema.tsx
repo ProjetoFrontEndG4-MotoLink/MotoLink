@@ -17,7 +17,7 @@ export const SchemaEmpresas = z
       .regex(/(?=.*[$*&@#!])/, "É necessário pelo menos um caracter especial"),
 
     confirmPassword: z.string().min(1, "Confirme sua senha"),
-
+    telefone:z.string().min(11,"Pelo menos onze dígitos"),
     setor: z.string().min(1, "Campo obrigatório"),
     userType: z.string().min(1, "Campo obrigatório"),
     avatar: z.string().min(1, "Campo obrigatório")

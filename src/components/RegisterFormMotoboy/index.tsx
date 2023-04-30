@@ -16,6 +16,7 @@ export interface IRegisterMotoboyFormData {
   CNH: string;
   userType: string;
   plate: string;
+  telefone:number
 }
 
 export const RegisterFormMotoboy = () => {
@@ -53,6 +54,14 @@ export const RegisterFormMotoboy = () => {
           placeholder="Ex.: email@teste.com"
         />
 
+<Input
+          label="Telefone"
+          type="number"
+          id={"Telefone"}
+          {...register("telefone")}
+          error={errors.telefone}
+          placeholder="Ex.: (00) 00000-0000"
+        />
         <Input
           label="Senha"
           type="password"

@@ -1,15 +1,17 @@
-import { useContext } from "react"
-import { UserContext } from "../../providers/UserContext"
+import { useContext } from "react";
+import { UserContext } from "../../providers/UserContext";
+import { JobCard } from "../../components/JobCard/JobCard";
+import { AsideCard } from "../../components/JobCard/AsideCards/AsideCard";
 
-export const DashEmpresas=()=>{
+export const DashEmpresas = () => {
+  const { logout } = useContext(UserContext);
 
-    const{logout}=useContext(UserContext)
-
-    return(
-
-        <>
-        <button onClick={logout}>Sair</button>
-        <h1>Dash Empresas</h1>
-        </>
-    )
-}
+  return (
+    <>
+      <button onClick={logout}>Sair</button>
+      <h1>Dash Empresas</h1>
+      <JobCard />
+      <AsideCard />
+    </>
+  );
+};

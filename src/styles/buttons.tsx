@@ -6,12 +6,16 @@ interface IStyledButtonProps {
 }
 
 export const ButtonDefault = styled.button<IStyledButtonProps>`
-  color: var(--whiteFixed);
+  display: flex;
+  justify-content: center;
   height: fit-content;
-  border-radius: 5px;
+
+  color: var(--whiteFixed);
   font-size: var(--text-1);
   font-weight: var(--weight-3);
+
   border: 2px solid var(--brand-3);
+  border-radius: 5px;
 
   .fullWidth {
     width: 100%;
@@ -63,13 +67,24 @@ export const ButtonDefault = styled.button<IStyledButtonProps>`
         `;
       case "yellow":
         return css`
+          color: var(--grey-1);
           background-color: var(--brand-1);
           border: 2px solid var(--brand-1);
+
+          :hover {
+            border: 2px solid var(--brand-2);
+            background-color: var(--brand-2);
+          }
         `;
       case "lightGrey":
         return css`
           background-color: var(--grey-2);
           border: 2px solid var(--grey-2);
+
+          :hover {
+            border: 2px solid var(--grey-1);
+            background-color: var(--grey-1);
+          }
         `;
     }
   }}

@@ -1,6 +1,10 @@
 import { CardTemplate } from "./JobCardStyle";
 
-export const JobCard = () => {
+interface JobCardProps {
+  children: React.ReactNode;
+}
+
+export const JobCard = ({ children }: JobCardProps) => {
   return (
     <CardTemplate>
       <h4>Entrega</h4>
@@ -13,6 +17,7 @@ export const JobCard = () => {
           <h5>Taxa/entrega</h5>
           <p>R$00,00</p>
         </div>
+        <div className="interactionButtonsContainer">{children}</div>
       </div>
     </CardTemplate>
   );

@@ -16,7 +16,7 @@ export interface IRegisterMotoboyFormData {
   CNH: string;
   userType: string;
   plate: string;
-  telefone:number
+  telefone: number;
 }
 
 export const RegisterFormMotoboy = () => {
@@ -27,11 +27,10 @@ export const RegisterFormMotoboy = () => {
   } = useForm<IRegisterMotoboyFormData>({
     resolver: zodResolver(SchemaMotoboy),
   });
-  const [loading, setLoading] = useState(false);
-  const { registerMotoboy } = useContext(UserContext);
+  const { registerMotoboy, loading } = useContext(UserContext);
 
   const submit: SubmitHandler<IRegisterMotoboyFormData> = (formData) => {
-   registerMotoboy(formData);
+    registerMotoboy(formData);
   };
   return (
     <StyledForm>
@@ -54,7 +53,7 @@ export const RegisterFormMotoboy = () => {
           placeholder="Ex.: email@teste.com"
         />
 
-<Input
+        <Input
           label="Telefone"
           type="number"
           id={"Telefone"}

@@ -4,6 +4,8 @@ import { Api } from "../../services/Api";
 import { useNavigate } from "react-router-dom";
 import { IRegisterMotoboyFormData } from "../../components/RegisterFormMotoboy";
 import { IRegisterEmpresasFormData } from "../../components/RegisterEmpresasForm";
+import { toast } from "react-toastify";
+import { AxiosError } from "axios";
 
 interface IUserProvider {
   children: React.ReactNode;
@@ -17,7 +19,7 @@ interface IUserContext {
   user: IUser | null;
   registerEmpresa: (FormData: IRegisterEmpresasFormData) => void;
   registerMotoboy: (FormData: IRegisterMotoboyFormData) => void;
-  load:boolean
+  load: boolean;
 }
 interface IUser {
   email: string;
@@ -30,56 +32,58 @@ interface IUser {
   avatar: string;
 }
 
+interface APIError {
+  message: string;
+  status: number;
+  data?: any;
+}
+
 export const UserContext = createContext({} as IUserContext);
 
 export const UserProvider = ({ children }: IUserProvider) => {
   const [user, setUser] = useState<IUser | null>(null);
-  const [load,setLoad]=useState(true)
+  const [load, setLoad] = useState(true);
 
   const navigate = useNavigate();
 
-useEffect(()=>{
-  const token = localStorage.getItem("@TOKEN");
-  const id = localStorage.getItem("@USERID");
+  useEffect(() => {
+    const token = localStorage.getItem("@TOKEN");
+    const id = localStorage.getItem("@USERID");
 
-  const autoLogin=async(setLoad:React.Dispatch<React.SetStateAction<boolean>>)=>{
-    
-    try {
-      
-      const response=await Api.get(`/users/${id}`,{
-        headers:{
-          Authorization:`Bearer ${token}`
+    const autoLogin = async (
+      setLoad: React.Dispatch<React.SetStateAction<boolean>>
+    ) => {
+      try {
+        const response = await Api.get(`/users/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        setUser(response.data);
+
+        if (response.data.userType === "empresa") {
+          navigate("/dashboardempresas");
         }
-
-      })
-
-      setUser(response.data)
-
-      if (response.data.userType === "empresa") {
-        navigate("/dashboardempresas");
+        if (response.data.userType === "motoboy") {
+          navigate("/dashboardmotoboy");
+        }
+      } catch (error) {
+        console.log(error);
+        localStorage.removeItem("@TOKEN");
+        localStorage.removeItem("@USERID");
+      } finally {
+        setLoad(false);
       }
-      if (response.data.userType === "motoboy") {
-        navigate("/dashboardmotoboy");
-      }
-    } catch (error) {
-      console.log(error)
-      localStorage.removeItem("@TOKEN");
-      localStorage.removeItem("@USERID");
+    };
+
+    if (token && id) {
+      autoLogin(setLoad);
+    } else {
+      setLoad(false);
+      navigate("/");
     }
-    finally{
-      setLoad(false)
-    }
-  }
-  if(token && id){
-    autoLogin(setLoad)
-  }else{
-    setLoad(false)
-    navigate('/')
-  }
-
-
-},[])
-
+  }, []);
 
   const userLogin = async (
     formData: ILoginFormData,
@@ -91,15 +95,16 @@ useEffect(()=>{
       localStorage.setItem("@TOKEN", response.data.accessToken);
       localStorage.setItem("@USERID", response.data.user.id);
       setUser(response.data.user);
-    
+
       if (response.data.user.userType === "empresa") {
         navigate("/dashboardempresas");
       }
       if (response.data.user.userType === "motoboy") {
         navigate("/dashboardmotoboy");
       }
-    } catch (error) {
+    } catch (error: AxiosError<APIError> | any) {
       console.log(error);
+      toast.error(error.response?.data);
     } finally {
       setLoading(false);
     }
@@ -134,7 +139,14 @@ useEffect(()=>{
   };
   return (
     <UserContext.Provider
-      value={{ userLogin, logout, user, registerEmpresa, registerMotoboy,load}}
+      value={{
+        userLogin,
+        logout,
+        user,
+        registerEmpresa,
+        registerMotoboy,
+        load,
+      }}
     >
       {children}
     </UserContext.Provider>

@@ -1,13 +1,14 @@
-import { RounterMain } from './assets/Routes/RouterMain'
+import { RounterMain } from "./Routes/RouterMain";
+import { GlobalStyles } from "./styles/global";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-function App() {
-
-
+export const App = () => {
   return (
-   <>
-   <RounterMain/>
-   </>
-  )
-}
-
-export default App
+    <div className="App">
+      <ToastContainer />
+      <RounterMain />
+      <GlobalStyles />
+    </div>
+  );
+};

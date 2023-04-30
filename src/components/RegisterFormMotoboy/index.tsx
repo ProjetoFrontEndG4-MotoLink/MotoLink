@@ -30,7 +30,7 @@ export const RegisterFormMotoboy = () => {
   const { registerMotoboy } = useContext(UserContext);
 
   const submit: SubmitHandler<IRegisterMotoboyFormData> = (formData) => {
-    registerMotoboy(formData);
+   registerMotoboy(formData);
   };
   return (
     <StyledForm>
@@ -99,7 +99,7 @@ export const RegisterFormMotoboy = () => {
 
         <Input
           type="text"
-          value="Motoboy"
+          value="motoboy"
           {...register("userType")}
           error={errors.userType}
           className="disabled"

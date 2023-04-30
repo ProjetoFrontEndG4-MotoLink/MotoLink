@@ -7,6 +7,7 @@ interface IStyledButtonProps {
 
 export const ButtonDefault = styled.button<IStyledButtonProps>`
   color: var(--whiteFixed);
+  height: fit-content;
   border-radius: 5px;
   font-size: var(--text-1);
   font-weight: var(--weight-3);
@@ -14,6 +15,10 @@ export const ButtonDefault = styled.button<IStyledButtonProps>`
 
   .fullWidth {
     width: 100%;
+  }
+
+  img {
+    width: 24px;
   }
 
   ${({ buttonSize }) => {
@@ -25,7 +30,10 @@ export const ButtonDefault = styled.button<IStyledButtonProps>`
         `;
       case "medium":
         return css`
-          padding: 20px;
+          display: flex;
+          align-items: center;
+          font-size: var(--text-2);
+          padding: 0px 20px;
           height: 40px;
         `;
     }

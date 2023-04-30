@@ -16,6 +16,7 @@ interface IUserContext {
     setLoading: React.Dispatch<React.SetStateAction<boolean>>
   ) => Promise<void>;
   logout: () => void;
+  editProfile: () => void;
   user: IUser | null;
   registerEmpresa: (FormData: IRegisterEmpresasFormData) => void;
   registerMotoboy: (FormData: IRegisterMotoboyFormData) => void;
@@ -115,10 +116,14 @@ export const UserProvider = ({ children }: IUserProvider) => {
     navigate("/");
   };
 
+  const editProfile = () => {
+    alert("adicionar logica de abrir modal");
+  };
+
   const registerEmpresa = async (formData: IRegisterEmpresasFormData) => {
     try {
       setLoad(true);
-      const response = await Api.post("/users", formData);
+      await Api.post("/users", formData);
 
       alert("Empresa Cadastrada");
       navigate("/");
@@ -132,7 +137,7 @@ export const UserProvider = ({ children }: IUserProvider) => {
   const registerMotoboy = async (formData: IRegisterMotoboyFormData) => {
     try {
       setLoad(true);
-      const response = await Api.post("/users", formData);
+      await Api.post("/users", formData);
       alert("Motoboy Cadastrado");
       navigate("/");
     } catch (error: AxiosError<APIError> | any) {
@@ -150,6 +155,7 @@ export const UserProvider = ({ children }: IUserProvider) => {
         registerEmpresa,
         registerMotoboy,
         load,
+        editProfile,
       }}
     >
       {children}

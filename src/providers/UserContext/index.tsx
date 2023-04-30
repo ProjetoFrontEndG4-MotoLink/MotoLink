@@ -69,7 +69,6 @@ export const UserProvider = ({ children }: IUserProvider) => {
           navigate("/dashboardmotoboy");
         }
       } catch (error) {
-        console.log(error);
         localStorage.removeItem("@TOKEN");
         localStorage.removeItem("@USERID");
       } finally {
@@ -103,7 +102,6 @@ export const UserProvider = ({ children }: IUserProvider) => {
         navigate("/dashboardmotoboy");
       }
     } catch (error: AxiosError<APIError> | any) {
-      console.log(error);
       toast.error(error.response?.data);
     } finally {
       setLoading(false);

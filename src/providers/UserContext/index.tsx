@@ -117,22 +117,28 @@ export const UserProvider = ({ children }: IUserProvider) => {
 
   const registerEmpresa = async (formData: IRegisterEmpresasFormData) => {
     try {
+      setLoad(true);
       const response = await Api.post("/users", formData);
 
       alert("Empresa Cadastrada");
       navigate("/");
     } catch (error: AxiosError<APIError> | any) {
       toast.error(error.response?.data);
+    } finally {
+      setLoad(false);
     }
   };
 
   const registerMotoboy = async (formData: IRegisterMotoboyFormData) => {
     try {
+      setLoad(true);
       const response = await Api.post("/users", formData);
       alert("Motoboy Cadastrado");
       navigate("/");
     } catch (error: AxiosError<APIError> | any) {
       toast.error(error.response?.data);
+    } finally {
+      setLoad(false);
     }
   };
   return (

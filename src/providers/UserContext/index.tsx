@@ -16,6 +16,7 @@ interface IUserContext {
     setLoading: React.Dispatch<React.SetStateAction<boolean>>
   ) => Promise<void>;
   logout: () => void;
+  editProfile: () => void;
   user: IUser | null;
   registerEmpresa: (FormData: IRegisterEmpresasFormData) => void;
   registerMotoboy: (FormData: IRegisterMotoboyFormData) => void;
@@ -115,6 +116,10 @@ export const UserProvider = ({ children }: IUserProvider) => {
     navigate("/");
   };
 
+  const editProfile = () => {
+    alert("adicionar logica de abrir modal");
+  };
+
   const registerEmpresa = async (formData: IRegisterEmpresasFormData) => {
     try {
       setLoad(true);
@@ -150,6 +155,7 @@ export const UserProvider = ({ children }: IUserProvider) => {
         registerEmpresa,
         registerMotoboy,
         load,
+        editProfile,
       }}
     >
       {children}

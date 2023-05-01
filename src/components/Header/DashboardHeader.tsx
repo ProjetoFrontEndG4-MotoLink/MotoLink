@@ -2,22 +2,22 @@ import { DashboardHeaderStyle } from "./DashboardHeaderStyle";
 import logo from "../../assets/images/logo-black.svg";
 import logoutIcon from "../../assets/images/icon-logout.svg";
 import { ButtonDefault } from "../../styles/buttons";
+import { useContext} from "react";
+import { JobsContext } from "../../providers/JobsContext";
+import { UserContext } from "../../providers/UserContext";
 
-interface DashboardHeaderProps {
-  logout: () => void;
-  editProfile: () => void;
-}
 
-export const DashboardHeader = ({
-  logout,
-  editProfile,
-}: DashboardHeaderProps) => {
+
+export const DashboardHeader = () => {
+  const{logout,setOpenModal}=useContext(UserContext)
+
+
   return (
     <DashboardHeaderStyle>
       <img src={logo} alt="logo motolink" />
       <div className="buttonsContainer">
         <ButtonDefault
-          onClick={editProfile}
+          onClick={()=>setOpenModal(true)}
           buttonSize="medium"
           buttonStyle="orange"
         >

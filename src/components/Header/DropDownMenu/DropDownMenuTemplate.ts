@@ -2,9 +2,8 @@ import styled from "styled-components";
 
 export const DropDownMenuTemplate = styled.div`
   display: block;
-
   position: absolute;
-  top: 95px;
+  top: 97px;
   left: 0;
 
   width: 100%;

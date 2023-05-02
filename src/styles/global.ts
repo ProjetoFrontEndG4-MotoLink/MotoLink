@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
     * {
@@ -48,8 +48,6 @@ export const GlobalStyles = createGlobalStyle`
 
         --border-Radius: 5px;
     }
-
-    
 
     h1 {
         font-size: var( --title-1);
@@ -128,5 +126,18 @@ export const GlobalStyles = createGlobalStyle`
         }
 
     }
+`
 
-`;
+export const ModalContainer = styled.div`
+    background-color: rgba(0, 0, 0, .4);
+    width: 100%;
+    height: 100%;
+
+    align-items: center;
+    margin: 0 auto;
+
+    display: flex;
+    justify-content: center;
+
+    position: absolute;
+`

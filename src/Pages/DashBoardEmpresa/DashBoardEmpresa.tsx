@@ -41,17 +41,7 @@ export const DashEmpresas = () => {
         </div>
 
         <JobListEmpresas/>
-        
-          
       
-        <AsideCard />
-
-
-
-        {openModal ? <UpdateModalEmpresas /> : null}
-        {openModalAddJob ? <ModalAddNewJob /> : null}
-        {openModalUpJob ? <ModalUpJob /> : null}
-
         <AsideCard />
       </main>
 

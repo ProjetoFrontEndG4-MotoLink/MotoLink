@@ -1,23 +1,34 @@
+import { useContext } from "react";
+import { IJobs, JobsContext } from "../../providers/JobsContext";
 import { CardTemplate } from "./JobCardStyle";
+import { joiResolver } from "@hookform/resolvers/joi";
 
-interface JobCardProps {
-  children: React.ReactNode;
+
+interface ICardProp{
+  job:IJobs
 }
 
-export const JobCard = ({ children }: JobCardProps) => {
+export const JobCard = ({job}:ICardProp) => {
+
+  const{deleteJob,setOpenModalUpJob,setCurrentJob}=useContext(JobsContext)
   return (
-    <CardTemplate>
+    <CardTemplate onClick={()=>setCurrentJob(job)}>
       <h4>Entrega</h4>
       <div className="Card__Info--default">
         <div className="Card__Info__Detail">
-          <h5>Local da Entrega</h5>
-          <p>Rua Lorem Ipsum, LI - Lorem</p>
+          <h5>Local Da Entrega</h5>
+          <p>{job.local}</p>
         </div>
         <div className="Card__Info__Detail">
           <h5>Taxa/entrega</h5>
-          <p>R$00,00</p>
+          <p>{`R$:${job.price}`}</p>
         </div>
+
         <div className="interactionButtonsContainer">{children}</div>
+
+        <button onClick={()=>setOpenModalUpJob(true)}>Editar</button>
+        <button onClick={()=>deleteJob(job.id)}>Excluir</button>
+
       </div>
     </CardTemplate>
   );

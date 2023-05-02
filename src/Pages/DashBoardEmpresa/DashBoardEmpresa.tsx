@@ -11,6 +11,7 @@ import { UserContext } from "../../providers/UserContext";
 import { ModalAddNewJob } from "../../components/ModalAddNewJobs";
 import { JobListEmpresas } from "../../components/JobListempresas";
 import { ModalUpJob } from "../../components/ModalUpdateJobs";
+import { Footer } from "../../components/Footer";
 
 export const DashEmpresas = () => {
  
@@ -20,33 +21,37 @@ export const DashEmpresas = () => {
   
   return (
     <>
-
       <DashboardHeader />
+
+      <main className="container">
      
       
+        <div>
+          <h1>{user?.name}</h1>
+          <h3>Setor:{user?.setor}</h3>
+          <h3>Telefone:{user?.telefone}</h3>
+          <h3>E-mail:{user?.email}</h3>
+        </div>
 
-      <div>
-        <h1>{user?.name}</h1>
-        <h3>Setor:{user?.setor}</h3>
-        <h3>Telefone:{user?.telefone}</h3>
-        <h3>E-mail:{user?.email}</h3>
-      </div>
-
-      <div>
-        <h1>Entregas Publicadas</h1>
-        <button onClick={()=>setOpenModalAddJob(true)}>Adicionar nova entrega</button>
-      </div>
-      <JobListEmpresas/>
-      
+        <div>
+          <h1>Entregas Publicadas</h1>
+          <button onClick={()=>setOpenModalAddJob(true)}>Adicionar nova entrega</button>
+        </div>
+        <JobListEmpresas/>
         
-      
-      
+          
+        
+        
 
-     {openModal? <UpdateModalEmpresas/>:null}
-      {openModalAddJob? <ModalAddNewJob/>:null}
-      {openModalUpJob?<ModalUpJob/>:null}
-     
-      <AsideCard />
+        {openModal? <UpdateModalEmpresas/>:null}
+        {openModalAddJob? <ModalAddNewJob/>:null}
+        {openModalUpJob?<ModalUpJob/>:null}
+      
+        <AsideCard />
+
+      </main>
+
+      <Footer/>
     </>
   );
 };

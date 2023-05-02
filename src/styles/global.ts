@@ -10,14 +10,9 @@ export const GlobalStyles = createGlobalStyle`
         text-decoration: none;
         font-family: 'Inter', sans-serif;
     }
-
-    body {
-        width: 100vw;
-        height: 100vh;
-    }
     
     .App{
-        width: 100vw;
+        max-width: 100%;
         min-height: 100vh;
     }
 
@@ -120,6 +115,7 @@ export const GlobalStyles = createGlobalStyle`
     @media (min-width: 1024px) {
         .container {
             width: 1180px;
+            max-width: 100%;
             margin: 0 auto;
         }
 
@@ -130,6 +126,7 @@ export const GlobalStyles = createGlobalStyle`
         .container_right {
             width: 280px;
         }
+
     }
 
 `;

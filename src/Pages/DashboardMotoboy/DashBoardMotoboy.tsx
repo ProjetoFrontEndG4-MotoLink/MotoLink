@@ -1,14 +1,24 @@
-import { useContext } from "react"
-import { UserContext } from "../../providers/UserContext"
+import { useContext } from "react";
+import { JobsListMoto } from "../../components/JobsListMoto/JobsListMoto";
+import { DashboardHeader } from "../../components/Header/DashboardHeader";
+import { UserContext } from "../../providers/UserContext";
 
-export const DashMotoboy=()=>{
-const {logout}=useContext(UserContext)
-    return(
+export const DashMotoboy = () => {
+    const {user} = useContext(UserContext)
 
-        <>
-        <button onClick={logout}>Sair</button>
-        <h1>Dash Motoboy</h1>
-        
-        </>
-    )
-}
+	return (
+		<>
+            <DashboardHeader/>
+			<div>
+				<h1>{user?.name}</h1>
+				<h3>Setor:{user?.setor}</h3>
+				<h3>Telefone:{user?.telefone}</h3>
+				<h3>E-mail:{user?.email}</h3>
+			</div>
+            <div>
+                <h1>Jobs Disponiveis</h1>
+                <JobsListMoto/>
+            </div>
+		</>
+	);
+};

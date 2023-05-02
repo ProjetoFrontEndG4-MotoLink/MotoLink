@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const CardTemplate = styled.div`
   width: 280px;
+  height: fit-content;
   max-width: 100%;
 
   h4 {
@@ -28,6 +29,8 @@ export const CardTemplate = styled.div`
     background-color: var(--grey-5);
 
     .Card__Info__Detail {
+      padding-top: 5px;
+
       h5 {
         color: var(--grey-2);
         font-size: var(--text-3);
@@ -38,6 +41,17 @@ export const CardTemplate = styled.div`
         font-size: var(--text-2);
         font-weight: var(--weight-4);
       }
+    }
+
+    .interactionButtonsContainer {
+      padding-top: 10px;
+
+      .fullWidth {
+        width: 100%;
+      }
+      width: 100%;
+      display: flex;
+      gap: 10px;
     }
   }
 `;

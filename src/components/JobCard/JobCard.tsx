@@ -3,6 +3,7 @@ import { IJobs, JobsContext } from "../../providers/JobsContext";
 import { CardTemplate } from "./JobCardStyle";
 import { joiResolver } from "@hookform/resolvers/joi";
 
+
 interface ICardProp{
   job:IJobs
 }
@@ -22,8 +23,12 @@ export const JobCard = ({job}:ICardProp) => {
           <h5>Taxa/entrega</h5>
           <p>{`R$:${job.price}`}</p>
         </div>
+
+        <div className="interactionButtonsContainer">{children}</div>
+
         <button onClick={()=>setOpenModalUpJob(true)}>Editar</button>
         <button onClick={()=>deleteJob(job.id)}>Excluir</button>
+
       </div>
     </CardTemplate>
   );

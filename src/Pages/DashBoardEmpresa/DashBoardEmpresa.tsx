@@ -1,10 +1,9 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
-import { JobCard } from "../../components/JobCard/JobCard";
+
 import { AsideCard } from "../../components/JobCard/AsideCards/AsideCard";
 import { DashboardHeader } from "../../components/Header/DashboardHeader";
 
-import { ButtonDefault } from "../../styles/buttons";
 import { UpdateModalEmpresas } from "../../components/UpdateModalEmpresas";
 import { JobsContext } from "../../providers/JobsContext";
 import { UserContext } from "../../providers/UserContext";
@@ -21,6 +20,10 @@ export const DashEmpresas = () => {
   
   return (
     <>
+      {openModal? <UpdateModalEmpresas/>:null}
+      {openModalAddJob? <ModalAddNewJob/>:null}
+      {openModalUpJob?<ModalUpJob/>:null}
+      
       <DashboardHeader />
 
       <main className="container">
@@ -40,12 +43,6 @@ export const DashEmpresas = () => {
         <JobListEmpresas/>
         
           
-        
-        
-
-        {openModal? <UpdateModalEmpresas/>:null}
-        {openModalAddJob? <ModalAddNewJob/>:null}
-        {openModalUpJob?<ModalUpJob/>:null}
       
         <AsideCard />
 

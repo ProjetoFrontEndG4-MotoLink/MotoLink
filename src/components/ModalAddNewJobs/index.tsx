@@ -2,6 +2,8 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import { Input } from "../Input"
 import { useContext } from "react"
 import { JobsContext } from "../../providers/JobsContext"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { NewJobSchema } from "./schema"
 
 export interface IAddNewJob{
     local:string
@@ -10,7 +12,7 @@ export interface IAddNewJob{
 }
 export const ModalAddNewJob=()=>{
 
-const {register,handleSubmit}=useForm<IAddNewJob>({})
+const {register,handleSubmit,formState:{errors}}=useForm<IAddNewJob>({resolver:zodResolver(NewJobSchema)})
 const {addNewJob,setOpenModalAddJob,openModalAddJob}=useContext(JobsContext)
 const submit:SubmitHandler<IAddNewJob>=(formData)=>{
 addNewJob(formData)
@@ -26,8 +28,8 @@ addNewJob(formData)
             </div>
             <form onSubmit={handleSubmit(submit)}>
 
-                <Input type="text" id="Endereço" label="Endereço" placeholder="Ex: Rua xxx xxx xx" {...register("local")}/>
-                <Input  type="number" id="Valor" label="Taxa de Entrega" placeholder="Ex:R$:0,000,00" {...register("price")}/>
+                <Input type="text" id="Endereço" label="Endereço" placeholder="Ex: Rua xxx xxx xx" {...register("local")} error={errors.local}/>
+                <Input  type="number" id="Valor" label="Taxa de Entrega" placeholder="Ex:R$:0,000,00" {...register("price")}error={errors.price}/>
               
                 <button> Cadastrar nova entrega</button>
             </form>

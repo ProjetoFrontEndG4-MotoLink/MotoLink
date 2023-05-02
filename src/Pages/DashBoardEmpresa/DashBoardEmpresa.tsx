@@ -1,6 +1,4 @@
-import { useContext, useState } from "react";
-
-import { JobCard } from "../../components/JobCard/JobCard";
+import { useContext } from "react";
 import { AsideCard } from "../../components/JobCard/AsideCards/AsideCard";
 import { DashboardHeader } from "../../components/Header/DashboardHeader";
 import { UpdateModalEmpresas } from "../../components/UpdateModalEmpresas";

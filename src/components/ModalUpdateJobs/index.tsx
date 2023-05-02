@@ -2,6 +2,8 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import { Input } from "../Input"
 import { useContext } from "react"
 import { JobsContext } from "../../providers/JobsContext"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { UpdateJobSchema } from "./schema"
 
 export interface IUpJob{
     local:string
@@ -10,7 +12,7 @@ export interface IUpJob{
 }
 export const ModalUpJob=()=>{
 
-const {register,handleSubmit}=useForm<IUpJob>({})
+const {register,handleSubmit,formState:{errors}}=useForm<IUpJob>({resolver:zodResolver(UpdateJobSchema)})
 const { setOpenModalUpJob,updateJob}=useContext(JobsContext)
 const submit:SubmitHandler<IUpJob>=(formData)=>{
 
@@ -29,8 +31,8 @@ updateJob(formData)
             </div>
             <form onSubmit={handleSubmit(submit)}>
 
-                <Input type="text" id="Endereço" label="Endereço" placeholder="Ex: Rua xxx xxx xx" {...register("local")}/>
-                <Input  type="number" id="Valor" label="Taxa de Entrega" placeholder="Ex:R$:0,000,00" {...register("price")}/>
+                <Input type="text" id="Endereço" label="Endereço" placeholder="Ex: Rua xxx xxx xx" {...register("local")} error={errors.local}/>
+                <Input  type="number" id="Valor" label="Taxa de Entrega" placeholder="Ex:R$:0,000,00" {...register("price")}error={errors.price}/>
               
                 <button> Editar entrega</button>
             </form>

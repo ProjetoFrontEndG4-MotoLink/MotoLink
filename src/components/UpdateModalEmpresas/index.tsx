@@ -2,6 +2,8 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import { Input } from "../Input"
 import { useContext } from "react"
 import { UserContext } from "../../providers/UserContext"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { UpdateEmpresas } from "./schema"
 
 export interface IupdateEmpresas{
     name:string,
@@ -13,7 +15,7 @@ export const UpdateModalEmpresas=()=>{
 
     const{editProfile,setOpenModal}=useContext(UserContext)
     
-    const{register,handleSubmit}=useForm<IupdateEmpresas>({})
+    const{register,handleSubmit,formState:{errors}}=useForm<IupdateEmpresas>({resolver:zodResolver(UpdateEmpresas)})
 
 
     const submit:SubmitHandler<IupdateEmpresas>=(formData)=>{
@@ -34,6 +36,8 @@ export const UpdateModalEmpresas=()=>{
           id={"Nome"}
           {...register("name")}
           placeholder="Ex:João da Silva"
+          error={errors.name}
+          
         />
               <Input
           label="E-mail"
@@ -41,6 +45,7 @@ export const UpdateModalEmpresas=()=>{
           id={"E-mail"}
           {...register("email")}
           placeholder="Ex.: email@teste.com"
+          error={errors.email}
         />
 
 <Input
@@ -50,6 +55,7 @@ export const UpdateModalEmpresas=()=>{
           {...register("telefone")}
          
           placeholder="Ex.: (00) 00000-0000"
+          error={errors.telefone}
         />
            <Input
           label="Setor"
@@ -58,6 +64,7 @@ export const UpdateModalEmpresas=()=>{
           {...register("setor")}
          
           placeholder="Ex: pizzaria"
+          error={errors.setor}
         />
 
         <button>Editar Perfil</button>

@@ -10,28 +10,23 @@ import { ModalAddNewJob } from "../../components/ModalAddNewJobs";
 import { JobListEmpresas } from "../../components/JobListempresas";
 import { ModalUpJob } from "../../components/ModalUpdateJobs";
 import { Footer } from "../../components/Footer";
-import { DropDownMenu } from "../../components/Header/DropDownMenu";
+import { UserDashboardInfo } from "../../components/UserDashboardInfo";
 
 export const DashEmpresas = () => {
-  const { user, openModal } = useContext(UserContext);
+  const { openModal } = useContext(UserContext);
   const { setOpenModalAddJob, openModalAddJob, openModalUpJob } =
     useContext(JobsContext);
 
   return (
     <>
-      {openModal? <UpdateModalEmpresas/>:null}
-      {openModalAddJob? <ModalAddNewJob/>:null}
-      {openModalUpJob?<ModalUpJob/>:null}
-      
+      {openModal ? <UpdateModalEmpresas /> : null}
+      {openModalAddJob ? <ModalAddNewJob /> : null}
+      {openModalUpJob ? <ModalUpJob /> : null}
+
       <DashboardHeader />
 
       <main className="container">
-        <div>
-          <h1>{user?.name}</h1>
-          <h3>Setor:{user?.setor}</h3>
-          <h3>Telefone:{user?.telefone}</h3>
-          <h3>E-mail:{user?.email}</h3>
-        </div>
+        <UserDashboardInfo />
 
         <div>
           <h1>Entregas Publicadas</h1>
@@ -40,8 +35,8 @@ export const DashEmpresas = () => {
           </button>
         </div>
 
-        <JobListEmpresas/>
-      
+        <JobListEmpresas />
+
         <AsideCard />
       </main>
 

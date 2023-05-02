@@ -1,6 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Input } from "../Input";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { UserContext } from "../../providers/UserContext";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SchemaEmpresas } from "./schema";

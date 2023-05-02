@@ -29,7 +29,6 @@ export const DashboardHeaderStyle = styled.header`
     justify-content: space-between;
   }
 
-  
   @media (min-width: 1024px) {
     .container {
       width: 1180px;
@@ -44,6 +43,5 @@ export const DashboardHeaderStyle = styled.header`
     .button__menu {
       display: none;
     }
-
   }
 `;

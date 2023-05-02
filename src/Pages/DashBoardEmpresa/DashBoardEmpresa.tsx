@@ -1,6 +1,5 @@
 import { useContext } from "react";
 
-
 import { AsideCard } from "../../components/JobCard/AsideCards/AsideCard";
 import { DashboardHeader } from "../../components/Header/DashboardHeader";
 
@@ -11,13 +10,13 @@ import { ModalAddNewJob } from "../../components/ModalAddNewJobs";
 import { JobListEmpresas } from "../../components/JobListempresas";
 import { ModalUpJob } from "../../components/ModalUpdateJobs";
 import { Footer } from "../../components/Footer";
+import { DropDownMenu } from "../../components/Header/DropDownMenu";
 
 export const DashEmpresas = () => {
- 
-  
- const {user,openModal}=useContext(UserContext)
- const{setOpenModalAddJob,openModalAddJob,openModalUpJob}=useContext(JobsContext)
-  
+  const { user, openModal } = useContext(UserContext);
+  const { setOpenModalAddJob, openModalAddJob, openModalUpJob } =
+    useContext(JobsContext);
+
   return (
     <>
       {openModal? <UpdateModalEmpresas/>:null}
@@ -27,8 +26,6 @@ export const DashEmpresas = () => {
       <DashboardHeader />
 
       <main className="container">
-     
-      
         <div>
           <h1>{user?.name}</h1>
           <h3>Setor:{user?.setor}</h3>
@@ -38,17 +35,27 @@ export const DashEmpresas = () => {
 
         <div>
           <h1>Entregas Publicadas</h1>
-          <button onClick={()=>setOpenModalAddJob(true)}>Adicionar nova entrega</button>
+          <button onClick={() => setOpenModalAddJob(true)}>
+            Adicionar nova entrega
+          </button>
         </div>
+
         <JobListEmpresas/>
         
           
       
         <AsideCard />
 
+
+
+        {openModal ? <UpdateModalEmpresas /> : null}
+        {openModalAddJob ? <ModalAddNewJob /> : null}
+        {openModalUpJob ? <ModalUpJob /> : null}
+
+        <AsideCard />
       </main>
 
-      <Footer/>
+      <Footer />
     </>
   );
 };

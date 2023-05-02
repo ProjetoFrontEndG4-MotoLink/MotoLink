@@ -2,15 +2,19 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import { Input } from "../Input"
 import { useContext } from "react"
 import { JobsContext } from "../../providers/JobsContext"
+
 import { ModalContainer } from "../../styles/global"
 import { StyledModalAddNewJob } from "./style"
 import { ButtonDefault } from "../../styles/buttons"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { NewJobSchema } from "./schema"
 
 export interface IAddNewJob{
     local:string
     price:number
     
 }
+
 export const ModalAddNewJob = () => {
     const {register,handleSubmit}=useForm<IAddNewJob>({})
     const {addNewJob,setOpenModalAddJob,openModalAddJob}=useContext(JobsContext)

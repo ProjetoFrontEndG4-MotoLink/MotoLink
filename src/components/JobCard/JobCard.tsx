@@ -24,7 +24,7 @@ export const JobCard = ({job}:ICardProp) => {
           <p>{`R$:${job.price}`}</p>
         </div>
 
-        <div className="interactionButtonsContainer">{children}</div>
+        {/* <div className="interactionButtonsContainer">{children}</div> */}
 
         <button onClick={()=>setOpenModalUpJob(true)}>Editar</button>
         <button onClick={()=>deleteJob(job.id)}>Excluir</button>

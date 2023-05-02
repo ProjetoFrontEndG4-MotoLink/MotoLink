@@ -21,9 +21,9 @@ export const DashEmpresas = () => {
   return (
     <>
 
-      <DashboardHeader logout={logout} editProfile={editProfile} />
-      <button onClick={logout}>Sair</button>
       <DashboardHeader />
+     
+      
 
       <div>
         <h1>{user?.name}</h1>
@@ -36,20 +36,11 @@ export const DashEmpresas = () => {
         <h1>Entregas Publicadas</h1>
         <button onClick={()=>setOpenModalAddJob(true)}>Adicionar nova entrega</button>
       </div>
-      <JobListEmpresas>
-      <JobCard>
-        <ButtonDefault
-          className="fullWidth"
-          buttonSize="medium"
-          buttonStyle="orange"
-        >
-          Editar
-        </ButtonDefault>
-        <ButtonDefault buttonSize="medium" buttonStyle="lightGrey">
-          Excluir
-        </ButtonDefault>
-      </JobCard>
-      </JobListEmpresas>
+      <JobListEmpresas/>
+      
+        
+      
+      
 
      {openModal? <UpdateModalEmpresas/>:null}
       {openModalAddJob? <ModalAddNewJob/>:null}

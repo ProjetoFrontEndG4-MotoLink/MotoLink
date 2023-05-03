@@ -6,7 +6,7 @@ import { ButtonDefault } from "../../../styles/buttons";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { NewJobSchema } from "./schema";
 import { ModalContainer } from "../../../styles/Modal";
-import closeIcon from "../../assets/images/icon-close.svg";
+import closeIcon from "../../../assets/images/icon-close.svg";
 
 export interface IAddNewJob {
   local: string;
@@ -28,7 +28,7 @@ export const ModalAddNewJob = () => {
     <ModalContainer>
       <div className="modalBody">
         <div className="modal__header">
-          <h2>Nova entrega</h2>
+          <h2>Adicionar nova entrega</h2>
           <img src={closeIcon} onClick={() => setOpenModalAddJob(false)} />
         </div>
         <form onSubmit={handleSubmit(submit)}>

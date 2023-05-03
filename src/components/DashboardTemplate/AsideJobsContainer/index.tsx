@@ -1,14 +1,21 @@
+import { useContext } from "react";
 import { AsideStyle } from "./AsideStyle";
+import { IJobs, JobsContext } from "../../../providers/JobsContext";
+import { AsideCard } from "./AsideCards/AsideCard";
 
-type AsideProps = {
-  children: React.ReactNode;
-};
+export interface IJobsProps{
+  jobs: IJobs
+}
 
-export const AsideContainer = ({ children }: AsideProps) => {
+export const AsideContainer = () => {
+  const {jobsAccept} = useContext(JobsContext)
+  console.log(jobsAccept)
   return (
     <AsideStyle>
       <h3>Entregas aceitas</h3>
-      <ul>{children}</ul>
+      <ul>{jobsAccept.map((jobs)=>(
+        <AsideCard key={jobs.id} jobs={jobs}/>
+      ))}</ul>
     </AsideStyle>
   );
 };

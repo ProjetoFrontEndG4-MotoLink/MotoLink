@@ -8,18 +8,19 @@ import { UserContext } from "../UserContext";
 
 interface IJobsContext {
   setOpenModalAddJob: React.Dispatch<React.SetStateAction<boolean>>;
-  openModalAddJob: boolean;
   addNewJob: (formData: IAddNewJob) => Promise<void>;
-  jobById: IJobs[];
-  jobsList: IJobs[];
   deleteJob: (id: number) => Promise<void>;
   setOpenModalUpJob: React.Dispatch<React.SetStateAction<boolean>>;
-  openModalUpJob: boolean;
   updateJob: (formData: IUpJob) => Promise<void>;
   setCurrentJob: React.Dispatch<React.SetStateAction<IJobs | null>>;
-  currentJob: IJobs | null;
   acceptJob: (id: number) => Promise<void>;
+  openModalAddJob: boolean;
+  jobById: IJobs[];
+  jobsList: IJobs[];
+  openModalUpJob: boolean;
+  currentJob: IJobs | null;
   jobsNotAccept: IJobs[];
+  jobsAccept: IJobs[];
 }
 
 interface IJobsProvider {
@@ -32,6 +33,7 @@ export interface IJobs {
   companyId: number | string;
   partners: string;
   id: number;
+  idUser: number;
   status: boolean;
   local: string;
   price: number;
@@ -42,7 +44,7 @@ export const JobsContext = createContext({} as IJobsContext);
 export const JobsProvider = ({ children }: IJobsProvider) => {
   const [jobsList, setJobsList] = useState<IJobs[]>([]);
   const [jobById, setJobById] = useState<IJobs[]>([]);
-  // const [jobsAccept, setJobsAccept] = useState<IJobs[]>([]);
+  const [jobsAccept, setJobsAccept] = useState<IJobs[]>([]);
   const [jobsNotAccept, setJobsNotAccept] = useState<IJobs[]>([]);
   const [openModalAddJob, setOpenModalAddJob] = useState(false);
   const [openModalUpJob, setOpenModalUpJob] = useState(false);
@@ -51,6 +53,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
 
   useEffect(() => {
     const token = localStorage.getItem("@TOKEN");
+    const id = localStorage.getItem("@USERID");
 
     const getAllJobs = async () => {
       try {
@@ -59,7 +62,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
             Authorization: `Bearer ${token}`,
           },
         });
-
+        
         setJobsList(response.data);
       } catch (error) {
         toast.error("Ops... Algo deu errado, tente novamente!");
@@ -160,28 +163,36 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
 
   const acceptJob = async (id: number) => {
     const token = localStorage.getItem("@TOKEN");
-    const motoUser = user?.name;
-    const plateNumber = user?.plate;
-    const idUser = user?.id;
+    const user_id = localStorage.getItem("@USERID");
+  
     try {
       const response = await Api.patch(
         `/jobs/${id}`,
-        {
-          id: idUser,
-          status: false,
-          name: motoUser,
-          plate: plateNumber,
-        },
+        { idUser: user_id, status: false },
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-
-      console.log(response.data);
+  
+      const updatedJob = response.data;
+      const updatedJobsList = jobsList.map((job) => {
+        if (job.id === updatedJob.id) {
+          return updatedJob;
+        } else {
+          return job;
+        }
+      });
+  
+      const newJobsAcceptList = [...jobsAccept, updatedJob];
+  
+      setJobsList(updatedJobsList);
+      setJobsAccept(newJobsAcceptList);
+  
+      toast.success("Entrega aceita com sucesso!");
     } catch (error) {
-      console.error(error);
+      toast.error("Ops... Algo deu errado, tente novamente!");
     }
   };
 
@@ -201,6 +212,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
         setCurrentJob,
         acceptJob,
         jobsNotAccept,
+        jobsAccept,
       }}
     >
       {children}

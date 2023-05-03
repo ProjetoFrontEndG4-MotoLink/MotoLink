@@ -1,19 +1,23 @@
-import { Footer } from "../Footer";
+import { Footer } from "./Footer";
 import { DashboardHeader } from "../Header/DashboardHeader";
 import { AsideCard } from "../JobCard/AsideCards/AsideCard";
 import { ButtonDefault } from "../../styles/buttons";
 import { MainStyle } from "./dashboardTemplate";
 import { UserDashboardInfo } from "./UserDashboardInfo";
+import { useContext } from "react";
+import { JobsContext } from "../../providers/JobsContext";
 
 interface IDashboardTemplateProps {
-  callback: () => void;
+  buttonAddJob?: true;
   children: React.ReactNode;
 }
 
 export const DashboardTemplate = ({
-  callback,
+  buttonAddJob,
   children,
 }: IDashboardTemplateProps) => {
+  const { setOpenModalAddJob } = useContext(JobsContext);
+
   return (
     <>
       <DashboardHeader />
@@ -23,13 +27,15 @@ export const DashboardTemplate = ({
           <div className="JobsListContainer">
             <div className="JobsListContainer__header">
               <h2>Entregas Publicadas</h2>
-              <ButtonDefault
-                buttonSize="medium"
-                buttonStyle="yellow"
-                onClick={() => callback}
-              >
-                Adicionar nova entrega
-              </ButtonDefault>
+              {buttonAddJob ? (
+                <ButtonDefault
+                  buttonSize="medium"
+                  buttonStyle="yellow"
+                  onClick={() => setOpenModalAddJob(true)}
+                >
+                  Adicionar nova entrega
+                </ButtonDefault>
+              ) : null}
             </div>
             {children}
           </div>

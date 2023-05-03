@@ -9,7 +9,7 @@ export const MainStyle = styled.main`
   .main__column1 {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 40px;
 
     .JobsListContainer {
       display: flex;

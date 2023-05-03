@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
 export const CardTemplate = styled.div`
-  width: 280px;
   height: fit-content;
+  align-self: center;
+  width: 100%;
   max-width: 100%;
 
   h4 {
@@ -53,5 +54,10 @@ export const CardTemplate = styled.div`
       display: flex;
       gap: 10px;
     }
+  }
+
+  @media (min-width: 768px) {
+    width: 280px;
+    max-width: 100%;
   }
 `;

@@ -4,6 +4,6 @@ type JobListProps = {
   children: React.ReactNode;
 };
 
-export const JobListEmpresas = ({ children }: JobListProps) => {
+export const JobList = ({ children }: JobListProps) => {
   return <JobListStyle>{children}</JobListStyle>;
 };

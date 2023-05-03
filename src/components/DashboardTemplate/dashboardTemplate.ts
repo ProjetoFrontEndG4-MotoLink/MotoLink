@@ -9,7 +9,7 @@ export const MainStyle = styled.main`
   .main__column1 {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 40px;
 
     .JobsListContainer {
       display: flex;
@@ -32,6 +32,10 @@ export const MainStyle = styled.main`
     display: grid;
     grid-template-columns: 3fr 1fr;
     gap: 20px;
+
+    .main__column1 {
+      gap: 40px;
+    }
 
     .JobsListContainer__header {
       flex-direction: row;

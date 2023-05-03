@@ -1,4 +1,4 @@
-import { LoginForm } from "../../components/LoginForm";
+import { LoginForm } from "./LoginForm/index.tsx";
 import { IndexDefaultTemplate } from "../../components/IndexDefaultTemplate/IndexDefaultTemplate.tsx";
 import { ButtonDefault } from "../../styles/buttons.tsx";
 import { Link } from "react-router-dom";

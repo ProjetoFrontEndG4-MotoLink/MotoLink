@@ -1,22 +1,19 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Input } from "../Input";
+import { Input } from "../../../components/Input";
 import { useContext } from "react";
-import { JobsContext } from "../../providers/JobsContext";
-import { ButtonDefault } from "../../styles/buttons";
+import { JobsContext } from "../../../providers/JobsContext";
+import { ButtonDefault } from "../../../styles/buttons";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { NewJobSchema } from "./schema";
-import { ModalContainer } from "../../styles/Modal";
+import { ModalContainer } from "../../../styles/Modal";
+import closeIcon from "../../assets/images/icon-close.svg";
 
 export interface IAddNewJob {
   local: string;
   price: number;
 }
 
-type ModalProps = {
-  isOpen: boolean;
-};
-
-export const ModalAddNewJob = ({ isOpen }: ModalProps) => {
+export const ModalAddNewJob = () => {
   const {
     register,
     handleSubmit,
@@ -29,10 +26,10 @@ export const ModalAddNewJob = ({ isOpen }: ModalProps) => {
 
   return (
     <ModalContainer>
-      <dialog open={isOpen}>
-        <div className="buttons__container">
+      <div className="modalBody">
+        <div className="modal__header">
           <h2>Nova entrega</h2>
-          <button onClick={() => setOpenModalAddJob(false)}>x</button>
+          <img src={closeIcon} onClick={() => setOpenModalAddJob(false)} />
         </div>
         <form onSubmit={handleSubmit(submit)}>
           <Input
@@ -61,7 +58,7 @@ export const ModalAddNewJob = ({ isOpen }: ModalProps) => {
             Cadastrar nova entrega
           </ButtonDefault>
         </form>
-      </dialog>
+      </div>
     </ModalContainer>
   );
 };

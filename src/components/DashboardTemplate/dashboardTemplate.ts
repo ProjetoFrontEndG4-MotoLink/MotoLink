@@ -16,6 +16,11 @@ export const MainStyle = styled.main`
       flex-direction: column;
       gap: 20px;
 
+      h3 {
+        padding: 40px;
+        text-align: center;
+      }
+
       .JobsListContainer__header {
         h2 {
           text-align: center;

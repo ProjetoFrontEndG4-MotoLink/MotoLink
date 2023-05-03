@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { Api } from "../../services/Api";
 import { IAddNewJob } from "../../Pages/DashBoardEmpresa/ModalAddNewJobs";
 import { IUpJob } from "../../Pages/DashBoardEmpresa/ModalUpdateJobs";
+import { toast } from "react-toastify";
 
 interface IJobsContext {
   setOpenModalAddJob: React.Dispatch<React.SetStateAction<boolean>>;
@@ -79,10 +80,12 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
           },
         }
       );
-
+      
+      toast.success("Entrega publicada com sucesso!")
       setJobsList([...jobsList, response.data]);
     } catch (error) {
       console.log(error);
+      toast.error("Ops... Algo deu errado, tente novamente!")
     } finally {
       setOpenModalAddJob(false);
     }
@@ -103,9 +106,11 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
         return job.id !== Number(companyid);
       });
 
+      toast.success("Entrega deletada com sucesso!")
       setJobsList(newJobList);
     } catch (error) {
       console.log(error);
+      toast.error("Ops... Algo deu errado, tente novamente!")
     }
   };
 
@@ -113,6 +118,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
     const token = localStorage.getItem("@TOKEN");
 
     const id = currentJob?.id;
+    console.log(currentJob)
 
     try {
       const response = await Api.patch(`/jobs/${id}`, formData, {
@@ -125,9 +131,11 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
         return job.id !== id;
       });
 
+      toast.success("Entrega modificada com sucesso!")
       setJobsList([...newJobList, response.data]);
     } catch (error) {
       console.log(error);
+      toast.error("Ops... Algo deu errado, tente novamente!")
     } finally {
       setOpenModalUpJob(false);
     }

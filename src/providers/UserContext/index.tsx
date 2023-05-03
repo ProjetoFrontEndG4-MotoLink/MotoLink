@@ -109,7 +109,8 @@ export const UserProvider = ({ children }: IUserProvider) => {
         navigate("/dashboardmotoboy");
       }
     } catch (error: AxiosError<APIError> | any) {
-      toast.error(error.response?.data);
+      console.log(error.response?.data)
+      toast.error("Ops... Algo deu errado, tente novamente!")
     } finally {
       setLoading(false);
     }
@@ -131,9 +132,11 @@ export const UserProvider = ({ children }: IUserProvider) => {
           Authorization: `Bearer ${token}`,
         },
       });
+      toast.success("Perfil atualizado com sucesso!")
       setUser(response.data);
     } catch (error) {
       console.log(error);
+      toast.error("Ops... Algo deu errado, tente novamente!")
     } finally {
       setOpenModal(false);
     }
@@ -143,11 +146,10 @@ export const UserProvider = ({ children }: IUserProvider) => {
     try {
       setLoad(true);
       await Api.post("/users", formData);
-
-      alert("Empresa Cadastrada");
+      toast.success("Empresa cadastrada com sucesso!")
       navigate("/");
     } catch (error: AxiosError<APIError> | any) {
-      toast.error(error.response?.data);
+      console.log(error.response?.data);
     } finally {
       setLoad(false);
     }
@@ -157,10 +159,10 @@ export const UserProvider = ({ children }: IUserProvider) => {
     try {
       setLoad(true);
       await Api.post("/users", formData);
-      alert("Motoboy Cadastrado");
+      toast.success("Usuário cadastrado com sucesso!")
       navigate("/");
     } catch (error: AxiosError<APIError> | any) {
-      toast.error(error.response?.data);
+      console.log(error.response?.data);
     } finally {
       setLoad(false);
     }

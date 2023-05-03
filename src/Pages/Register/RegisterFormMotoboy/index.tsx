@@ -1,11 +1,11 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Input } from "../Input";
-import { useContext, useState } from "react";
-import { UserContext } from "../../providers/UserContext";
+import { Input } from "../../../components/Input";
+import { useContext } from "react";
+import { UserContext } from "../../../providers/UserContext";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SchemaMotoboy } from "./schema";
-import { StyledForm } from "../LoginForm/style";
-import { ButtonDefault } from "../../styles/buttons";
+import { StyledForm } from "../../Login/LoginForm/style";
+import { ButtonDefault } from "../../../styles/buttons";
 
 export interface IRegisterMotoboyFormData {
   email: string;

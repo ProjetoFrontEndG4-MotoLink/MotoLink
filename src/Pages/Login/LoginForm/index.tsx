@@ -1,11 +1,11 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Input } from "../Input";
+import { Input } from "../../../components/Input";
 import { useContext, useState } from "react";
-import { UserContext } from "../../providers/UserContext";
+import { UserContext } from "../../../providers/UserContext";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema } from "./loginSchema";
 import { StyledForm } from "./style";
-import { ButtonDefault } from "../../styles/buttons";
+import { ButtonDefault } from "../../../styles/buttons";
 
 export interface ILoginFormData {
   email: string;

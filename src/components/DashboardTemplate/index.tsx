@@ -1,16 +1,19 @@
 import { Footer } from "../Footer";
 import { DashboardHeader } from "../Header/DashboardHeader";
 import { AsideCard } from "../JobCard/AsideCards/AsideCard";
-import { JobListEmpresas } from "../JobListempresas";
 import { ButtonDefault } from "../../styles/buttons";
 import { MainStyle } from "./dashboardTemplate";
 import { UserDashboardInfo } from "./UserDashboardInfo";
 
 interface IDashboardTemplateProps {
   callback: () => void;
+  children: React.ReactNode;
 }
 
-export const DashboardTemplate = ({ callback }: IDashboardTemplateProps) => {
+export const DashboardTemplate = ({
+  callback,
+  children,
+}: IDashboardTemplateProps) => {
   return (
     <>
       <DashboardHeader />
@@ -28,7 +31,7 @@ export const DashboardTemplate = ({ callback }: IDashboardTemplateProps) => {
                 Adicionar nova entrega
               </ButtonDefault>
             </div>
-            <JobListEmpresas />
+            {children}
           </div>
         </div>
         <div className="main__column2">

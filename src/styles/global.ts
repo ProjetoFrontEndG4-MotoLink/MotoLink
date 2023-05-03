@@ -10,14 +10,9 @@ export const GlobalStyles = createGlobalStyle`
         text-decoration: none;
         font-family: 'Inter', sans-serif;
     }
-
-    body {
-        width: 100vw;
-        height: 100vh;
-    }
     
     .App{
-        width: 100vw;
+        max-width: 100%;
         min-height: 100vh;
     }
 
@@ -54,22 +49,20 @@ export const GlobalStyles = createGlobalStyle`
         --border-Radius: 5px;
     }
 
-    
-
     h1 {
-        font-size: var( --title-1);
+        font-size: var( --title-2);
         font-weight: var(--weight-1);
         color: var(--brand-3);
     }
 
     h2 {
-        font-size: var( --title-2);
+        font-size: var( --title-3);
         font-weight: var(--weight-2);
         color: var(--grey-1); 
     }
 
     h3 {
-        font-size: var( --title-3);
+        font-size: var( --text-1);
         font-weight: var(--weight-3);
         color: var(--grey-1);
     }
@@ -120,6 +113,7 @@ export const GlobalStyles = createGlobalStyle`
     @media (min-width: 1024px) {
         .container {
             width: 1180px;
+            max-width: 100%;
             margin: 0 auto;
         }
 
@@ -130,6 +124,23 @@ export const GlobalStyles = createGlobalStyle`
         .container_right {
             width: 280px;
         }
-    }
 
+        h1 {
+        font-size: var( --title-1);
+        font-weight: var(--weight-1);
+        color: var(--brand-3);
+        }
+
+        h2 {
+            font-size: var( --title-2);
+            font-weight: var(--weight-2);
+            color: var(--grey-1); 
+        }
+
+        h3 {
+            font-size: var( --title-3);
+            font-weight: var(--weight-3);
+            color: var(--grey-1);
+        }
+    }
 `;

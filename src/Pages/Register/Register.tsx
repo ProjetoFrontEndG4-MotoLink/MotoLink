@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { RegisterFormEmpresas } from "../../components/RegisterEmpresasForm";
+import { RegisterFormEmpresas } from "./RegisterEmpresasForm/index.tsx";
 import { useState } from "react";
-import { RegisterFormMotoboy } from "../../components/RegisterFormMotoboy";
+import { RegisterFormMotoboy } from "./RegisterFormMotoboy/index.tsx";
 import { IndexDefaultTemplate } from "../../components/IndexDefaultTemplate/IndexDefaultTemplate.tsx";
 import { CardTypeOfUser } from "../../components/CardTypeOfUser/index.tsx";
 import iconMotoboy from "../../assets/images/icon-motoboy.svg";

@@ -1,24 +1,42 @@
+import { DashboardTemplate } from "../../components/DashboardTemplate";
+import { JobCard } from "../../components/JobCard/JobCard";
+import { JobList } from "../../components/DashboardTemplate/JobList";
+import { ButtonDefault } from "../../styles/buttons";
 import { useContext } from "react";
-import { JobsListMoto } from "../../components/JobsListMoto/JobsListMoto";
-import { DashboardHeader } from "../../components/Header/DashboardHeader";
-import { UserContext } from "../../providers/UserContext";
+import {JobsContext } from "../../providers/JobsContext";
 
 export const DashMotoboy = () => {
-    const {user} = useContext(UserContext)
+  const {jobsNotAccept, acceptJob} = useContext(JobsContext)
 
-	return (
-		<>
-            <DashboardHeader/>
-			<div>
-				<h1>{user?.name}</h1>
-				<h3>Setor:{user?.setor}</h3>
-				<h3>Telefone:{user?.telefone}</h3>
-				<h3>E-mail:{user?.email}</h3>
-			</div>
-            <div>
-                <h1>Jobs Disponiveis</h1>
-                <JobsListMoto/>
-            </div>
-		</>
-	);
+
+  return (
+    <DashboardTemplate>
+      <JobList>
+        {jobsNotAccept.map((job)=> (
+          <JobCard key={job.id}  job={job}>
+          <div className="Card__Info__Detail">
+            <h5>Local Da Entrega</h5>
+            <p>{job.local}</p>
+          </div>
+          <div className="Card__Info__Detail">
+            <h5>Taxa/entrega</h5>
+            <p>{`R$${job.price}`}</p>
+          </div>
+          <div className="interactionButtonsContainer">
+            <ButtonDefault
+              className="fullWidth"
+              buttonSize="medium"
+              buttonStyle="yellow"
+              onClick={() => {
+                acceptJob()
+              }}
+            >
+              Aceitar entrega
+            </ButtonDefault>
+          </div>
+        </JobCard>
+        ))}
+      </JobList>
+    </DashboardTemplate>
+  );
 };

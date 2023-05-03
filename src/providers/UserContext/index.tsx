@@ -1,12 +1,12 @@
 import React, { createContext, useEffect, useState } from "react";
-import { ILoginFormData } from "../../components/LoginForm";
+import { ILoginFormData } from "../../Pages/Login/LoginForm";
 import { Api } from "../../services/Api";
 import { useNavigate } from "react-router-dom";
-import { IRegisterMotoboyFormData } from "../../components/RegisterFormMotoboy";
-import { IRegisterEmpresasFormData } from "../../components/RegisterEmpresasForm";
+import { IRegisterMotoboyFormData } from "../../Pages/Register/RegisterFormMotoboy";
+import { IRegisterEmpresasFormData } from "../../Pages/Register/RegisterEmpresasForm";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
-import { IupdateEmpresas } from "../../components/UpdateModalEmpresas";
+import { IupdateEmpresas } from "../../Pages/DashBoardEmpresa/UpdateModalEmpresas";
 
 interface IUserProvider {
   children: React.ReactNode;
@@ -17,13 +17,13 @@ interface IUserContext {
     setLoading: React.Dispatch<React.SetStateAction<boolean>>
   ) => Promise<void>;
   logout: () => void;
-  editProfile: (formData:IupdateEmpresas) => void;
+  editProfile: (formData: IupdateEmpresas) => void;
   user: IUser | null;
   registerEmpresa: (FormData: IRegisterEmpresasFormData) => void;
   registerMotoboy: (FormData: IRegisterMotoboyFormData) => void;
   load: boolean;
-  openModal:boolean
-setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
+  openModal: boolean;
+  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 interface IUser {
   email: string;
@@ -34,8 +34,8 @@ interface IUser {
   plate: string;
   model: string;
   avatar: string;
-  telefone:string;
-  setor:string
+  telefone: string;
+  setor: string;
 }
 
 interface APIError {
@@ -49,7 +49,7 @@ export const UserContext = createContext({} as IUserContext);
 export const UserProvider = ({ children }: IUserProvider) => {
   const [user, setUser] = useState<IUser | null>(null);
   const [load, setLoad] = useState(true);
-  const [openModal,setOpenModal]=useState(false)
+  const [openModal, setOpenModal] = useState(false);
 
   const navigate = useNavigate();
 
@@ -73,7 +73,7 @@ export const UserProvider = ({ children }: IUserProvider) => {
           navigate("/dashboardempresas");
         }
         if (response.data.userType === "motoboy") {
-          navigate("/dashboardmotoboy");
+          navigate("/dashboardemotoboy");
         }
       } catch (error) {
         localStorage.removeItem("@TOKEN");
@@ -122,25 +122,21 @@ export const UserProvider = ({ children }: IUserProvider) => {
     navigate("/");
   };
 
-  const editProfile = async(formData:IupdateEmpresas) => {
+  const editProfile = async (formData: IupdateEmpresas) => {
     const id = localStorage.getItem("@USERID");
     const token = localStorage.getItem("@TOKEN");
-  try {
-    const response = await Api.patch(`/users/${id}`,formData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    setUser(response.data)
-    
-
-    
-  } catch (error) {
-    console.log(error)
-  }
-  finally{
-    setOpenModal(false)
-  }
+    try {
+      const response = await Api.patch(`/users/${id}`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setUser(response.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setOpenModal(false);
+    }
   };
 
   const registerEmpresa = async (formData: IRegisterEmpresasFormData) => {
@@ -180,7 +176,7 @@ export const UserProvider = ({ children }: IUserProvider) => {
         load,
         editProfile,
         setOpenModal,
-        openModal
+        openModal,
       }}
     >
       {children}

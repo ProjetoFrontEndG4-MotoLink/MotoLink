@@ -4,6 +4,7 @@ import { IAddNewJob } from "../../Pages/DashBoardEmpresa/ModalAddNewJobs";
 import { IUpJob } from "../../Pages/DashBoardEmpresa/ModalUpdateJobs";
 import { toast } from "react-toastify";
 
+
 interface IJobsContext {
   setOpenModalAddJob: React.Dispatch<React.SetStateAction<boolean>>;
   openModalAddJob: boolean;
@@ -16,6 +17,8 @@ interface IJobsContext {
   updateJob: (formData: IUpJob) => Promise<void>;
   setCurrentJob: React.Dispatch<React.SetStateAction<IJobs | null>>;
   currentJob: IJobs | null;
+  acceptJob: () => Promise<void>;
+  jobsNotAccept: IJobs[];
 }
 
 interface IJobsProvider {
@@ -23,6 +26,7 @@ interface IJobsProvider {
 }
 
 export interface IJobs {
+  jobs: string;
   name: string;
   companyId: number | string;
   partners: string;
@@ -37,6 +41,7 @@ export const JobsContext = createContext({} as IJobsContext);
 export const JobsProvider = ({ children }: IJobsProvider) => {
   const [jobsList, setJobsList] = useState<IJobs[]>([]);
   const [jobById, setJobById] = useState<IJobs[]>([]);
+  const [jobsNotAccept, setJobsNotAccept] = useState<IJobs[]>([])
   const [openModalAddJob, setOpenModalAddJob] = useState(false);
   const [openModalUpJob, setOpenModalUpJob] = useState(false);
   const [currentJob, setCurrentJob] = useState<IJobs | null>(null);
@@ -59,9 +64,14 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
           return job.companyId == id;
         });
 
+        const jobNotAccept = jobsList.filter((job) => {
+          return job.status == true;
+        });
+        
+        setJobsNotAccept(jobNotAccept)
         setJobById(jobEmpresa);
       } catch (error) {
-        console.log(error);
+        toast.error("Ops... Algo deu errado, tente novamente!")
       }
     };
     getAllJobs();
@@ -73,18 +83,17 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
     try {
       const response = await Api.post(
         "/jobs",
-        { local: formData.local, companyId: Number(id), price: formData.price },
+        { local: formData.local, companyId: Number(id), price: formData.price, status:true},
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-      
-      toast.success("Entrega publicada com sucesso!")
+
       setJobsList([...jobsList, response.data]);
+      toast.success("Entrega publicada com sucesso!")
     } catch (error) {
-      console.log(error);
       toast.error("Ops... Algo deu errado, tente novamente!")
     } finally {
       setOpenModalAddJob(false);
@@ -109,16 +118,13 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
       toast.success("Entrega deletada com sucesso!")
       setJobsList(newJobList);
     } catch (error) {
-      console.log(error);
       toast.error("Ops... Algo deu errado, tente novamente!")
     }
   };
 
   const updateJob = async (formData: IUpJob) => {
     const token = localStorage.getItem("@TOKEN");
-
     const id = currentJob?.id;
-    console.log(currentJob)
 
     try {
       const response = await Api.patch(`/jobs/${id}`, formData, {
@@ -134,10 +140,32 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
       toast.success("Entrega modificada com sucesso!")
       setJobsList([...newJobList, response.data]);
     } catch (error) {
-      console.log(error);
       toast.error("Ops... Algo deu errado, tente novamente!")
+
     } finally {
       setOpenModalUpJob(false);
+    }
+  };
+
+  const acceptJob = async () => {
+    const token = localStorage.getItem("@TOKEN");
+    const id = currentJob?.id;
+    try {
+      const response = await Api.patch(`/jobs/${id}`, 
+      {
+        status: false
+      },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+
+        }
+      );
+  
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -155,6 +183,8 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
         updateJob,
         currentJob,
         setCurrentJob,
+        acceptJob,
+        jobsNotAccept,
       }}
     >
       {children}

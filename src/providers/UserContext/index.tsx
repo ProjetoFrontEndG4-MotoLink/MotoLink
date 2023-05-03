@@ -73,7 +73,7 @@ export const UserProvider = ({ children }: IUserProvider) => {
           navigate("/dashboardempresas");
         }
         if (response.data.userType === "motoboy") {
-          navigate("/dashboardmotoboy");
+          navigate("/dashboardemotoboy");
         }
       } catch (error) {
         localStorage.removeItem("@TOKEN");
@@ -132,11 +132,11 @@ export const UserProvider = ({ children }: IUserProvider) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      toast.success("Perfil atualizado com sucesso!")
       setUser(response.data);
+      toast.success("Perfil atualizado com sucesso!")
     } catch (error) {
-      console.log(error);
       toast.error("Ops... Algo deu errado, tente novamente!")
+
     } finally {
       setOpenModal(false);
     }

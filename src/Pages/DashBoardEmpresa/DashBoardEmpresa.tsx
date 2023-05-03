@@ -23,18 +23,18 @@ export const DashEmpresas = () => {
   return (
     <>
       {openModal ? <UpdateModalEmpresas /> : null}
-      {openModalUpJob ? <ModalUpJob /> : null}
+
       {openModalAddJob ? <ModalAddNewJob /> : null}
+      {openModalUpJob ? <ModalUpJob /> : null}
       <DashboardTemplate buttonAddJob={true}>
+      <JobList>
         {jobById.length > 0 ? (
           jobById.map((job) => {
-            const currentJob = () => {
-              setCurrentJob(job);
-            };
+          setCurrentJob(job.id);
+          
+            return (             
+                <JobCard key={job.id} job={job}>
 
-            return (
-              <JobList>
-                <JobCard key={job.id} callback={currentJob}>
                   <div className="Card__Info__Detail">
                     <h5>Local Da Entrega</h5>
                     <p>{job.local}</p>
@@ -61,12 +61,13 @@ export const DashEmpresas = () => {
                     </ButtonDefault>
                   </div>
                 </JobCard>
-              </JobList>
             );
           })
-        ) : (
-          <h3> Você ainda não cadastrou nenhuma entrega </h3>
-        )}
+          ) : (
+            <h3> Você ainda não cadastrou nenhuma entrega </h3>
+            )}
+            </JobList>
+
       </DashboardTemplate>
     </>
   );

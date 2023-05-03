@@ -2,12 +2,14 @@ import { CardTemplate } from "./JobCardStyle";
 
 interface ICardProp {
   children: React.ReactNode;
-  callback: () => void;
+  job: IJobs;
 }
 
-export const JobCard = ({ children, callback }: ICardProp) => {
+export const JobCard = ({ children, job}: ICardProp) => {
+  const {setCurrentJob} = useContext(JobsContext)
   return (
-    <CardTemplate onClick={() => callback}>
+    <CardTemplate onClick={() => setCurrentJob(job)}>
+
       <h4>Entrega</h4>
       <div className="Card__Info--default">{children}</div>
     </CardTemplate>

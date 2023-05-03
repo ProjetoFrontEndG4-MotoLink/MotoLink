@@ -1,49 +1,41 @@
-// import { useContext } from "react";
-// import { UserContext } from "../../providers/UserContext";
 import { DashboardTemplate } from "../../components/DashboardTemplate";
 import { JobCard } from "../../components/JobCard/JobCard";
 import { JobList } from "../../components/DashboardTemplate/JobList";
 import { ButtonDefault } from "../../styles/buttons";
+import { useContext } from "react";
+import {JobsContext } from "../../providers/JobsContext";
 
 export const DashMotoboy = () => {
-  //   const { logout } = useContext(UserContext);
+  const {jobsNotAccept, acceptJob} = useContext(JobsContext)
+
   return (
     <DashboardTemplate>
-      {/* {jobById.length > 0 ? (
-        jobById.map((job) => {
-          const currentJob = () => {
-            setCurrentJob(job);
-          };
-
-          return ( */}
       <JobList>
-        <JobCard key={1} callback={() => {}}>
+      {jobsNotAccept > 0 (
+        {jobsNotAccept.map((job)=> (
+          <JobCard key={job.id}  job={job}>
           <div className="Card__Info__Detail">
             <h5>Local Da Entrega</h5>
-            <p>lorem ipsum</p>
+            <p>{job.local}</p>
           </div>
           <div className="Card__Info__Detail">
             <h5>Taxa/entrega</h5>
-            {/* <p>{`R$:${job.price}`}</p> */}
-            <p>{`R$:40,00`}</p>
+            <p>{`R${job.price}`}</p>
           </div>
           <div className="interactionButtonsContainer">
             <ButtonDefault
               className="fullWidth"
               buttonSize="medium"
               buttonStyle="yellow"
-              onClick={() => {}}
-            >
+              onClick={() => {
+                acceptJob()
+              }} >
               Aceitar entrega
             </ButtonDefault>
           </div>
-        </JobCard>
+        </JobCard>)
+: ( <h3> Nenhuma entrega disponível </h3> )}
       </JobList>
-      {/* );
-        })
-      ) : (
-        <h3> Você ainda não cadastrou nenhuma entrega </h3>
-      )} */}
     </DashboardTemplate>
   );
 };

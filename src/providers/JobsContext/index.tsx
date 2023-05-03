@@ -64,7 +64,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
       }
     };
     getAllJobs();
-  }, [jobById]);
+  }, [jobsList]);
 
   const addNewJob = async (formData: IAddNewJob) => {
     const token = localStorage.getItem("@TOKEN");

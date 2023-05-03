@@ -5,7 +5,7 @@ import { UserContext } from "../../../providers/UserContext";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UpdateEmpresas } from "./schema";
 import { ModalContainer } from "../../../styles/Modal";
-import closeIcon from "../../assets/images/icon-close.svg";
+import closeIcon from "../../../assets/images/icon-close.svg";
 import { ButtonDefault } from "../../../styles/buttons";
 
 export interface IupdateEmpresas {

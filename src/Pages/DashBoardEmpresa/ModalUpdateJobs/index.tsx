@@ -5,6 +5,8 @@ import { JobsContext } from "../../../providers/JobsContext";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UpdateJobSchema } from "./schema";
 import { ModalContainer } from "../../../styles/Modal";
+import closeIcon from "../../../assets/images/icon-close.svg";
+import { ButtonDefault } from "../../../styles/buttons";
 
 export interface IUpJob {
   local: string;
@@ -24,9 +26,9 @@ export const ModalUpJob = () => {
   return (
     <ModalContainer>
       <div className="modalBody">
-        <div>
-          <h2>Atualiza entrega</h2>
-          <button onClick={() => setOpenModalUpJob(false)}>Fechar modal</button>
+        <div className="modal__header">
+          <h2>Editar entrega</h2>
+          <img src={closeIcon} onClick={() => setOpenModalUpJob(false)} />
         </div>
         <form onSubmit={handleSubmit(submit)}>
           <Input
@@ -46,7 +48,10 @@ export const ModalUpJob = () => {
             error={errors.price}
           />
 
-          <button> Editar entrega</button>
+          <ButtonDefault buttonSize="default" buttonStyle="yellow">
+            {" "}
+            Editar entrega
+          </ButtonDefault>
         </form>
       </div>
     </ModalContainer>

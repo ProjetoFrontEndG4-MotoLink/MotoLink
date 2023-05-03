@@ -50,19 +50,19 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     h1 {
-        font-size: var( --title-1);
+        font-size: var( --title-2);
         font-weight: var(--weight-1);
         color: var(--brand-3);
     }
 
     h2 {
-        font-size: var( --title-2);
+        font-size: var( --title-3);
         font-weight: var(--weight-2);
         color: var(--grey-1); 
     }
 
     h3 {
-        font-size: var( --title-3);
+        font-size: var( --text-1);
         font-weight: var(--weight-3);
         color: var(--grey-1);
     }
@@ -125,19 +125,36 @@ export const GlobalStyles = createGlobalStyle`
             width: 280px;
         }
 
+        h1 {
+        font-size: var( --title-1);
+        font-weight: var(--weight-1);
+        color: var(--brand-3);
+        }
+
+        h2 {
+            font-size: var( --title-2);
+            font-weight: var(--weight-2);
+            color: var(--grey-1); 
+        }
+
+        h3 {
+            font-size: var( --title-3);
+            font-weight: var(--weight-3);
+            color: var(--grey-1);
+        }
     }
-`
+`;
 
 export const ModalContainer = styled.div`
-    background-color: rgba(0, 0, 0, .4);
-    width: 100%;
-    height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
 
-    align-items: center;
-    margin: 0 auto;
+  align-items: center;
+  margin: 0 auto;
 
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 
-    position: absolute;
-`
+  position: absolute;
+`;

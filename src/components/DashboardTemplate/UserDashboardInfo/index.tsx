@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { UserDashboard } from "./UserDashboardInfoTemplate";
-import { UserContext } from "../../providers/UserContext";
+import { UserContext } from "../../../providers/UserContext";
 
 export const UserDashboardInfo = () => {
   const { user } = useContext(UserContext);

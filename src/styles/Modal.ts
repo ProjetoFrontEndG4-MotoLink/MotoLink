@@ -29,6 +29,7 @@ export const ModalContainer = styled.div`
 
       img {
         width: 18px;
+        cursor: pointer;
       }
     }
 

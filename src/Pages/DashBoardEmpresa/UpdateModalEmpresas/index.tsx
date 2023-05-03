@@ -38,7 +38,7 @@ export const UpdateModalEmpresas = () => {
             type="text"
             id={"Nome"}
             {...register("name")}
-            placeholder="Ex:João da Silva"
+            placeholder="Ex: João da Silva"
             error={errors.name}
           />
           <Input
@@ -46,7 +46,7 @@ export const UpdateModalEmpresas = () => {
             type="email"
             id={"E-mail"}
             {...register("email")}
-            placeholder="Ex.: email@teste.com"
+            placeholder="Ex: email@teste.com"
             error={errors.email}
           />
 
@@ -55,7 +55,7 @@ export const UpdateModalEmpresas = () => {
             type="number"
             id={"Telefone"}
             {...register("telefone")}
-            placeholder="Ex.: (00) 00000-0000"
+            placeholder="Ex: (00) 00000-0000"
             error={errors.telefone}
           />
           <Input
@@ -63,7 +63,7 @@ export const UpdateModalEmpresas = () => {
             type="text"
             id={"Setor"}
             {...register("setor")}
-            placeholder="Ex: pizzaria"
+            placeholder="Ex: Pizzaria"
             error={errors.setor}
           />
 

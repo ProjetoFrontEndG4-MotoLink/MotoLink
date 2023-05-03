@@ -54,6 +54,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
 					}
 				);
 				setJobsList(response.data);
+				console.log(response.data)
 
 				const jobEmpresa = jobsList.filter(
 					(job) => {
@@ -69,7 +70,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
 			}
 			getAllJobs();
 		};
-	}, []);
+	}, [jobsList]);
 
 	const addNewJob = async (formData: IAddNewJob) => {
 		const token = localStorage.getItem("@TOKEN");

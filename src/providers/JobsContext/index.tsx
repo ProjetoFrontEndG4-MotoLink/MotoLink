@@ -42,7 +42,7 @@ export const JobsContext = createContext({} as IJobsContext);
 export const JobsProvider = ({ children }: IJobsProvider) => {
   const [jobsList, setJobsList] = useState<IJobs[]>([]);
   const [jobById, setJobById] = useState<IJobs[]>([]);
-  const [jobsAccept, setJobsAccept] = useState<IJobs[]>([]);
+  // const [jobsAccept, setJobsAccept] = useState<IJobs[]>([]);
   const [jobsNotAccept, setJobsNotAccept] = useState<IJobs[]>([]);
   const [openModalAddJob, setOpenModalAddJob] = useState(false);
   const [openModalUpJob, setOpenModalUpJob] = useState(false);
@@ -86,6 +86,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
   const addNewJob = async (formData: IAddNewJob) => {
     const token = localStorage.getItem("@TOKEN");
     const id = localStorage.getItem("@USERID");
+
     try {
       const response = await Api.post(
         "/jobs",
@@ -122,12 +123,12 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
         },
       });
 
-      const newJobList = jobsList.filter((job) => {
-        return job.id !== Number(companyid);
+      const jobEmpresa = jobsList.filter((job) => {
+        return job.companyId == id;
       });
 
       toast.success("Entrega deletada com sucesso!");
-      setJobsList(newJobList);
+      setJobById(jobEmpresa);
     } catch (error) {
       toast.error("Ops... Algo deu errado, tente novamente!");
     }

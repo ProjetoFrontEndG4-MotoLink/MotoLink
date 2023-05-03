@@ -15,6 +15,7 @@ export const DashEmpresas = () => {
     deleteJob,
     jobById,
     setOpenModalUpJob,
+    setCurrentJob,
     openModalAddJob,
     openModalUpJob,
   } = useContext(JobsContext);
@@ -22,15 +23,18 @@ export const DashEmpresas = () => {
   return (
     <>
       {openModal ? <UpdateModalEmpresas /> : null}
+
       {openModalAddJob ? <ModalAddNewJob /> : null}
       {openModalUpJob ? <ModalUpJob /> : null}
       <DashboardTemplate buttonAddJob={true}>
       <JobList>
         {jobById.length > 0 ? (
           jobById.map((job) => {
-            return (
-              
+          setCurrentJob(job.id);
+          
+            return (             
                 <JobCard key={job.id} job={job}>
+
                   <div className="Card__Info__Detail">
                     <h5>Local Da Entrega</h5>
                     <p>{job.local}</p>
@@ -63,6 +67,7 @@ export const DashEmpresas = () => {
             <h3> Você ainda não cadastrou nenhuma entrega </h3>
             )}
             </JobList>
+
       </DashboardTemplate>
     </>
   );

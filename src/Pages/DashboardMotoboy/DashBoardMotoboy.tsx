@@ -8,10 +8,10 @@ import {JobsContext } from "../../providers/JobsContext";
 export const DashMotoboy = () => {
   const {jobsNotAccept, acceptJob} = useContext(JobsContext)
 
-
   return (
     <DashboardTemplate>
       <JobList>
+      {jobsNotAccept > 0 (
         {jobsNotAccept.map((job)=> (
           <JobCard key={job.id}  job={job}>
           <div className="Card__Info__Detail">
@@ -20,7 +20,7 @@ export const DashMotoboy = () => {
           </div>
           <div className="Card__Info__Detail">
             <h5>Taxa/entrega</h5>
-            <p>{`R$${job.price}`}</p>
+            <p>{`R${job.price}`}</p>
           </div>
           <div className="interactionButtonsContainer">
             <ButtonDefault
@@ -29,13 +29,12 @@ export const DashMotoboy = () => {
               buttonStyle="yellow"
               onClick={() => {
                 acceptJob()
-              }}
-            >
+              }} >
               Aceitar entrega
             </ButtonDefault>
           </div>
-        </JobCard>
-        ))}
+        </JobCard>)
+: ( <h3> Nenhuma entrega disponível </h3> )}
       </JobList>
     </DashboardTemplate>
   );

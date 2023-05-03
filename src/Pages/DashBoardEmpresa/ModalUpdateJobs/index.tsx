@@ -43,7 +43,8 @@ export const ModalUpJob = () => {
             type="number"
             id="Valor"
             label="Taxa de Entrega"
-            placeholder="Ex:R$:0,000,00"
+            placeholder="R$00,00"
+
             {...register("price")}
             error={errors.price}
           />

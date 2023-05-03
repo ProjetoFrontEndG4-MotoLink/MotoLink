@@ -43,9 +43,7 @@ export const DashMotoboy = () => {
 									buttonSize="medium"
 									buttonStyle="yellow"
 									onClick={() => {
-										acceptJob(
-											job.id
-										);
+										acceptJob(job.id);
 									}}
 								>
 									Aceitar

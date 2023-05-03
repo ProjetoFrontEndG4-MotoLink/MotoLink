@@ -20,6 +20,8 @@ interface IJobsContext {
   currentJob: IJobs | null;
   acceptJob: (id:number) => Promise<void>;
   jobsNotAccept: IJobs[];
+
+  
 }
 
 interface IJobsProvider {
@@ -42,6 +44,7 @@ export const JobsContext = createContext({} as IJobsContext);
 export const JobsProvider = ({ children }: IJobsProvider) => {
   const [jobsList, setJobsList] = useState<IJobs[]>([]);
   const [jobById, setJobById] = useState<IJobs[]>([]);
+  const [jobsAccept, setJobsAccept] = useState<IJobs[]>([])
   const [jobsNotAccept, setJobsNotAccept] = useState<IJobs[]>([])
   const [openModalAddJob, setOpenModalAddJob] = useState(false);
   const [openModalUpJob, setOpenModalUpJob] = useState(false);
@@ -69,7 +72,8 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
         const jobNotAccept = jobsList.filter((job) => {
           return job.status == true;
         });
-        
+
+
         setJobsNotAccept(jobNotAccept)
         setJobById(jobEmpresa);
       } catch (error) {
@@ -153,10 +157,11 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
     const token = localStorage.getItem("@TOKEN");
     const motoUser = user?.name
     const plateNumber = user?.plate
-    console.log(id)
+    const idUser = user?.id
     try {
       const response = await Api.patch(`/jobs/${id}`, 
       {
+        id: idUser,
         status: false,
         name: motoUser,
         plate: plateNumber

@@ -106,7 +106,7 @@ export const UserProvider = ({ children }: IUserProvider) => {
         navigate("/dashboardempresas");
       }
       if (response.data.user.userType === "motoboy") {
-        navigate("/dashboardmotoboy");
+        navigate("/dashboardemotoboy");
       }
     } catch (error: AxiosError<APIError> | any) {
       toast.error(error.response?.data);

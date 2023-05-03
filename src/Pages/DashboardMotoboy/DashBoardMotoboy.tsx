@@ -5,6 +5,8 @@ import { ButtonDefault } from "../../styles/buttons";
 import { useContext } from "react";
 import {JobsContext } from "../../providers/JobsContext";
 
+
+
 export const DashMotoboy = () => {
   const {jobsNotAccept, acceptJob} = useContext(JobsContext)
 
@@ -28,7 +30,7 @@ export const DashMotoboy = () => {
               buttonSize="medium"
               buttonStyle="yellow"
               onClick={() => {
-                acceptJob()
+                acceptJob(job.id)
               }}
             >
               Aceitar entrega

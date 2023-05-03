@@ -1,7 +1,8 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { Api } from "../../services/Api";
 import { IAddNewJob } from "../../Pages/DashBoardEmpresa/ModalAddNewJobs";
 import { IUpJob } from "../../Pages/DashBoardEmpresa/ModalUpdateJobs";
+import { UserContext } from "../UserContext";
 
 interface IJobsContext {
   setOpenModalAddJob: React.Dispatch<React.SetStateAction<boolean>>;
@@ -15,7 +16,7 @@ interface IJobsContext {
   updateJob: (formData: IUpJob) => Promise<void>;
   setCurrentJob: React.Dispatch<React.SetStateAction<IJobs | null>>;
   currentJob: IJobs | null;
-  acceptJob: () => Promise<void>;
+  acceptJob: (id:number) => Promise<void>;
   jobsNotAccept: IJobs[];
 }
 
@@ -43,6 +44,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
   const [openModalAddJob, setOpenModalAddJob] = useState(false);
   const [openModalUpJob, setOpenModalUpJob] = useState(false);
   const [currentJob, setCurrentJob] = useState<IJobs | null>(null);
+  const {user} = useContext(UserContext)
 
   useEffect(() => {
     const token = localStorage.getItem("@TOKEN");
@@ -144,13 +146,17 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
     }
   };
 
-  const acceptJob = async () => {
+  const acceptJob = async (id: number) => {
     const token = localStorage.getItem("@TOKEN");
-    const id = currentJob?.id;
+    const motoUser = user?.name
+    const plateNumber = user?.plate
+    console.log(id)
     try {
       const response = await Api.patch(`/jobs/${id}`, 
       {
-        status: false
+        status: false,
+        name: motoUser,
+        plate: plateNumber
       },
         {
           headers: {

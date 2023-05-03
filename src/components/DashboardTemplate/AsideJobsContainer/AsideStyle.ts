@@ -6,7 +6,7 @@ export const AsideStyle = styled.aside`
   gap: 20px;
 
   box-sizing: border-box;
-  width: 280px;
+  width: 100%;
   background-color: var(--grey-4);
   border-radius: var(--border-Radius);
   padding: 25px 20px;
@@ -18,8 +18,6 @@ export const AsideStyle = styled.aside`
     display: flex;
     flex-direction: column;
     gap: 10px;
-
-    padding-right: 10px;
 
     ::-webkit-scrollbar {
       width: 5px;

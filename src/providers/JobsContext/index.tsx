@@ -1,9 +1,10 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { Api } from "../../services/Api";
 import { IAddNewJob } from "../../Pages/DashBoardEmpresa/ModalAddNewJobs";
 import { IUpJob } from "../../Pages/DashBoardEmpresa/ModalUpdateJobs";
 import { toast } from "react-toastify";
 
+import { UserContext } from "../UserContext";
 
 interface IJobsContext {
   setOpenModalAddJob: React.Dispatch<React.SetStateAction<boolean>>;
@@ -17,8 +18,10 @@ interface IJobsContext {
   updateJob: (formData: IUpJob) => Promise<void>;
   setCurrentJob: React.Dispatch<React.SetStateAction<IJobs | null>>;
   currentJob: IJobs | null;
-  acceptJob: () => Promise<void>;
+  acceptJob: (id:number) => Promise<void>;
   jobsNotAccept: IJobs[];
+
+  
 }
 
 interface IJobsProvider {
@@ -41,10 +44,12 @@ export const JobsContext = createContext({} as IJobsContext);
 export const JobsProvider = ({ children }: IJobsProvider) => {
   const [jobsList, setJobsList] = useState<IJobs[]>([]);
   const [jobById, setJobById] = useState<IJobs[]>([]);
+  const [jobsAccept, setJobsAccept] = useState<IJobs[]>([])
   const [jobsNotAccept, setJobsNotAccept] = useState<IJobs[]>([])
   const [openModalAddJob, setOpenModalAddJob] = useState(false);
   const [openModalUpJob, setOpenModalUpJob] = useState(false);
   const [currentJob, setCurrentJob] = useState<IJobs | null>(null);
+  const {user} = useContext(UserContext)
 
   useEffect(() => {
     const token = localStorage.getItem("@TOKEN");
@@ -67,7 +72,8 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
         const jobNotAccept = jobsList.filter((job) => {
           return job.status == true;
         });
-        
+
+
         setJobsNotAccept(jobNotAccept)
         setJobById(jobEmpresa);
       } catch (error) {
@@ -147,13 +153,18 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
     }
   };
 
-  const acceptJob = async () => {
+  const acceptJob = async (id: number) => {
     const token = localStorage.getItem("@TOKEN");
-    const id = currentJob?.id;
+    const motoUser = user?.name
+    const plateNumber = user?.plate
+    const idUser = user?.id
     try {
       const response = await Api.patch(`/jobs/${id}`, 
       {
-        status: false
+        id: idUser,
+        status: false,
+        name: motoUser,
+        plate: plateNumber
       },
         {
           headers: {

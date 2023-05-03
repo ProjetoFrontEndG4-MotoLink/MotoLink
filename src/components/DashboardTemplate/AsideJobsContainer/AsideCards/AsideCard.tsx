@@ -1,6 +1,5 @@
 import { AsideCardTemplate } from "./AsideCards";
 
-
 export const AsideCard = () => {
 	return (
 		<AsideCardTemplate>

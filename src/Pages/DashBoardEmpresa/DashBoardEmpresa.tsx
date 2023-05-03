@@ -23,8 +23,8 @@ export const DashEmpresas = () => {
   return (
     <>
       {openModal ? <UpdateModalEmpresas /> : null}
-      {openModalAddJob ? <ModalAddNewJob /> : null}
       {openModalUpJob ? <ModalUpJob /> : null}
+      {openModalAddJob ? <ModalAddNewJob /> : null}
       <DashboardTemplate buttonAddJob={true}>
         {jobById.length > 0 ? (
           jobById.map((job) => {

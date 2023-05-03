@@ -1,6 +1,6 @@
 import { Footer } from "./Footer";
 import { DashboardHeader } from "../Header/DashboardHeader";
-import { AsideCard } from "../JobCard/AsideCards/AsideCard";
+import { AsideCard } from "./AsideJobsContainer/AsideCards/AsideCard";
 import { ButtonDefault } from "../../styles/buttons";
 import { MainStyle } from "./dashboardTemplate";
 import { UserDashboardInfo } from "./UserDashboardInfo";

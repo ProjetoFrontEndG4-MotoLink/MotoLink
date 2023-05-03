@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import { UpdateModalEmpresas } from "../../components/UpdateModalEmpresas";
+import { UpdateModalEmpresas } from "./UpdateModalEmpresas";
 import { JobsContext } from "../../providers/JobsContext";
 import { UserContext } from "../../providers/UserContext";
-import { ModalAddNewJob } from "../../components/ModalAddNewJobs";
-import { ModalUpJob } from "../../components/ModalUpdateJobs";
+import { ModalAddNewJob } from "./ModalAddNewJobs";
+import { ModalUpJob } from "./ModalUpdateJobs";
 import { DashboardTemplate } from "../../components/DashboardTemplate";
 import { JobList } from "../../components/DashboardTemplate/JobList";
 import { JobCard } from "../../components/JobCard/JobCard";
@@ -23,17 +23,17 @@ export const DashEmpresas = () => {
   return (
     <>
       {openModal ? <UpdateModalEmpresas /> : null}
-      {openModalAddJob ? <ModalAddNewJob isOpen={true} /> : null}
+      {openModalAddJob ? <ModalAddNewJob /> : null}
       {openModalUpJob ? <ModalUpJob /> : null}
       <DashboardTemplate buttonAddJob={true}>
-        <JobList>
-          {jobById.length > 0 ? (
-            jobById.map((job) => {
-              const currentJob = () => {
-                setCurrentJob(job);
-              };
+        {jobById.length > 0 ? (
+          jobById.map((job) => {
+            const currentJob = () => {
+              setCurrentJob(job);
+            };
 
-              return (
+            return (
+              <JobList>
                 <JobCard key={job.id} callback={currentJob}>
                   <div className="Card__Info__Detail">
                     <h5>Local Da Entrega</h5>
@@ -61,12 +61,12 @@ export const DashEmpresas = () => {
                     </ButtonDefault>
                   </div>
                 </JobCard>
-              );
-            })
-          ) : (
-            <h1> Você ainda não cadastrou nenhuma entrega </h1>
-          )}
-        </JobList>
+              </JobList>
+            );
+          })
+        ) : (
+          <h3> Você ainda não cadastrou nenhuma entrega </h3>
+        )}
       </DashboardTemplate>
     </>
   );

@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { Api } from "../../services/Api";
-import { IAddNewJob } from "../../components/ModalAddNewJobs";
-import { IUpJob } from "../../components/ModalUpdateJobs";
+import { IAddNewJob } from "../../Pages/DashBoardEmpresa/ModalAddNewJobs";
+import { IUpJob } from "../../Pages/DashBoardEmpresa/ModalUpdateJobs";
 
 interface IJobsContext {
   setOpenModalAddJob: React.Dispatch<React.SetStateAction<boolean>>;

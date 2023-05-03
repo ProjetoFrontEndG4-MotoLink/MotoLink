@@ -6,7 +6,7 @@ import { IRegisterMotoboyFormData } from "../../Pages/Register/RegisterFormMotob
 import { IRegisterEmpresasFormData } from "../../Pages/Register/RegisterEmpresasForm";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
-import { IupdateEmpresas } from "../../components/UpdateModalEmpresas";
+import { IupdateEmpresas } from "../../Pages/DashBoardEmpresa/UpdateModalEmpresas";
 
 interface IUserProvider {
   children: React.ReactNode;

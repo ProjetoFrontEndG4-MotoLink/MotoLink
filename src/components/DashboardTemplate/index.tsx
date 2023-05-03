@@ -6,6 +6,7 @@ import { MainStyle } from "./dashboardTemplate";
 import { UserDashboardInfo } from "./UserDashboardInfo";
 import { useContext } from "react";
 import { JobsContext } from "../../providers/JobsContext";
+import { AsideContainer } from "./AsideJobsContainer";
 
 interface IDashboardTemplateProps {
   buttonAddJob?: true;
@@ -41,7 +42,11 @@ export const DashboardTemplate = ({
           </div>
         </div>
         <div className="main__column2">
-          <AsideCard />
+          <AsideContainer>
+            <AsideCard />
+            <AsideCard />
+            <AsideCard />
+          </AsideContainer>
         </div>
       </MainStyle>
       <Footer />

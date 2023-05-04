@@ -45,6 +45,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
   const [jobsList, setJobsList] = useState<IJobs[]>([]);
   const [jobById, setJobById] = useState<IJobs[]>([]);
   const [jobsAccept, setJobsAccept] = useState<IJobs[]>([]);
+  const [jobsAcceptByMoto, setJobsAcceptByMoto] = useState<IJobs[]>([]);
   const [jobsNotAccept, setJobsNotAccept] = useState<IJobs[]>([]);
   const [aceptedJobEmpresas, setAceptedJobEmpresa] = useState<IJobs[]>([]);
   const [openModalAddJob, setOpenModalAddJob] = useState(false);
@@ -80,12 +81,12 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
             Authorization: `Bearer ${token}`,
           },
         })
-        setJobsAccept(response.data)
+        setJobsAcceptByMoto(response.data)
 
-        const jobMotoBoy = jobsAccept.filter((job) => {
+        const jobMotoBoy = jobsAcceptByMoto.filter((job) => {
           return job.idUser == Number(id);
         });
-        setJobsAccept([...response.data, jobMotoBoy]);
+        setJobsAccept(jobMotoBoy);
       } catch (error) {
         console.log(error)
       }

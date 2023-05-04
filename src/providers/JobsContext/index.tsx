@@ -19,7 +19,7 @@ interface IJobsContext {
   currentJob: IJobs | null;
   jobsNotAccept: IJobs[];
   jobsAccept: IJobs[];
-  aceptedJobEmpresas: IJobs[]
+  aceptedJobEmpresas: IJobs[];
 }
 
 interface IJobsProvider {
@@ -61,7 +61,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
             Authorization: `Bearer ${token}`,
           },
         });
-        
+
         setJobsList(response.data);
       } catch (error) {
         toast.error("Ops... Algo deu errado, tente novamente!");
@@ -70,28 +70,28 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
     getAllJobs();
   }, [jobsList]);
 
-  useEffect(()=>{
+  useEffect(() => {
     const getJobsAccept = async () => {
       const token = localStorage.getItem("@TOKEN");
       const id = localStorage.getItem("@USERID");
       try {
-        const response = await Api.get('/jobs?status_like=false', {
+        const response = await Api.get("/jobs?status_like=false", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        })
-        setJobsAccept(response.data)
+        });
+        setJobsAccept(response.data);
 
         const jobMotoBoy = jobsAccept.filter((job) => {
           return job.idUser == Number(id);
         });
         setJobsAccept([...response.data, jobMotoBoy]);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-    }
-    getJobsAccept()
-  },[jobsAccept])
+    };
+    getJobsAccept();
+  }, [jobsAccept]);
 
   useEffect(() => {
     const id = localStorage.getItem("@USERID");
@@ -140,7 +140,6 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
 
   const deleteJob = async (id: number) => {
     const token = localStorage.getItem("@TOKEN");
-    const companyid = localStorage.getItem("@USERID");
 
     try {
       await Api.delete(`/jobs/${id}`, {
@@ -185,9 +184,9 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
   const acceptJob = async (id: number) => {
     const token = localStorage.getItem("@TOKEN");
     const user_id = localStorage.getItem("@USERID");
-  
+
     try {
-      const response = await Api.patch(
+      await Api.patch(
         `/jobs/${id}`,
         { idUser: user_id, status: false },
         {
@@ -209,9 +208,6 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
 
     setAceptedJobEmpresa([...accept]);
   };
-
-
-
 
   return (
     <JobsContext.Provider

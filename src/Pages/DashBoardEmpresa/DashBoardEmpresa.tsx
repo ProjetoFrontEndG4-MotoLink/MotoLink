@@ -28,61 +28,67 @@ export const DashEmpresas = () => {
 
       {openModalAddJob ? <ModalAddNewJob /> : null}
       {openModalUpJob ? <ModalUpJob /> : null}
-      <DashboardTemplate buttonAddJob={true}>
-        <JobList>
-          {jobById.length > 0 ? (
-            jobById.map((job) => {
-              return (
-                <JobCard key={job.id} job={job}>
-                  <div className="Card__Info__Detail">
-                    <h5>Local Da Entrega</h5>
-                    <p>{job.local}</p>
-                  </div>
-                  <div className="Card__Info__Detail">
-                    <h5>Taxa/entrega</h5>
-                    <p>{`R$${job.price}`}</p>
-                  </div>
-                  <div className="interactionButtonsContainer">
-                    <ButtonDefault
-                      className="fullWidth"
-                      buttonSize="medium"
-                      buttonStyle="orange"
-                      onClick={() => setOpenModalUpJob(true)}
-                    >
-                      Editar
-                    </ButtonDefault>
-                    <ButtonDefault
-                      buttonSize="medium"
-                      buttonStyle="lightGrey"
-                      onClick={() => deleteJob(job.id)}
-                    >
-                      Excluir
-                    </ButtonDefault>
-                  </div>
-                </JobCard>
-              );
-            })
-          ) : (
-            <h3> Você ainda não cadastrou nenhuma entrega </h3>
-          )}
-        </JobList>
+      <DashboardTemplate
+        buttonAddJob={true}
+        firstChildren={
+          <JobList>
+            {jobById.length > 0 ? (
+              jobById.map((job) => {
+                return (
+                  <JobCard key={job.id} job={job}>
+                    <div className="Card__Info__Detail">
+                      <h5>Local Da Entrega</h5>
+                      <p>{job.local}</p>
+                    </div>
+                    <div className="Card__Info__Detail">
+                      <h5>Taxa/entrega</h5>
+                      <p>{`R$${job.price}`}</p>
+                    </div>
+                    <div className="interactionButtonsContainer">
+                      <ButtonDefault
+                        className="fullWidth"
+                        buttonSize="medium"
+                        buttonStyle="orange"
+                        onClick={() => setOpenModalUpJob(true)}
+                      >
+                        Editar
+                      </ButtonDefault>
+                      <ButtonDefault
+                        buttonSize="medium"
+                        buttonStyle="lightGrey"
+                        onClick={() => deleteJob(job.id)}
+                      >
+                        Excluir
+                      </ButtonDefault>
+                    </div>
+                  </JobCard>
+                );
+              })
+            ) : (
+              <h3> Você ainda não cadastrou nenhuma entrega </h3>
+            )}
+          </JobList>
+        }
+        secondChildren={
+          <AsideContainer>
+            <h3>Entregas aceitas</h3>
+            {aceptedJobEmpresas.length > 0 ? (
+              aceptedJobEmpresas.map((job) => {
+                return (
+                  <AsideCard key={job.id}>
+                    <h4>Motoboy: {job.name}</h4>
 
-        <AsideContainer>
-        <h3>Entregas aceitas</h3>
-          {aceptedJobEmpresas.length>0?(
-            aceptedJobEmpresas.map((job)=>{
-              return <AsideCard key={job.id}>
-
-                         <h4>Motoboy: {job.name}</h4>
-
-                         <h5>Endereço: {job.local}</h5>
-				                  <p> Placa da Moto: {job.plate}</p>
-                    </AsideCard>
-            })
-          ):(<h2>Nenhuma entrega aceita</h2>)}
-           
+                    <h5>Endereço: {job.local}</h5>
+                    <p> Placa da Moto: {job.plate}</p>
+                  </AsideCard>
+                );
+              })
+            ) : (
+              <p className="textSmallBold">Nenhuma entrega aceita</p>
+            )}
           </AsideContainer>
-      </DashboardTemplate>
+        }
+      />
     </>
   );
 };

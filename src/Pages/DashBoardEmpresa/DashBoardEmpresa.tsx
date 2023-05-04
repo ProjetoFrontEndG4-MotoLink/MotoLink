@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { UpdateModalEmpresas } from "./UpdateModalEmpresas";
-import { JobsContext } from "../../providers/JobsContext";
+import { IJobs, JobsContext } from "../../providers/JobsContext";
 import { UserContext } from "../../providers/UserContext";
 import { ModalAddNewJob } from "./ModalAddNewJobs";
 import { ModalUpJob } from "./ModalUpdateJobs";
@@ -17,7 +17,7 @@ export const DashEmpresas = () => {
     deleteJob,
     jobById,
     setOpenModalUpJob,
-    acceptedJobEmpresas,
+    aceptedJobEmpresas,
     openModalAddJob,
     openModalUpJob,
   } = useContext(JobsContext);
@@ -72,9 +72,8 @@ export const DashEmpresas = () => {
         secondChildren={
           <AsideContainer>
             <h3>Entregas aceitas</h3>
-            {acceptedJobEmpresas.length > 0 ? (
-              acceptedJobEmpresas.map((job) => {
-                console.log(job);
+            {aceptedJobEmpresas.length > 0 ? (
+              aceptedJobEmpresas.map((job) => {
                 return (
                   <AsideCard key={job.id}>
                     <p className="textDefaultBold">Motoboy</p>

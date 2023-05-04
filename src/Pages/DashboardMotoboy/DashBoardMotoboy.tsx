@@ -9,7 +9,6 @@ import { AsideCard } from "../../components/DashboardTemplate/AsideJobsContainer
 
 export const DashMotoboy = () => {
   const { jobsNotAccept, acceptJob, jobsAccept } = useContext(JobsContext);
-  console.log(jobsAccept);
   return (
     <DashboardTemplate
       firstChildren={
@@ -49,12 +48,10 @@ export const DashMotoboy = () => {
           {jobsAccept.length > 0
             ? jobsAccept.map((job) => {
                 return (
-                  <AsideCard>
-                    <h3>{job.companyName}</h3>
-                    <p className="textSmallBold">Entrega</p>
-                    <h5>{job.local}</h5>
-                    <p className="textSmallBold">Taxa</p>
-                    <p>{job.price}</p>
+                  <AsideCard key={job.id}>
+                    <h4>Empresa: {job.companyName}</h4>
+                    <h5>Endereço: {job.local}</h5>
+                    <p>Taxa : {job.price}</p>
                   </AsideCard>
                 );
               })

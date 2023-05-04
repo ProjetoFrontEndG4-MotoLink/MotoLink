@@ -1,6 +1,6 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Input } from "../../../components/Input";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { UserContext } from "../../../providers/UserContext";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UpdateEmpresas } from "./schema";
@@ -15,17 +15,26 @@ export interface IupdateEmpresas {
   telefone: string;
 }
 export const UpdateModalEmpresas = () => {
-  const { editProfile, setOpenModal } = useContext(UserContext);
+  const { editProfile, setOpenModal, user } = useContext(UserContext);
   const {
     register,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm<IupdateEmpresas>({ resolver: zodResolver(UpdateEmpresas) });
 
   const submit: SubmitHandler<IupdateEmpresas> = (formData) => {
+    console.log(formData);
     editProfile(formData);
   };
-  
+
+  useEffect(() => {
+    setValue("name", user?.name || "");
+    setValue("email", user?.email || "");
+    setValue("telefone", user?.telefone || "");
+    setValue("setor", user?.setor || "");
+  }, [setValue, user]);
+
   return (
     <ModalContainer>
       <div className="modalBody">
@@ -42,9 +51,14 @@ export const UpdateModalEmpresas = () => {
             {...register("name")}
             placeholder="Ex: João da Silva"
             error={errors.name}
-         
           />
-       
+          <Input
+            label="Email"
+            type="email"
+            id={"Email"}
+            {...register("email")}
+            readOnly
+          />
           <Input
             label="Telefone"
             type="number"

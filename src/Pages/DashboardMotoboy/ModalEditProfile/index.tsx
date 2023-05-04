@@ -1,6 +1,6 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Input } from "../../../components/Input";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { UserContext } from "../../../providers/UserContext";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ModalContainer } from "../../../styles/Modal";
@@ -12,14 +12,16 @@ export interface IupdateMotoboy {
   name: string;
   email: string;
   telefone: string;
-  CNH: number;
+  CNH: string;
   plate: string;
 }
 
 export const UpdateModalMotoboy = () => {
-  const { setOpenModalMoto, editProfileMotoboy } = useContext(UserContext);
+  const { setOpenModalMoto, editProfileMotoboy, user } =
+    useContext(UserContext);
   const {
     register,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm<IupdateMotoboy>({ resolver: zodResolver(UpdateMotoboy) });
@@ -28,6 +30,14 @@ export const UpdateModalMotoboy = () => {
     console.log(formData);
     editProfileMotoboy(formData);
   };
+
+  useEffect(() => {
+    setValue("name", user?.name || "");
+    setValue("email", user?.email || "");
+    setValue("telefone", user?.telefone || "");
+    setValue("CNH", user?.CNH || "");
+    setValue("plate", user?.plate || "");
+  }, [setValue, user]);
 
   return (
     <ModalContainer>
@@ -40,13 +50,19 @@ export const UpdateModalMotoboy = () => {
           <Input
             label="Nome"
             type="text"
-
             id={"Nome"}
             {...register("name")}
             placeholder="Ex: João da Silva"
             error={errors.name}
           />
-         
+          <Input
+            label="Email"
+            type="email"
+            id={"Email"}
+            {...register("email")}
+            error={errors.name}
+            readOnly
+          />
           <Input
             label="Telefone"
             type="number"
@@ -57,12 +73,11 @@ export const UpdateModalMotoboy = () => {
           />
           <Input
             label="CNH"
-            type="number"
+            type="string"
             id={"CNH"}
             {...register("CNH")}
             placeholder="Ex: ABC12345678"
             error={errors.CNH}
-        
           />
           <Input
             label="Placa"
@@ -72,7 +87,11 @@ export const UpdateModalMotoboy = () => {
             placeholder="Ex: 333ee77"
             error={errors.plate}
           />
-          <ButtonDefault buttonSize="default" buttonStyle="yellow" type="submit">
+          <ButtonDefault
+            buttonSize="default"
+            buttonStyle="yellow"
+            type="submit"
+          >
             Editar Perfil
           </ButtonDefault>
         </form>

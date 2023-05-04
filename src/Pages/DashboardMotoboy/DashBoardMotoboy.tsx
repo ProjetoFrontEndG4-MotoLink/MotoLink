@@ -8,76 +8,57 @@ import { AsideContainer } from "../../components/DashboardTemplate/AsideJobsCont
 import { AsideCard } from "../../components/DashboardTemplate/AsideJobsContainer/AsideCards/AsideCard";
 
 export const DashMotoboy = () => {
-	const { jobsNotAccept, acceptJob,jobsAccept } = useContext(JobsContext);
-console.log(jobsAccept)
-	return (
-		<DashboardTemplate>
-			<JobList>
-				{jobsNotAccept.length > 0 ? (
-					jobsNotAccept.map((job) => (
-						<JobCard
-							key={
-								job.id
-							}
-							job={job}
-						>
-							<div className="Card__Info__Detail">
-								<h5>
-									Local
-									Da
-									Entrega
-								</h5>
-								<p>
-									{
-										job.local
-									}
-								</p>
-							</div>
-							<div className="Card__Info__Detail">
-								<h5>
-									Taxa/entrega
-								</h5>
-								<p>{`R${job.price}`}</p>
-							</div>
-							<div className="interactionButtonsContainer">
-								<ButtonDefault
-									className="fullWidth"
-									buttonSize="medium"
-									buttonStyle="yellow"
-									onClick={() => {
-										acceptJob(job.id);
-									}}
-								>
-									Aceitar
-									entrega
-								</ButtonDefault>
-							</div>
-						</JobCard>
-					))
-				) : (
-					<h3>
-						{" "}
-						Nenhuma entrega
-						disponível{" "}
-					</h3>
-				)}
-			</JobList>
-
-			<AsideContainer>
-					<h3>Entregas aceitas</h3>
-					{jobsAccept.length>0?(
-						jobsAccept.map((job)=>{
-							return <AsideCard>
-								<h4>Empresa: {job.companyName}</h4>
-								<h5>Endereço: {job.local}</h5>
-								<p>Taxa : {job.price}</p>
-							</AsideCard>
-						})
-					):("Nenhuma entrega aceita")}
-
-			</AsideContainer>
-
-
-		</DashboardTemplate>
-	);
+  const { jobsNotAccept, acceptJob, jobsAccept } = useContext(JobsContext);
+  console.log(jobsAccept);
+  return (
+    <DashboardTemplate
+      firstChildren={
+        <JobList>
+          {jobsNotAccept.length > 0 ? (
+            jobsNotAccept.map((job) => (
+              <JobCard key={job.id} job={job}>
+                <div className="Card__Info__Detail">
+                  <h5>Local Da Entrega</h5>
+                  <p>{job.local}</p>
+                </div>
+                <div className="Card__Info__Detail">
+                  <h5>Taxa/entrega</h5>
+                  <p>{`R${job.price}`}</p>
+                </div>
+                <div className="interactionButtonsContainer">
+                  <ButtonDefault
+                    className="fullWidth"
+                    buttonSize="medium"
+                    buttonStyle="yellow"
+                    onClick={() => {
+                      acceptJob(job.id);
+                    }}
+                  >
+                    Aceitar entrega
+                  </ButtonDefault>
+                </div>
+              </JobCard>
+            ))
+          ) : (
+            <p className="textDefaultBold">Nenhuma entrega aceita</p>
+          )}
+        </JobList>
+      }
+      secondChildren={
+        <AsideContainer>
+          {jobsAccept.length > 0
+            ? jobsAccept.map((job) => {
+                return (
+                  <AsideCard>
+                    <h4>Empresa: {job.companyName}</h4>
+                    <h5>Endereço: {job.local}</h5>
+                    <p>Taxa : {job.price}</p>
+                  </AsideCard>
+                );
+              })
+            : "Nenhuma entrega aceita"}
+        </AsideContainer>
+      }
+    />
+  );
 };

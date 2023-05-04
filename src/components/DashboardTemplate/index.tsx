@@ -1,12 +1,10 @@
 import { Footer } from "./Footer";
 import { DashboardHeader } from "../Header/DashboardHeader";
-import { AsideCard } from "./AsideJobsContainer/AsideCards/AsideCard";
 import { ButtonDefault } from "../../styles/buttons";
 import { MainStyle } from "./dashboardTemplate";
 import { UserDashboardInfo } from "./UserDashboardInfo";
 import { useContext } from "react";
 import { JobsContext } from "../../providers/JobsContext";
-import { AsideContainer } from "./AsideJobsContainer";
 
 interface IDashboardTemplateProps {
   buttonAddJob?: true;

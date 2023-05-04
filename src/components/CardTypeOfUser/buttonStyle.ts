@@ -24,5 +24,6 @@ export const TypeOfUserCard = styled.button`
   :hover {
     background-color: var(--brand-1);
     border: 1.5px solid var(--brand-1);
+    transition: 1s;
   }
 `;

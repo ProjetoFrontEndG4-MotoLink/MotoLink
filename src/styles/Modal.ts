@@ -23,7 +23,7 @@ export const ModalContainer = styled.div`
     height: fit-content;
     background-color: var(--whiteFixed);
     z-index: 3;
-    animation: ${modalAnimation} 1s ease;
+    animation: ${modalAnimation} 0.8s ease;
 
     border: none;
 

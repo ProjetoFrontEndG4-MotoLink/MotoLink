@@ -79,6 +79,11 @@ export const GlobalStyles = createGlobalStyle`
         color: var(--grey-1);
     }
 
+    p {
+        font-size: var( --text-2);
+        font-weight: var(--weight-3);
+        }
+
     .textSmall {
         align-self: center;
         font-size: var(--text-3);
@@ -141,6 +146,11 @@ export const GlobalStyles = createGlobalStyle`
             font-size: var( --title-3);
             font-weight: var(--weight-3);
             color: var(--grey-1);
+        }
+
+        p{
+            font-size: var( --text-2);
+            font-weight: var(--weight-3);
         }
     }
 `;

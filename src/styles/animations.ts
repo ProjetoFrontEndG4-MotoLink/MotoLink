@@ -1,11 +1,11 @@
 import { keyframes } from "styled-components";
 
 export const modalAnimation = keyframes`
-    0% {
+    from {
         opacity: 0;
         transform: translateY(-60%);
     }
-    100% {
+    to {
         opacity: 1;
         transform: translateY(0);
     }
@@ -19,4 +19,24 @@ export const AnimationFadeIn = keyframes`
         transform: translateY(0);
         opacity: 1;
   }
+`
+
+export const AnimationFadeIn2 = keyframes`
+    from {
+        transform: translateX(50px);
+        opacity: 0;
+    } to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+`
+
+export const AnimationFadeIn3 = keyframes`
+ from {
+        transform: translateX(-50px);
+        opacity: 0;
+    } to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 `

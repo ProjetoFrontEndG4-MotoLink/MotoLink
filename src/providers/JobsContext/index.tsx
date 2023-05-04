@@ -19,7 +19,7 @@ interface IJobsContext {
   currentJob: IJobs | null;
   jobsNotAccept: IJobs[];
   jobsAccept: IJobs[];
-  aceptedJobEmpresas: IJobs[];
+  aceptedJobEmpresas: IJobs[]
 }
 
 interface IJobsProvider {
@@ -104,7 +104,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
       return job.status == true;
     });
 
-    jobsAceptEmpresa();
+    jobsAcceptEmpresa();
     setJobsNotAccept(jobNotAccept);
     setJobById(jobEmpresa);
   }, [jobsList]);
@@ -202,12 +202,12 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
     }
   };
 
-  const jobsAceptEmpresa = () => {
-    const acept = jobById.filter((job) => {
+  const jobsAcceptEmpresa = () => {
+    const accept = jobById.filter((job) => {
       return job.status == false;
     });
 
-    setAceptedJobEmpresa([...acept]);
+    setAceptedJobEmpresa([...accept]);
   };
 
 

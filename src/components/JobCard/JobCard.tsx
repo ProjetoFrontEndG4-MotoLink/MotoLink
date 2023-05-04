@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { CardTemplate } from "./JobCardStyle";
 import { IJobs, JobsContext } from "../../providers/JobsContext";
 
-interface ICardProp {
+export interface ICardProp {
   children: React.ReactNode;
   job: IJobs;
 }

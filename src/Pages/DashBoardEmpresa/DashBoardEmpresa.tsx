@@ -8,6 +8,8 @@ import { DashboardTemplate } from "../../components/DashboardTemplate";
 import { JobList } from "../../components/DashboardTemplate/JobList";
 import { JobCard } from "../../components/JobCard/JobCard";
 import { ButtonDefault } from "../../styles/buttons";
+import { AsideCard } from "../../components/DashboardTemplate/AsideJobsContainer/AsideCards/AsideCard";
+import { AsideContainer } from "../../components/DashboardTemplate/AsideJobsContainer";
 
 export const DashEmpresas = () => {
   const { openModal } = useContext(UserContext);
@@ -15,7 +17,7 @@ export const DashEmpresas = () => {
     deleteJob,
     jobById,
     setOpenModalUpJob,
-    // setCurrentJob,
+    aceptedJobEmpresas,
     openModalAddJob,
     openModalUpJob,
   } = useContext(JobsContext);
@@ -64,6 +66,22 @@ export const DashEmpresas = () => {
             <h3> Você ainda não cadastrou nenhuma entrega </h3>
           )}
         </JobList>
+
+        <AsideContainer>
+        <h3>Entregas aceitas</h3>
+          {aceptedJobEmpresas.length>0?(
+            aceptedJobEmpresas.map((job)=>{
+              return <AsideCard key={job.id}>
+
+                         <h4>Motoboy: {job.name}</h4>
+
+                         <h5>Endereço: {job.local}</h5>
+				                  <p> Placa da Moto: {job.plate}</p>
+                    </AsideCard>
+            })
+          ):(<h2>Nenhuma entrega aceita</h2>)}
+           
+          </AsideContainer>
       </DashboardTemplate>
     </>
   );

@@ -133,6 +133,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
       toast.success("Entrega publicada com sucesso!");
     } catch (error) {
       toast.error("Ops... Algo deu errado, tente novamente!");
+      console.log(error)
     } finally {
       setOpenModalAddJob(false);
     }
@@ -154,6 +155,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
       setJobsList([...newJobList]);
     } catch (error) {
       toast.error("Ops... Algo deu errado, tente novamente!");
+      console.log(error)
     }
   };
 
@@ -176,6 +178,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
       setJobsList([...newJobList, response.data]);
     } catch (error) {
       toast.error("Ops... Algo deu errado, tente novamente!");
+      console.log(error)
     } finally {
       setOpenModalUpJob(false);
     }
@@ -198,6 +201,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
       toast.success("Entrega aceita com sucesso!");
     } catch (error) {
       toast.error("Ops... Algo deu errado, tente novamente!");
+      console.log(error)
     }
   };
 

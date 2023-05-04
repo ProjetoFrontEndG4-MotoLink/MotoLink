@@ -1,8 +1,9 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { Api } from "../../services/Api";
 import { IAddNewJob } from "../../Pages/DashBoardEmpresa/ModalAddNewJobs";
 import { IUpJob } from "../../Pages/DashBoardEmpresa/ModalUpdateJobs";
 import { toast } from "react-toastify";
+import { UserContext } from "../UserContext";
 
 interface IJobsContext {
   setOpenModalAddJob: React.Dispatch<React.SetStateAction<boolean>>;
@@ -51,6 +52,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
   const [openModalUpJob, setOpenModalUpJob] = useState(false);
   const [currentJob, setCurrentJob] = useState<IJobs | null>(null);
 
+ const {user}=useContext(UserContext)
   useEffect(() => {
     const token = localStorage.getItem("@TOKEN");
 
@@ -121,6 +123,8 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
           companyId: Number(id),
           price: formData.price,
           status: true,
+          companyName:user?.name
+          
         },
         {
           headers: {
@@ -191,7 +195,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
     try {
       await Api.patch(
         `/jobs/${id}`,
-        { idUser: user_id, status: false },
+        { idUser: user_id, status: false,name:user?.name, plate:user?.plate },
         {
           headers: {
             Authorization: `Bearer ${token}`,

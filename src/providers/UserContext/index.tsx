@@ -44,7 +44,7 @@ interface IUser {
   name: string;
   id: number;
   userType: string;
-  cnh: number;
+  CNH: number|string;
   plate: string;
   model: string;
   avatar: string;
@@ -136,6 +136,8 @@ export const UserProvider = ({ children }: IUserProvider) => {
     localStorage.removeItem("@USERID");
     setUser(null);
     navigate("/");
+    setOpenModalMoto(false)
+    setOpenModal(false)
   };
 
   const editProfile = async (formData: IupdateEmpresas) => {

@@ -76,9 +76,10 @@ export const DashEmpresas = () => {
               aceptedJobEmpresas.map((job) => {
                 return (
                   <AsideCard key={job.id}>
-                    <p className="textDefaultBold">Motoboy</p>
-                    <p className="textSmallBold">Endereço</p>
+                    <p className="textDefaultBold">Motoboy: {job.name}</p>
+                    <p className="textSmallBold">Endereço{job.local}</p>
                     <p>{job.local}</p>
+                    <p>Placa da Moto: {job.plate}</p>
                   </AsideCard>
                 );
               })

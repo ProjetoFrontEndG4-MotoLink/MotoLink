@@ -22,9 +22,13 @@ export const UpdateModalMotoboy = () => {
     register,
     handleSubmit,
     formState: { errors },
+    watch
   } = useForm<IupdateMotoboy>({ resolver: zodResolver(UpdateMotoboy) });
+
+  const{user}=useContext(UserContext)
   const submit: SubmitHandler<IupdateMotoboy> = (formData) => {
     editProfileMotoboy(formData);
+
   };
   return (
     <ModalContainer>
@@ -37,19 +41,14 @@ export const UpdateModalMotoboy = () => {
           <Input
             label="Nome"
             type="text"
+
             id={"Nome"}
             {...register("name")}
             placeholder="Ex: João da Silva"
             error={errors.name}
+            
           />
-          <Input
-            label="E-mail"
-            type="email"
-            id={"E-mail"}
-            {...register("email")}
-            placeholder="Ex: email@teste.com"
-            error={errors.email}
-          />
+         
           <Input
             label="Telefone"
             type="number"
@@ -63,8 +62,8 @@ export const UpdateModalMotoboy = () => {
             type="number"
             id={"CNH"}
             {...register("CNH")}
-            placeholder="Ex: 999999999"
             error={errors.CNH}
+         
           />
           <Input
             label="Placa"

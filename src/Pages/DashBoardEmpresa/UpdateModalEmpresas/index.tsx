@@ -40,16 +40,9 @@ export const UpdateModalEmpresas = () => {
             {...register("name")}
             placeholder="Ex: João da Silva"
             error={errors.name}
+         
           />
-          <Input
-            label="E-mail"
-            type="email"
-            id={"E-mail"}
-            {...register("email")}
-            placeholder="Ex: email@teste.com"
-            error={errors.email}
-          />
-
+       
           <Input
             label="Telefone"
             type="number"

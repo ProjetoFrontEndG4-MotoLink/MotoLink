@@ -1,10 +1,8 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { Api } from "../../services/Api";
 import { IAddNewJob } from "../../Pages/DashBoardEmpresa/ModalAddNewJobs";
 import { IUpJob } from "../../Pages/DashBoardEmpresa/ModalUpdateJobs";
 import { toast } from "react-toastify";
-
-import { UserContext } from "../UserContext";
 
 interface IJobsContext {
   setOpenModalAddJob: React.Dispatch<React.SetStateAction<boolean>>;
@@ -49,11 +47,9 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
   const [openModalAddJob, setOpenModalAddJob] = useState(false);
   const [openModalUpJob, setOpenModalUpJob] = useState(false);
   const [currentJob, setCurrentJob] = useState<IJobs | null>(null);
-  const { user } = useContext(UserContext);
 
   useEffect(() => {
     const token = localStorage.getItem("@TOKEN");
-    const id = localStorage.getItem("@USERID");
 
     const getAllJobs = async () => {
       try {

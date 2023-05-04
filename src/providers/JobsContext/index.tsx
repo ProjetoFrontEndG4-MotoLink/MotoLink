@@ -24,33 +24,36 @@ interface IJobsContext {
 }
 
 interface IJobsProvider {
-  children: React.ReactNode;
+	children: React.ReactNode;
 }
 
 export interface IJobs {
-  jobs: string;
-  name: string;
-  companyId: number | string;
-  partners: string;
-  id: number;
-  idUser: number;
-  status: boolean;
-  local: string;
-  price: number;
-  plate: string;
-  companyName: string;
+	jobs: string;
+	name: string;
+	companyId: number | string;
+	partners: string;
+	id: number;
+	idUser: number;
+	status: boolean;
+	local: string;
+	price: number;
+	plate: string;
+	companyName: string;
 }
 export const JobsContext = createContext({} as IJobsContext);
 
 export const JobsProvider = ({ children }: IJobsProvider) => {
-  const [jobsList, setJobsList] = useState<IJobs[]>([]);
-  const [jobById, setJobById] = useState<IJobs[]>([]);
-  const [jobsAccept, setJobsAccept] = useState<IJobs[]>([]);
-  const [jobsNotAccept, setJobsNotAccept] = useState<IJobs[]>([]);
-  const [aceptedJobEmpresas, setAceptedJobEmpresa] = useState<IJobs[]>([]);
-  const [openModalAddJob, setOpenModalAddJob] = useState(false);
-  const [openModalUpJob, setOpenModalUpJob] = useState(false);
-  const [currentJob, setCurrentJob] = useState<IJobs | null>(null);
+	const [jobsList, setJobsList] = useState<IJobs[]>([]);
+	const [jobById, setJobById] = useState<IJobs[]>([]);
+	const [jobsAccept, setJobsAccept] = useState<IJobs[]>([]);
+	const [jobsAcceptByMoto, setJobsAcceptByMoto] = useState<IJobs[]>([]);
+	const [jobsNotAccept, setJobsNotAccept] = useState<IJobs[]>([]);
+	const [aceptedJobEmpresas, setAceptedJobEmpresa] = useState<IJobs[]>(
+		[]
+	);
+	const [openModalAddJob, setOpenModalAddJob] = useState(false);
+	const [openModalUpJob, setOpenModalUpJob] = useState(false);
+	const [currentJob, setCurrentJob] = useState<IJobs | null>(null);
 
  const {user}=useContext(UserContext)
   useEffect(() => {
@@ -72,48 +75,59 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
     getAllJobs();
   }, [jobsList]);
 
-  useEffect(() => {
-    const getJobsAccept = async () => {
-      const token = localStorage.getItem("@TOKEN");
-      const id = localStorage.getItem("@USERID");
-      try {
-        const response = await Api.get("/jobs?status_like=false", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setJobsAccept(response.data);
+	useEffect(() => {
+		const getJobsAccept = async () => {
+			const token = localStorage.getItem("@TOKEN");
+			const id = localStorage.getItem("@USERID");
+			try {
+				const response = await Api.get(
+					"/jobs?status_like=false",
+					{
+						headers: {
+							Authorization: `Bearer ${token}`,
+						},
+					}
+				);
+				setJobsAcceptByMoto(response.data);
 
-        const jobMotoBoy = jobsAccept.filter((job) => {
-          return job.idUser == Number(id);
-        });
-        setJobsAccept([...response.data, jobMotoBoy]);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getJobsAccept();
-  }, [jobsAccept]);
+				const jobMotoBoy =
+					jobsAcceptByMoto.filter(
+						(job) => {
+							return (
+								job.idUser ==
+								Number(
+									id
+								)
+							);
+						}
+					);
+				setJobsAccept(jobMotoBoy);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+		getJobsAccept();
+	}, [jobsAccept]);
 
-  useEffect(() => {
-    const id = localStorage.getItem("@USERID");
+	useEffect(() => {
+		const id = localStorage.getItem("@USERID");
 
-    const jobEmpresa = jobsList.filter((job) => {
-      return job.companyId == id;
-    });
+		const jobEmpresa = jobsList.filter((job) => {
+			return job.companyId == id;
+		});
 
-    const jobNotAccept = jobsList.filter((job) => {
-      return job.status == true;
-    });
+		const jobNotAccept = jobsList.filter((job) => {
+			return job.status == true;
+		});
 
-    jobsAcceptEmpresa();
-    setJobsNotAccept(jobNotAccept);
-    setJobById(jobEmpresa);
-  }, [jobsList]);
+		jobsAcceptEmpresa();
+		setJobsNotAccept(jobNotAccept);
+		setJobById(jobEmpresa);
+	}, [jobsList]);
 
-  const addNewJob = async (formData: IAddNewJob) => {
-    const token = localStorage.getItem("@TOKEN");
-    const id = localStorage.getItem("@USERID");
+	const addNewJob = async (formData: IAddNewJob) => {
+		const token = localStorage.getItem("@TOKEN");
+		const id = localStorage.getItem("@USERID");
 
     try {
       const response = await Api.post(
@@ -145,14 +159,16 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
   const deleteJob = async (id: number) => {
     const token = localStorage.getItem("@TOKEN");
 
-    try {
-      await Api.delete(`/jobs/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+		try {
+			await Api.delete(`/jobs/${id}`, {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			});
 
-      const newJobList = jobsList.filter((job) => job.id !== id);
+			const newJobList = jobsList.filter(
+				(job) => job.id !== id
+			);
 
       toast.success("Entrega deletada com sucesso!");
       setJobsList([...newJobList]);
@@ -161,20 +177,24 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
     }
   };
 
-  const updateJob = async (formData: IUpJob) => {
-    const token = localStorage.getItem("@TOKEN");
-    const id = currentJob?.id;
+	const updateJob = async (formData: IUpJob) => {
+		const token = localStorage.getItem("@TOKEN");
+		const id = currentJob?.id;
 
-    try {
-      const response = await Api.patch(`/jobs/${id}`, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+		try {
+			const response = await Api.patch(
+				`/jobs/${id}`,
+				formData,
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			);
 
-      const newJobList = jobsList.filter((job) => {
-        return job.id !== id;
-      });
+			const newJobList = jobsList.filter((job) => {
+				return job.id !== id;
+			});
 
       toast.success("Entrega modificada com sucesso!");
       setJobsList([...newJobList, response.data]);
@@ -205,13 +225,13 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
     }
   };
 
-  const jobsAcceptEmpresa = () => {
-    const accept = jobById.filter((job) => {
-      return job.status == false;
-    });
+	const jobsAcceptEmpresa = () => {
+		const accept = jobById.filter((job) => {
+			return job.status == false;
+		});
 
-    setAceptedJobEmpresa([...accept]);
-  };
+		setAceptedJobEmpresa([...accept]);
+	};
 
   return (
     <JobsContext.Provider

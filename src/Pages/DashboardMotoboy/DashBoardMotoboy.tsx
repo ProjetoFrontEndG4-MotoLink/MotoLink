@@ -6,9 +6,13 @@ import { useContext } from "react";
 import { JobsContext } from "../../providers/JobsContext";
 import { AsideContainer } from "../../components/DashboardTemplate/AsideJobsContainer";
 import { AsideCard } from "../../components/DashboardTemplate/AsideJobsContainer/AsideCards/AsideCard";
+import { UpdateModalMotoboy } from "./ModalEditProfile";
+import { UserContext } from "../../providers/UserContext";
 
 export const DashMotoboy = () => {
   const { jobsNotAccept, acceptJob, jobsAccept } = useContext(JobsContext);
+
+const { openModalMoto } = useContext(UserContext);
   return (
     <DashboardTemplate
       firstChildren={
@@ -59,5 +63,6 @@ export const DashMotoboy = () => {
         </AsideContainer>
       }
     />
+
   );
 };

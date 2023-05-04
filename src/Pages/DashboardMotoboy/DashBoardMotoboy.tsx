@@ -4,10 +4,12 @@ import { JobList } from "../../components/DashboardTemplate/JobList";
 import { ButtonDefault } from "../../styles/buttons";
 import { useContext } from "react";
 import { JobsContext } from "../../providers/JobsContext";
+import { AsideContainer } from "../../components/DashboardTemplate/AsideJobsContainer";
+import { AsideCard } from "../../components/DashboardTemplate/AsideJobsContainer/AsideCards/AsideCard";
 
 export const DashMotoboy = () => {
-	const { jobsNotAccept, acceptJob } = useContext(JobsContext);
-
+	const { jobsNotAccept, acceptJob,jobsAccept } = useContext(JobsContext);
+console.log(jobsAccept)
 	return (
 		<DashboardTemplate>
 			<JobList>
@@ -60,6 +62,22 @@ export const DashMotoboy = () => {
 					</h3>
 				)}
 			</JobList>
+
+			<AsideContainer>
+					<h3>Entregas aceitas</h3>
+					{jobsAccept.length>0?(
+						jobsAccept.map((job)=>{
+							return <AsideCard>
+								<h4>Empresa: {job.companyName}</h4>
+								<h5>Endereço: {job.local}</h5>
+								<p>Taxa : {job.price}</p>
+							</AsideCard>
+						})
+					):("Nenhuma entrega aceita")}
+
+			</AsideContainer>
+
+
 		</DashboardTemplate>
 	);
 };

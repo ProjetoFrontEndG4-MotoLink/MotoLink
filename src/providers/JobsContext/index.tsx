@@ -21,6 +21,8 @@ interface IJobsContext {
   currentJob: IJobs | null;
   jobsNotAccept: IJobs[];
   jobsAccept: IJobs[];
+  aceptedJobEmpresas: IJobs[]
+  
 }
 
 interface IJobsProvider {
@@ -37,6 +39,9 @@ export interface IJobs {
   status: boolean;
   local: string;
   price: number;
+  plate:string;
+  companyName:string
+
 }
 
 export const JobsContext = createContext({} as IJobsContext);
@@ -52,7 +57,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
   const [currentJob, setCurrentJob] = useState<IJobs | null>(null);
   const { user } = useContext(UserContext);
  
-  console.log(aceptedJobEmpresas)
+ 
 
   useEffect(() => {
     const token = localStorage.getItem("@TOKEN");
@@ -103,6 +108,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
           companyId: Number(id),
           price: formData.price,
           status: true,
+          companyName:user?.name
         },
         {
           headers: {
@@ -204,7 +210,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
       return job.status == false
     })
 
-   setAceptedJobEmpresa(acept)
+   setAceptedJobEmpresa([...acept])
 
  
    
@@ -227,6 +233,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
         acceptJob,
         jobsNotAccept,
         jobsAccept,
+        aceptedJobEmpresas
       }}
     >
       {children}

@@ -6,16 +6,20 @@ import { AsideCard } from "./AsideCards/AsideCard";
 export interface IJobsProps{
   jobs: IJobs
 }
+type JobAsideProps = {
+  children: React.ReactNode;
+};
 
-export const AsideContainer = () => {
+export const AsideContainer = ({children}:JobAsideProps) => {
   const {jobsAccept} = useContext(JobsContext)
   
   return (
-    <AsideStyle>
-      <h3>Entregas aceitas</h3>
+    <AsideStyle> {children}
+   
+      {/*
       <ul>{jobsAccept.map((jobs)=>(
         <AsideCard key={jobs.id} jobs={jobs}/>
-      ))}</ul>
+      ))}</ul> */}
     </AsideStyle>
   );
 };

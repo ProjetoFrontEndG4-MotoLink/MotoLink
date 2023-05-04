@@ -41,13 +41,13 @@ export const DashboardTemplate = ({
             {children}
           </div>
         </div>
-        <div className="main__column2">
+        {/* <div className="main__column2">
           <AsideContainer>
             <AsideCard />
             <AsideCard />
             <AsideCard />
           </AsideContainer>
-        </div>
+        </div> */}
       </MainStyle>
       <Footer />
     </>

@@ -33,10 +33,9 @@ interface IUserContext {
 export interface IupdateMotoboy {
   name: string;
   email: string;
-  setor: string;
   telefone: string;
-  CNH: number;
-  plate: string;
+  CNH: number | string;
+  plate?: string;
 }
 
 interface IUser {
@@ -44,7 +43,7 @@ interface IUser {
   name: string;
   id: number;
   userType: string;
-  CNH: number|string;
+  CNH: string;
   plate: string;
   model: string;
   avatar: string;
@@ -189,6 +188,7 @@ export const UserProvider = ({ children }: IUserProvider) => {
   const editProfileMotoboy = async (formData: IupdateMotoboy) => {
     const id = localStorage.getItem("@USERID");
     const token = localStorage.getItem("@TOKEN");
+    console.log("teste")
     try {
       const response = await Api.patch(`/users/${id}`, formData, {
         headers: {

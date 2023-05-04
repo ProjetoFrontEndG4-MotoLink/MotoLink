@@ -11,25 +11,24 @@ import { UpdateMotoboy } from "./schema";
 export interface IupdateMotoboy {
   name: string;
   email: string;
-  setor: string;
   telefone: string;
   CNH: number;
   plate: string;
 }
+
 export const UpdateModalMotoboy = () => {
   const { setOpenModalMoto, editProfileMotoboy } = useContext(UserContext);
   const {
     register,
     handleSubmit,
     formState: { errors },
-    watch
   } = useForm<IupdateMotoboy>({ resolver: zodResolver(UpdateMotoboy) });
 
-  const{user}=useContext(UserContext)
   const submit: SubmitHandler<IupdateMotoboy> = (formData) => {
+    console.log(formData);
     editProfileMotoboy(formData);
-
   };
+
   return (
     <ModalContainer>
       <div className="modalBody">
@@ -46,7 +45,6 @@ export const UpdateModalMotoboy = () => {
             {...register("name")}
             placeholder="Ex: João da Silva"
             error={errors.name}
-            
           />
          
           <Input
@@ -62,8 +60,9 @@ export const UpdateModalMotoboy = () => {
             type="number"
             id={"CNH"}
             {...register("CNH")}
+            placeholder="Ex: ABC12345678"
             error={errors.CNH}
-         
+        
           />
           <Input
             label="Placa"
@@ -73,7 +72,7 @@ export const UpdateModalMotoboy = () => {
             placeholder="Ex: 333ee77"
             error={errors.plate}
           />
-          <ButtonDefault buttonSize="default" buttonStyle="yellow">
+          <ButtonDefault buttonSize="default" buttonStyle="yellow" type="submit">
             Editar Perfil
           </ButtonDefault>
         </form>

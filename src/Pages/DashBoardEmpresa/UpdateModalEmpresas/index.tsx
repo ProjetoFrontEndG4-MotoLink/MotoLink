@@ -21,9 +21,11 @@ export const UpdateModalEmpresas = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IupdateEmpresas>({ resolver: zodResolver(UpdateEmpresas) });
+
   const submit: SubmitHandler<IupdateEmpresas> = (formData) => {
     editProfile(formData);
   };
+  
   return (
     <ModalContainer>
       <div className="modalBody">

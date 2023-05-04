@@ -124,8 +124,8 @@ export const UserProvider = ({ children }: IUserProvider) => {
         navigate("/dashboardemotoboy");
       }
     } catch (error: AxiosError<APIError> | any) {
-      console.log(error.response?.data);
-      toast.error("Ops... Algo deu errado, tente novamente!");
+      console.log(error);
+      toast.error(error.response?.data)
     } finally {
       setLoading(false);
     }
@@ -163,7 +163,8 @@ export const UserProvider = ({ children }: IUserProvider) => {
       toast.success("Empresa cadastrada com sucesso!");
       navigate("/");
     } catch (error: AxiosError<APIError> | any) {
-      console.log(error.response?.data);
+      console.log(error);
+      toast.error(error.response?.data)
     } finally {
       setLoad(false);
     }
@@ -176,7 +177,8 @@ export const UserProvider = ({ children }: IUserProvider) => {
       toast.success("Usuário cadastrado com sucesso!");
       navigate("/");
     } catch (error: AxiosError<APIError> | any) {
-      console.log(error.response?.data);
+      console.log(error);
+      toast.error(error.response?.data)
     } finally {
       setLoad(false);
     }

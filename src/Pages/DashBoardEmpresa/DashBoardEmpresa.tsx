@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { UpdateModalEmpresas } from "./UpdateModalEmpresas";
-import { IJobs, JobsContext } from "../../providers/JobsContext";
+import { JobsContext } from "../../providers/JobsContext";
 import { UserContext } from "../../providers/UserContext";
 import { ModalAddNewJob } from "./ModalAddNewJobs";
 import { ModalUpJob } from "./ModalUpdateJobs";

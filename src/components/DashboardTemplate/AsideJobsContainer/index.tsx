@@ -9,7 +9,7 @@ export interface IJobsProps{
 
 export const AsideContainer = () => {
   const {jobsAccept} = useContext(JobsContext)
-  console.log(jobsAccept)
+  
   return (
     <AsideStyle>
       <h3>Entregas aceitas</h3>

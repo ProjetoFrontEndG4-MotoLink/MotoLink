@@ -44,12 +44,15 @@ export const JobsContext = createContext({} as IJobsContext);
 export const JobsProvider = ({ children }: IJobsProvider) => {
   const [jobsList, setJobsList] = useState<IJobs[]>([]);
   const [jobById, setJobById] = useState<IJobs[]>([]);
+  const [aceptedJobEmpresas, setAceptedJobEmpresa] = useState<IJobs[]>([]);
   const [jobsAccept, setJobsAccept] = useState<IJobs[]>([]);
   const [jobsNotAccept, setJobsNotAccept] = useState<IJobs[]>([]);
   const [openModalAddJob, setOpenModalAddJob] = useState(false);
   const [openModalUpJob, setOpenModalUpJob] = useState(false);
   const [currentJob, setCurrentJob] = useState<IJobs | null>(null);
   const { user } = useContext(UserContext);
+ 
+  console.log(aceptedJobEmpresas)
 
   useEffect(() => {
     const token = localStorage.getItem("@TOKEN");
@@ -84,6 +87,8 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
 
     setJobsNotAccept(jobNotAccept);
     setJobById(jobEmpresa);
+
+    jobsAceptEmpresa()
   }, [jobsList]);
 
   const addNewJob = async (formData: IAddNewJob) => {
@@ -134,9 +139,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
       toast.error("Ops... Algo deu errado, tente novamente!");
     }
   };
-  console.log(jobsList);
-
-  const updateJob = async (formData: IUpJob) => {
+    const updateJob = async (formData: IUpJob) => {
     const token = localStorage.getItem("@TOKEN");
     const id = currentJob?.id;
 
@@ -167,7 +170,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
     try {
       const response = await Api.patch(
         `/jobs/${id}`,
-        { idUser: user_id, status: false },
+        { idUser: user_id, status: false, name:user?.name,plate:user?.plate },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -194,6 +197,18 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
       toast.error("Ops... Algo deu errado, tente novamente!");
     }
   };
+
+  const jobsAceptEmpresa=()=>{
+
+    const acept= jobById.filter(job=>{
+      return job.status == false
+    })
+
+   setAceptedJobEmpresa(acept)
+
+ 
+   
+  }
 
   return (
     <JobsContext.Provider

@@ -21,6 +21,12 @@ export const StyledInputContainer = styled.div`
       border: 2px solid var(--brand-1);
       box-shadow: 0px 2px 2px 2px rgba(255, 208, 41, 0.1);
     }
+
+    :read-only {
+      border: 2px solid var(--grey-3);
+      background-color: var(--grey-4);
+      color: var(--grey-3);
+    }
   }
 
   .disabled {

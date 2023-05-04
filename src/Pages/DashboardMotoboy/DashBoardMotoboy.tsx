@@ -6,11 +6,19 @@ import { useContext } from "react";
 import { JobsContext } from "../../providers/JobsContext";
 import { AsideContainer } from "../../components/DashboardTemplate/AsideJobsContainer";
 import { AsideCard } from "../../components/DashboardTemplate/AsideJobsContainer/AsideCards/AsideCard";
+import { UserContext } from "../../providers/UserContext";
+import { UpdateModalMotoboy } from "./ModalEditProfile";
 
 export const DashMotoboy = () => {
+
+  const{ openModalMoto}=useContext(UserContext)
   const { jobsNotAccept, acceptJob, jobsAccept } = useContext(JobsContext);
+
   return (
-    <DashboardTemplate
+    <>
+
+    {openModalMoto? <UpdateModalMotoboy/>:null}
+     <DashboardTemplate
       firstChildren={
         <JobList>
           {jobsNotAccept.length > 0 ? (
@@ -47,6 +55,7 @@ export const DashMotoboy = () => {
         <AsideContainer>
           {jobsAccept.length > 0
             ? jobsAccept.map((job) => {
+              
                 return (
                   <AsideCard key={job.id}>
                     <h4>Empresa: {job.companyName}</h4>
@@ -59,5 +68,8 @@ export const DashMotoboy = () => {
         </AsideContainer>
       }
     />
+    
+    </>
+   
   );
 };

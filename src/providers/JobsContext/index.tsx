@@ -1,25 +1,26 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { Api } from "../../services/Api";
 import { IAddNewJob } from "../../Pages/DashBoardEmpresa/ModalAddNewJobs";
 import { IUpJob } from "../../Pages/DashBoardEmpresa/ModalUpdateJobs";
 import { toast } from "react-toastify";
+import { UserContext } from "../UserContext";
 
 interface IJobsContext {
-	setOpenModalAddJob: React.Dispatch<React.SetStateAction<boolean>>;
-	addNewJob: (formData: IAddNewJob) => Promise<void>;
-	deleteJob: (id: number) => Promise<void>;
-	setOpenModalUpJob: React.Dispatch<React.SetStateAction<boolean>>;
-	updateJob: (formData: IUpJob) => Promise<void>;
-	setCurrentJob: React.Dispatch<React.SetStateAction<IJobs | null>>;
-	acceptJob: (id: number) => Promise<void>;
-	openModalAddJob: boolean;
-	jobById: IJobs[];
-	jobsList: IJobs[];
-	openModalUpJob: boolean;
-	currentJob: IJobs | null;
-	jobsNotAccept: IJobs[];
-	jobsAccept: IJobs[];
-	aceptedJobEmpresas: IJobs[];
+  setOpenModalAddJob: React.Dispatch<React.SetStateAction<boolean>>;
+  addNewJob: (formData: IAddNewJob) => Promise<void>;
+  deleteJob: (id: number) => Promise<void>;
+  setOpenModalUpJob: React.Dispatch<React.SetStateAction<boolean>>;
+  updateJob: (formData: IUpJob) => Promise<void>;
+  setCurrentJob: React.Dispatch<React.SetStateAction<IJobs | null>>;
+  acceptJob: (id: number) => Promise<void>;
+  openModalAddJob: boolean;
+  jobById: IJobs[];
+  jobsList: IJobs[];
+  openModalUpJob: boolean;
+  currentJob: IJobs | null;
+  jobsNotAccept: IJobs[];
+  jobsAccept: IJobs[];
+  aceptedJobEmpresas: IJobs[];
 }
 
 interface IJobsProvider {
@@ -54,29 +55,25 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
 	const [openModalUpJob, setOpenModalUpJob] = useState(false);
 	const [currentJob, setCurrentJob] = useState<IJobs | null>(null);
 
-	useEffect(() => {
-		const token = localStorage.getItem("@TOKEN");
+ const {user}=useContext(UserContext)
+  useEffect(() => {
+    const token = localStorage.getItem("@TOKEN");
 
-		const getAllJobs = async () => {
-			try {
-				const response = await Api.get(
-					"/jobs",
-					{
-						headers: {
-							Authorization: `Bearer ${token}`,
-						},
-					}
-				);
+    const getAllJobs = async () => {
+      try {
+        const response = await Api.get("/jobs", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-				setJobsList(response.data);
-			} catch (error) {
-				toast.error(
-					"Ops... Algo deu errado, tente novamente!"
-				);
-			}
-		};
-		getAllJobs();
-	}, [jobsList]);
+        setJobsList(response.data);
+      } catch (error) {
+        toast.error("Ops... Algo deu errado, tente novamente!");
+      }
+    };
+    getAllJobs();
+  }, [jobsList]);
 
 	useEffect(() => {
 		const getJobsAccept = async () => {
@@ -132,35 +129,36 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
 		const token = localStorage.getItem("@TOKEN");
 		const id = localStorage.getItem("@USERID");
 
-		try {
-			const response = await Api.post(
-				"/jobs",
-				{
-					local: formData.local,
-					companyId: Number(id),
-					price: formData.price,
-					status: true,
-				},
-				{
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				}
-			);
+    try {
+      const response = await Api.post(
+        "/jobs",
+        {
+          local: formData.local,
+          companyId: Number(id),
+          price: formData.price,
+          status: true,
+          companyName:user?.name
+          
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-			setJobsList([...jobsList, response.data]);
-			toast.success("Entrega publicada com sucesso!");
-		} catch (error) {
-			toast.error(
-				"Ops... Algo deu errado, tente novamente!"
-			);
-		} finally {
-			setOpenModalAddJob(false);
-		}
-	};
+      setJobsList([...jobsList, response.data]);
+      toast.success("Entrega publicada com sucesso!");
+    } catch (error) {
+      toast.error("Ops... Algo deu errado, tente novamente!");
+      console.log(error)
+    } finally {
+      setOpenModalAddJob(false);
+    }
+  };
 
-	const deleteJob = async (id: number) => {
-		const token = localStorage.getItem("@TOKEN");
+  const deleteJob = async (id: number) => {
+    const token = localStorage.getItem("@TOKEN");
 
 		try {
 			await Api.delete(`/jobs/${id}`, {
@@ -173,14 +171,13 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
 				(job) => job.id !== id
 			);
 
-			toast.success("Entrega deletada com sucesso!");
-			setJobsList([...newJobList]);
-		} catch (error) {
-			toast.error(
-				"Ops... Algo deu errado, tente novamente!"
-			);
-		}
-	};
+      toast.success("Entrega deletada com sucesso!");
+      setJobsList([...newJobList]);
+    } catch (error) {
+      toast.error("Ops... Algo deu errado, tente novamente!");
+      console.log(error)
+    }
+  };
 
 	const updateJob = async (formData: IUpJob) => {
 		const token = localStorage.getItem("@TOKEN");
@@ -201,38 +198,36 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
 				return job.id !== id;
 			});
 
-			toast.success("Entrega modificada com sucesso!");
-			setJobsList([...newJobList, response.data]);
-		} catch (error) {
-			toast.error(
-				"Ops... Algo deu errado, tente novamente!"
-			);
-		} finally {
-			setOpenModalUpJob(false);
-		}
-	};
+      toast.success("Entrega modificada com sucesso!");
+      setJobsList([...newJobList, response.data]);
+    } catch (error) {
+      toast.error("Ops... Algo deu errado, tente novamente!");
+      console.log(error)
+    } finally {
+      setOpenModalUpJob(false);
+    }
+  };
 
-	const acceptJob = async (id: number) => {
-		const token = localStorage.getItem("@TOKEN");
-		const user_id = localStorage.getItem("@USERID");
+  const acceptJob = async (id: number) => {
+    const token = localStorage.getItem("@TOKEN");
+    const user_id = localStorage.getItem("@USERID");
 
-		try {
-			await Api.patch(
-				`/jobs/${id}`,
-				{ idUser: user_id, status: false },
-				{
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				}
-			);
-			toast.success("Entrega aceita com sucesso!");
-		} catch (error) {
-			toast.error(
-				"Ops... Algo deu errado, tente novamente!"
-			);
-		}
-	};
+    try {
+      await Api.patch(
+        `/jobs/${id}`,
+        { idUser: user_id, status: false,name:user?.name, plate:user?.plate },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      toast.success("Entrega aceita com sucesso!");
+    } catch (error) {
+      toast.error("Ops... Algo deu errado, tente novamente!");
+      console.log(error)
+    }
+  };
 
 	const jobsAcceptEmpresa = () => {
 		const accept = jobById.filter((job) => {
@@ -242,27 +237,27 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
 		setAceptedJobEmpresa([...accept]);
 	};
 
-	return (
-		<JobsContext.Provider
-			value={{
-				setOpenModalAddJob,
-				openModalAddJob,
-				addNewJob,
-				jobById,
-				jobsList,
-				deleteJob,
-				setOpenModalUpJob,
-				openModalUpJob,
-				updateJob,
-				currentJob,
-				setCurrentJob,
-				acceptJob,
-				jobsNotAccept,
-				jobsAccept,
-				aceptedJobEmpresas,
-			}}
-		>
-			{children}
-		</JobsContext.Provider>
-	);
+  return (
+    <JobsContext.Provider
+      value={{
+        setOpenModalAddJob,
+        openModalAddJob,
+        addNewJob,
+        jobById,
+        jobsList,
+        deleteJob,
+        setOpenModalUpJob,
+        openModalUpJob,
+        updateJob,
+        currentJob,
+        setCurrentJob,
+        acceptJob,
+        jobsNotAccept,
+        jobsAccept,
+        aceptedJobEmpresas,
+      }}
+    >
+      {children}
+    </JobsContext.Provider>
+  );
 };

@@ -11,6 +11,7 @@ import { IupdateEmpresas } from "../../Pages/DashBoardEmpresa/UpdateModalEmpresa
 interface IUserProvider {
   children: React.ReactNode;
 }
+
 interface IUserContext {
   userLogin: (
     formData: ILoginFormData,
@@ -24,13 +25,26 @@ interface IUserContext {
   load: boolean;
   openModal: boolean;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+  openModalMoto: boolean;
+  setOpenModalMoto: React.Dispatch<React.SetStateAction<boolean>>;
+  editProfileMotoboy: (formData: IupdateMotoboy) => Promise<void>;
 }
+
+export interface IupdateMotoboy {
+  name: string;
+  email: string;
+  setor: string;
+  telefone: string;
+  CNH: number;
+  plate: string;
+}
+
 interface IUser {
   email: string;
   name: string;
   id: number;
   userType: string;
-  cnh: number;
+  CNH: number|string;
   plate: string;
   model: string;
   avatar: string;
@@ -50,6 +64,7 @@ export const UserProvider = ({ children }: IUserProvider) => {
   const [user, setUser] = useState<IUser | null>(null);
   const [load, setLoad] = useState(true);
   const [openModal, setOpenModal] = useState(false);
+  const [openModalMoto, setOpenModalMoto] = useState(false);
 
   const navigate = useNavigate();
 
@@ -109,8 +124,8 @@ export const UserProvider = ({ children }: IUserProvider) => {
         navigate("/dashboardemotoboy");
       }
     } catch (error: AxiosError<APIError> | any) {
-      console.log(error.response?.data)
-      toast.error("Ops... Algo deu errado, tente novamente!")
+      console.log(error);
+      toast.error(error.response?.data)
     } finally {
       setLoading(false);
     }
@@ -121,6 +136,8 @@ export const UserProvider = ({ children }: IUserProvider) => {
     localStorage.removeItem("@USERID");
     setUser(null);
     navigate("/");
+    setOpenModalMoto(false)
+    setOpenModal(false)
   };
 
   const editProfile = async (formData: IupdateEmpresas) => {
@@ -133,10 +150,9 @@ export const UserProvider = ({ children }: IUserProvider) => {
         },
       });
       setUser(response.data);
-      toast.success("Perfil atualizado com sucesso!")
+      toast.success("Perfil atualizado com sucesso!");
     } catch (error) {
-      toast.error("Ops... Algo deu errado, tente novamente!")
-
+      toast.error("Ops... Algo deu errado, tente novamente!");
     } finally {
       setOpenModal(false);
     }
@@ -146,10 +162,11 @@ export const UserProvider = ({ children }: IUserProvider) => {
     try {
       setLoad(true);
       await Api.post("/users", formData);
-      toast.success("Empresa cadastrada com sucesso!")
+      toast.success("Empresa cadastrada com sucesso!");
       navigate("/");
     } catch (error: AxiosError<APIError> | any) {
-      console.log(error.response?.data);
+      console.log(error);
+      toast.error(error.response?.data)
     } finally {
       setLoad(false);
     }
@@ -159,14 +176,34 @@ export const UserProvider = ({ children }: IUserProvider) => {
     try {
       setLoad(true);
       await Api.post("/users", formData);
-      toast.success("Usuário cadastrado com sucesso!")
+      toast.success("Usuário cadastrado com sucesso!");
       navigate("/");
     } catch (error: AxiosError<APIError> | any) {
-      console.log(error.response?.data);
+      console.log(error);
+      toast.error(error.response?.data)
     } finally {
       setLoad(false);
     }
   };
+
+  const editProfileMotoboy = async (formData: IupdateMotoboy) => {
+    const id = localStorage.getItem("@USERID");
+    const token = localStorage.getItem("@TOKEN");
+    try {
+      const response = await Api.patch(`/users/${id}`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setUser(response.data);
+      toast.success("Perfil atualizado com sucesso!");
+    } catch (error) {
+      toast.error("Ops... Algo deu errado, tente novamente!");
+    } finally {
+      setOpenModalMoto(false);
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -179,6 +216,9 @@ export const UserProvider = ({ children }: IUserProvider) => {
         editProfile,
         setOpenModal,
         openModal,
+        openModalMoto,
+        setOpenModalMoto,
+        editProfileMotoboy,
       }}
     >
       {children}

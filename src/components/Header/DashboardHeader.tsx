@@ -8,9 +8,15 @@ import menuIcon from "../../assets/images/icon-menu.svg";
 import { DropDownMenu } from "./DropDownMenu";
 
 export const DashboardHeader = () => {
-  const { logout, setOpenModal } = useContext(UserContext);
+  const { logout, setOpenModal, setOpenModalMoto } = useContext(UserContext);
   const [isOpen, setIsOpen] = useState(false);
 
+  const openModais = () => {
+    setOpenModal(true);
+    setOpenModalMoto(true);
+  };
+
+  
   return (
     <DashboardHeaderStyle>
       {isOpen ? <DropDownMenu /> : null}
@@ -23,7 +29,7 @@ export const DashboardHeader = () => {
         />
         <div className="buttonsContainer">
           <ButtonDefault
-            onClick={() => setOpenModal(true)}
+            onClick={() => openModais()}
             buttonSize="medium"
             buttonStyle="orange"
           >

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { modalAnimation } from "./animations";
 
 export const ModalContainer = styled.div`
 
@@ -22,7 +23,7 @@ export const ModalContainer = styled.div`
     height: fit-content;
     background-color: var(--whiteFixed);
     z-index: 3;
-
+    animation: ${modalAnimation} 1s ease;
 
     border: none;
 

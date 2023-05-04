@@ -21,6 +21,7 @@ interface IJobsContext {
   jobsNotAccept: IJobs[];
   jobsAccept: IJobs[];
   aceptedJobEmpresas: IJobs[];
+  priceTotal: number;
 }
 
 interface IJobsProvider {
@@ -51,6 +52,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
 	const [aceptedJobEmpresas, setAceptedJobEmpresa] = useState<IJobs[]>(
 		[]
 	);
+	const [priceTotal, setPriceTotal] = useState(0)
 	const [openModalAddJob, setOpenModalAddJob] = useState(false);
 	const [openModalUpJob, setOpenModalUpJob] = useState(false);
 	const [currentJob, setCurrentJob] = useState<IJobs | null>(null);
@@ -69,7 +71,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
 
         setJobsList(response.data);
       } catch (error) {
-        console.error(error);
+        toast.error("Ops... Algo deu errado, tente novamente!");
       }
     };
     getAllJobs();
@@ -102,6 +104,10 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
 						}
 					);
 				setJobsAccept(jobMotoBoy);
+				const totalPriceJob = jobsAccept.reduce((count, price) => {
+					return count + Number(price.price)
+				}, 0)
+				setPriceTotal(totalPriceJob)
 			} catch (error) {
 				console.log(error);
 			}
@@ -150,7 +156,8 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
       setJobsList([...jobsList, response.data]);
       toast.success("Entrega publicada com sucesso!");
     } catch (error) {
-      console.error(error);
+      toast.error("Ops... Algo deu errado, tente novamente!");
+      console.log(error)
     } finally {
       setOpenModalAddJob(false);
     }
@@ -173,7 +180,8 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
       toast.success("Entrega deletada com sucesso!");
       setJobsList([...newJobList]);
     } catch (error) {
-      console.error(error);
+      toast.error("Ops... Algo deu errado, tente novamente!");
+      console.log(error)
     }
   };
 
@@ -199,7 +207,8 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
       toast.success("Entrega modificada com sucesso!");
       setJobsList([...newJobList, response.data]);
     } catch (error) {
-      console.error(error);
+      toast.error("Ops... Algo deu errado, tente novamente!");
+      console.log(error)
     } finally {
       setOpenModalUpJob(false);
     }
@@ -221,7 +230,8 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
       );
       toast.success("Entrega aceita com sucesso!");
     } catch (error) {
-      console.error(error);
+      toast.error("Ops... Algo deu errado, tente novamente!");
+      console.log(error)
     }
   };
 
@@ -232,6 +242,9 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
 
 		setAceptedJobEmpresa([...accept]);
 	};
+
+
+
 
   return (
     <JobsContext.Provider
@@ -251,6 +264,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
         jobsNotAccept,
         jobsAccept,
         aceptedJobEmpresas,
+		priceTotal,
       }}
     >
       {children}

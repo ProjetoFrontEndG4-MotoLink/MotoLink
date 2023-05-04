@@ -124,7 +124,7 @@ export const UserProvider = ({ children }: IUserProvider) => {
       }
     } catch (error: AxiosError<APIError> | any) {
       console.log(error);
-      toast.error(error.response?.data)
+      toast.error(error.response?.data);
     } finally {
       setLoading(false);
     }
@@ -135,8 +135,8 @@ export const UserProvider = ({ children }: IUserProvider) => {
     localStorage.removeItem("@USERID");
     setUser(null);
     navigate("/");
-    setOpenModalMoto(false)
-    setOpenModal(false)
+    setOpenModalMoto(false);
+    setOpenModal(false);
   };
 
   const editProfile = async (formData: IupdateEmpresas) => {
@@ -151,7 +151,7 @@ export const UserProvider = ({ children }: IUserProvider) => {
       setUser(response.data);
       toast.success("Perfil atualizado com sucesso!");
     } catch (error) {
-      toast.error("Ops... Algo deu errado, tente novamente!");
+      console.error(error);
     } finally {
       setOpenModal(false);
     }
@@ -165,7 +165,7 @@ export const UserProvider = ({ children }: IUserProvider) => {
       navigate("/");
     } catch (error: AxiosError<APIError> | any) {
       console.log(error);
-      toast.error(error.response?.data)
+      toast.error(error.response?.data);
     } finally {
       setLoad(false);
     }
@@ -178,8 +178,7 @@ export const UserProvider = ({ children }: IUserProvider) => {
       toast.success("Usuário cadastrado com sucesso!");
       navigate("/");
     } catch (error: AxiosError<APIError> | any) {
-      console.log(error);
-      toast.error(error.response?.data)
+      toast.error(error.response?.data);
     } finally {
       setLoad(false);
     }
@@ -188,7 +187,7 @@ export const UserProvider = ({ children }: IUserProvider) => {
   const editProfileMotoboy = async (formData: IupdateMotoboy) => {
     const id = localStorage.getItem("@USERID");
     const token = localStorage.getItem("@TOKEN");
-    console.log("teste")
+    console.log("teste");
     try {
       const response = await Api.patch(`/users/${id}`, formData, {
         headers: {

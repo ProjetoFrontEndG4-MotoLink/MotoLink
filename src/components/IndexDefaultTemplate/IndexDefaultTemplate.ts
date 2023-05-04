@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { AnimationFadeIn2, AnimationFadeIn3 } from "../../styles/animations";
 
 export const StyledLoginPage = styled.div`
   display: flex;
@@ -34,6 +35,8 @@ export const StyledLoginPage = styled.div`
       gap: 20px;
       width: 32.68rem;
 
+      animation: ${AnimationFadeIn3} 1s ease;
+
       .logo__column1 {
         width: 130px;
         height: auto;
@@ -60,6 +63,7 @@ export const StyledLoginPage = styled.div`
       gap: 40px;
       align-self: center;
       width: 29.68rem;
+      animation: ${AnimationFadeIn2} 1s ease;
 
       .registerRedirect__Container {
         display: flex;

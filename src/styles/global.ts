@@ -75,7 +75,7 @@ export const GlobalStyles = createGlobalStyle`
 
     .textDefaultBold {
         font-size: var(--text-1);
-        font-weight: var(--weight-3);
+        font-weight: var(--weight-2);
         color: var(--grey-1);
     }
 
@@ -144,5 +144,3 @@ export const GlobalStyles = createGlobalStyle`
         }
     }
 `;
-
-

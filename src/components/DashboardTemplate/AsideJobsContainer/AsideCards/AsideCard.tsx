@@ -1,16 +1,20 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { IJobsProps } from "..";
 import { AsideCardTemplate } from "./AsideCards";
 import { UserContext } from "../../../../providers/UserContext";
+import { ICardProp } from "../../../JobCard/JobCard";
 
-export const AsideCard = ({jobs}: IJobsProps) => {
+interface IAsideCardProp{
+children:React.ReactNode
+}
+
+
+export const AsideCard = ({children}: IAsideCardProp) => {
 	const {user} = useContext(UserContext)
 	return (
 		<AsideCardTemplate>
-			<h4>{user?.name}</h4>
 			<div className="Card__Info__Detail">
-				<h5>{jobs.local}</h5>
-				<p>{jobs.price}</p>
+				{children}
 			</div>
 		</AsideCardTemplate>
 	);

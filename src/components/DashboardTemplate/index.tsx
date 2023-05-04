@@ -10,12 +10,14 @@ import { AsideContainer } from "./AsideJobsContainer";
 
 interface IDashboardTemplateProps {
   buttonAddJob?: true;
-  children: React.ReactNode;
+  firstChildren: React.ReactNode;
+  secondChildren: React.ReactNode;
 }
 
 export const DashboardTemplate = ({
   buttonAddJob,
-  children,
+  firstChildren,
+  secondChildren,
 }: IDashboardTemplateProps) => {
   const { setOpenModalAddJob } = useContext(JobsContext);
 
@@ -38,16 +40,10 @@ export const DashboardTemplate = ({
                 </ButtonDefault>
               ) : null}
             </div>
-            {children}
+            {firstChildren}
           </div>
         </div>
-        <div className="main__column2">
-          <AsideContainer>
-            <AsideCard />
-            <AsideCard />
-            <AsideCard />
-          </AsideContainer>
-        </div>
+        <div className="main__column2">{secondChildren}</div>
       </MainStyle>
       <Footer />
     </>

@@ -66,7 +66,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
 
         setJobsList(response.data);
       } catch (error) {
-        toast.error("Ops... Algo deu errado, tente novamente!");
+        console.error(error);
       }
     };
     getAllJobs();
@@ -89,7 +89,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
         });
         setJobsAccept([...response.data, jobMotoBoy]);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
     getJobsAccept();
@@ -136,8 +136,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
       setJobsList([...jobsList, response.data]);
       toast.success("Entrega publicada com sucesso!");
     } catch (error) {
-      toast.error("Ops... Algo deu errado, tente novamente!");
-      console.log(error)
+      console.error(error);
     } finally {
       setOpenModalAddJob(false);
     }
@@ -158,8 +157,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
       toast.success("Entrega deletada com sucesso!");
       setJobsList([...newJobList]);
     } catch (error) {
-      toast.error("Ops... Algo deu errado, tente novamente!");
-      console.log(error)
+      console.error(error);
     }
   };
 
@@ -181,8 +179,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
       toast.success("Entrega modificada com sucesso!");
       setJobsList([...newJobList, response.data]);
     } catch (error) {
-      toast.error("Ops... Algo deu errado, tente novamente!");
-      console.log(error)
+      console.error(error);
     } finally {
       setOpenModalUpJob(false);
     }
@@ -204,8 +201,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
       );
       toast.success("Entrega aceita com sucesso!");
     } catch (error) {
-      toast.error("Ops... Algo deu errado, tente novamente!");
-      console.log(error)
+      console.error(error);
     }
   };
 

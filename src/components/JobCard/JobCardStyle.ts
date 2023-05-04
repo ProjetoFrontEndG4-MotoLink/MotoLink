@@ -1,3 +1,4 @@
+import { AnimationFadeIn } from './../../styles/animations';
 import styled from "styled-components";
 
 export const CardTemplate = styled.div`
@@ -5,6 +6,7 @@ export const CardTemplate = styled.div`
   align-self: center;
   width: 100%;
   max-width: 100%;
+  animation: ${AnimationFadeIn} 1s ease;
 
   h4 {
     display: flex;

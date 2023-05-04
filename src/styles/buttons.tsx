@@ -53,6 +53,7 @@ export const ButtonDefault = styled.button<IStyledButtonProps>`
           :hover {
             border: 2px solid var(--brand-4-shadow);
             background-color: var(--brand-4-shadow);
+            transition: opacity 1s;
           }
         `;
       case "grey":
@@ -63,6 +64,7 @@ export const ButtonDefault = styled.button<IStyledButtonProps>`
           :hover {
             border: 2px solid var(--grey-1);
             background-color: var(--grey-1);
+            transition: opacity 1s;
           }
         `;
       case "yellow":
@@ -74,6 +76,7 @@ export const ButtonDefault = styled.button<IStyledButtonProps>`
           :hover {
             border: 2px solid var(--brand-2);
             background-color: var(--brand-2);
+            transition: opacity 1s;
           }
         `;
       case "lightGrey":
@@ -84,6 +87,7 @@ export const ButtonDefault = styled.button<IStyledButtonProps>`
           :hover {
             border: 2px solid var(--grey-1);
             background-color: var(--grey-1);
+            transition: opacity 1s;
           }
         `;
     }

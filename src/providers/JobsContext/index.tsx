@@ -122,16 +122,15 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
         },
       });
 
-      const jobEmpresa = jobsList.filter((job) => {
-        return job.companyId == id;
-      });
+      const newJobList = jobsList.filter((job) => job.id !== id);
 
       toast.success("Entrega deletada com sucesso!");
-      setJobById(jobEmpresa);
+      setJobsList([...newJobList]);
     } catch (error) {
       toast.error("Ops... Algo deu errado, tente novamente!");
     }
   };
+  console.log(jobsList);
 
   const updateJob = async (formData: IUpJob) => {
     const token = localStorage.getItem("@TOKEN");

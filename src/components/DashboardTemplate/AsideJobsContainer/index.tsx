@@ -5,7 +5,9 @@ type JobAsideProps = {
 };
 
 export const AsideContainer = ({ children }: JobAsideProps) => {
-
-  return <AsideStyle>{children}</AsideStyle>;
-  
+  return (
+    <AsideStyle>
+      <ul>{children}</ul>
+    </AsideStyle>
+  );
 };

@@ -17,7 +17,7 @@ export const DashEmpresas = () => {
     deleteJob,
     jobById,
     setOpenModalUpJob,
-    aceptedJobEmpresas,
+    acceptedJobEmpresas,
     openModalAddJob,
     openModalUpJob,
   } = useContext(JobsContext);
@@ -72,14 +72,14 @@ export const DashEmpresas = () => {
         secondChildren={
           <AsideContainer>
             <h3>Entregas aceitas</h3>
-            {aceptedJobEmpresas.length > 0 ? (
-              aceptedJobEmpresas.map((job) => {
+            {acceptedJobEmpresas.length > 0 ? (
+              acceptedJobEmpresas.map((job) => {
+                console.log(job);
                 return (
                   <AsideCard key={job.id}>
-                    <h4>Motoboy: {job.name}</h4>
-
-                    <h5>Endereço: {job.local}</h5>
-                    <p> Placa da Moto: {job.plate}</p>
+                    <p className="textDefaultBold">Motoboy</p>
+                    <p className="textSmallBold">Endereço</p>
+                    <p>{job.local}</p>
                   </AsideCard>
                 );
               })

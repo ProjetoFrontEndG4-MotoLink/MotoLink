@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const AsideStyle = styled.aside`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
 
   box-sizing: border-box;
   width: 100%;

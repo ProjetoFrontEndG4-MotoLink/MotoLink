@@ -21,7 +21,7 @@ interface IJobsContext {
   currentJob: IJobs | null;
   jobsNotAccept: IJobs[];
   jobsAccept: IJobs[];
-  aceptedJobEmpresas: IJobs[];
+  acceptedJobEmpresas: IJobs[];
 }
 
 interface IJobsProvider {
@@ -47,7 +47,7 @@ export const JobsContext = createContext({} as IJobsContext);
 export const JobsProvider = ({ children }: IJobsProvider) => {
   const [jobsList, setJobsList] = useState<IJobs[]>([]);
   const [jobById, setJobById] = useState<IJobs[]>([]);
-  const [aceptedJobEmpresas, setAceptedJobEmpresa] = useState<IJobs[]>([]);
+  const [acceptedJobEmpresas, setAcceptedJobEmpresa] = useState<IJobs[]>([]);
   const [jobsAccept, setJobsAccept] = useState<IJobs[]>([]);
   const [jobsNotAccept, setJobsNotAccept] = useState<IJobs[]>([]);
   const [openModalAddJob, setOpenModalAddJob] = useState(false);
@@ -88,7 +88,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
     setJobsNotAccept(jobNotAccept);
     setJobById(jobEmpresa);
 
-    jobsAceptEmpresa();
+    jobsAcceptEmpresa();
   }, [jobsList]);
 
   const addNewJob = async (formData: IAddNewJob) => {
@@ -203,12 +203,12 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
     }
   };
 
-  const jobsAceptEmpresa = () => {
-    const acept = jobById.filter((job) => {
+  const jobsAcceptEmpresa = () => {
+    const accept = jobById.filter((job) => {
       return job.status == false;
     });
 
-    setAceptedJobEmpresa([...acept]);
+    setAcceptedJobEmpresa([...accept]);
   };
 
   return (
@@ -228,7 +228,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
         acceptJob,
         jobsNotAccept,
         jobsAccept,
-        aceptedJobEmpresas,
+        acceptedJobEmpresas,
       }}
     >
       {children}

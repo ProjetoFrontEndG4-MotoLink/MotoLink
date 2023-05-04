@@ -50,9 +50,11 @@ export const DashMotoboy = () => {
             ? jobsAccept.map((job) => {
                 return (
                   <AsideCard>
-                    <h4>Empresa: {job.companyName}</h4>
-                    <h5>Endereço: {job.local}</h5>
-                    <p>Taxa : {job.price}</p>
+                    <h3>{job.companyName}</h3>
+                    <p className="textSmallBold">Entrega</p>
+                    <h5>{job.local}</h5>
+                    <p className="textSmallBold">Taxa</p>
+                    <p>{job.price}</p>
                   </AsideCard>
                 );
               })

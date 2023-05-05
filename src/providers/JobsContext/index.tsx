@@ -69,7 +69,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
 
         setJobsList(response.data);
       } catch (error) {
-        console.error(error);
+        toast.error("Ops... Algo deu errado, tente novamente!");
       }
     };
     getAllJobs();
@@ -96,7 +96,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
         }, 0);
         setPriceTotal(totalPriceJob);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
     getJobsAccept();
@@ -128,7 +128,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
         {
           local: formData.local,
           companyId: Number(id),
-          price: formData.price,
+          price: Number(formData.price),
           status: true,
           companyName: user?.name,
         },
@@ -142,7 +142,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
       setJobsList([...jobsList, response.data]);
       toast.success("Entrega publicada com sucesso!");
     } catch (error) {
-      console.log(error);
+      toast.error("Ops... Algo deu errado, tente novamente!");
     } finally {
       setOpenModalAddJob(false);
     }
@@ -163,7 +163,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
       toast.success("Entrega deletada com sucesso!");
       setJobsList([...newJobList]);
     } catch (error) {
-      console.log(error);
+      toast.error("Ops... Algo deu errado, tente novamente!");
     }
   };
 
@@ -172,11 +172,15 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
     const id = currentJob?.id;
 
     try {
-      const response = await Api.patch(`/jobs/${id}`, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await Api.patch(
+        `/jobs/${id}`,
+        { local: formData.local, price: Number(formData.price) },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       const newJobList = jobsList.filter((job) => {
         return job.id !== id;
@@ -185,7 +189,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
       toast.success("Entrega modificada com sucesso!");
       setJobsList([...newJobList, response.data]);
     } catch (error) {
-      console.log(error);
+      toast.error("Ops... Algo deu errado, tente novamente!");
     } finally {
       setOpenModalUpJob(false);
     }
@@ -212,7 +216,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
       );
       toast.success("Entrega aceita com sucesso!");
     } catch (error) {
-      console.log(error);
+      toast.error("Ops... Algo deu errado, tente novamente!");
     }
   };
 

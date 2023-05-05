@@ -24,7 +24,6 @@ export const UpdateModalEmpresas = () => {
   } = useForm<IupdateEmpresas>({ resolver: zodResolver(UpdateEmpresas) });
 
   const submit: SubmitHandler<IupdateEmpresas> = (formData) => {
-    console.log(formData);
     editProfile(formData);
   };
 

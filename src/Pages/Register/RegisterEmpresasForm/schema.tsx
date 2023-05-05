@@ -20,7 +20,7 @@ export const SchemaEmpresas = z
     telefone:z.string().min(11,"Pelo menos onze dígitos"),
     setor: z.string().min(1, "Campo obrigatório"),
     userType: z.string().min(1, "Campo obrigatório"),
-    avatar: z.string().min(1, "Campo obrigatório")
+  
   })
   .refine(({ password, confirmPassword }) => confirmPassword === password, {
     message: "As senhas não correspondem",

@@ -17,7 +17,7 @@ export const SchemaMotoboy = z
       .regex(/(?=.*[$*&@#!])/, "É necessário pelo menos um caracter especial"),
 
     confirmPassword: z.string().min(1, "Confirme sua senha"),
-    avatar: z.string().min(1, "Campo obrigatório"),
+    
     CNH: z.string().min(9, "Pelo menos nove dígitos "),
     plate: z.string().min(7, "Pelo menos sete dígitos"),
     userType: z.string().min(1, "Campo obrigatório"),

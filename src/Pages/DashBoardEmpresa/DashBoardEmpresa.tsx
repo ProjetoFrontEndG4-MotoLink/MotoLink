@@ -42,7 +42,10 @@ export const DashEmpresas = () => {
                     </div>
                     <div className="Card__Info__Detail">
                       <h5>Taxa/entrega</h5>
-                      <p>{`R$${job.price}`}</p>
+                      <p>{`${job.price.toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: "BRL",
+                      })}`}</p>
                     </div>
                     <div className="interactionButtonsContainer">
                       <ButtonDefault
@@ -71,7 +74,6 @@ export const DashEmpresas = () => {
         }
         secondChildren={
           <AsideContainer>
-            <h3>Entregas aceitas</h3>
             {aceptedJobEmpresas.length > 0 ? (
               aceptedJobEmpresas.map((job) => {
                 return (

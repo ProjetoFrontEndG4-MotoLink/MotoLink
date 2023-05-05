@@ -42,6 +42,7 @@ export const ModalAddNewJob = () => {
           />
           <Input
             type="number"
+            step="any"
             id="Valor"
             label="Taxa de Entrega"
             placeholder="R$00,00"

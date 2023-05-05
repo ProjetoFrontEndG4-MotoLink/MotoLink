@@ -46,7 +46,7 @@ interface IUser {
   CNH: string;
   plate: string;
   model: string;
-  avatar: string;
+ 
   telefone: string;
   setor: string;
 }

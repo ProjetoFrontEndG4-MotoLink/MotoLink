@@ -12,7 +12,7 @@ export interface IRegisterMotoboyFormData {
   password: string;
   name: string;
   confirmPassword: string;
-  avatar: string;
+ 
   CNH: string;
   userType: string;
   plate: string;
@@ -78,14 +78,7 @@ export const RegisterFormMotoboy = () => {
           error={errors.confirmPassword}
           placeholder="Confirme sua senha"
         />
-        <Input
-          label="Foto do perfil"
-          type="text"
-          id={"Avatar"}
-          {...register("avatar")}
-          error={errors.avatar}
-          placeholder="Insira sua foto do perfil"
-        />
+       
 
         <Input
           label="CNH"
@@ -117,7 +110,7 @@ export const RegisterFormMotoboy = () => {
           buttonSize="default"
           buttonStyle="grey"
         >
-          {load ? "Entrando..." : "Fazer cadastro"}
+          {load ? "Cadastrando..." : "Fazer cadastro"}
         </ButtonDefault>
       </form>
     </StyledForm>

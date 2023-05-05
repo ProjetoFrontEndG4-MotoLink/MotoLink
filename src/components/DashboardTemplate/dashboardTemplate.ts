@@ -37,6 +37,7 @@ export const MainStyle = styled.main`
     display: grid;
     grid-template-columns: 3fr 1fr;
     gap: 20px;
+    padding: 40px 0px;
 
     .main__column1 {
       gap: 40px;

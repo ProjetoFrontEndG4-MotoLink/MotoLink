@@ -12,7 +12,7 @@ export interface IRegisterEmpresasFormData {
   password: string;
   name: string;
   confirmPassword: string;
-  avatar: string;
+ 
   setor: string;
   userType: string;
   telefone: number;
@@ -78,14 +78,6 @@ export const RegisterFormEmpresas = () => {
           placeholder="Confirme sua senha"
         />
 
-        <Input
-          label="Foto do perfil"
-          type="text"
-          id={"Avatar"}
-          {...register("avatar")}
-          error={errors.avatar}
-          placeholder="Insira sua foto do perfil"
-        />
 
         <Input
           label="Setor"
@@ -109,7 +101,7 @@ export const RegisterFormEmpresas = () => {
           buttonSize="default"
           buttonStyle="grey"
         >
-          {load ? "Entrando..." : "Fazer cadastro"}
+          {load ? "Cadastrando..." : "Fazer cadastro"}
         </ButtonDefault>
       </form>
     </StyledForm>

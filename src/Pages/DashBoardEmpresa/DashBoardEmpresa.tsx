@@ -77,8 +77,7 @@ export const DashEmpresas = () => {
                 return (
                   <AsideCard key={job.id}>
                     <p className="textDefaultBold">Motoboy: {job.name}</p>
-                    <p className="textSmallBold">Endereço{job.local}</p>
-                    <p>{job.local}</p>
+                    <p className="textSmallBold">Endereço: {job.local}</p>
                     <p>Placa da Moto: {job.plate}</p>
                   </AsideCard>
                 );

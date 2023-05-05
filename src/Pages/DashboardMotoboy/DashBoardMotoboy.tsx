@@ -25,11 +25,11 @@ export const DashMotoboy = () => {
             jobsNotAccept.map((job) => (
               <JobCard key={job.id} job={job}>
                 <div className="Card__Info__Detail">
-                  <h5>Local Da Entrega</h5>
+                  <h5>Local Da Entrega:</h5>
                   <p>{job.local}</p>
                 </div>
                 <div className="Card__Info__Detail">
-                  <h5>Taxa/entrega</h5>
+                  <h5>Taxa/entrega:</h5>
                   <p>{`R${job.price}`}</p>
                 </div>
                 <div className="interactionButtonsContainer">

@@ -57,6 +57,20 @@ export const StyledLoginPage = styled.div`
     width: 50%;
     min-height: 100vh;
 
+    .optionsContainer {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+
+      .titleOptionsContainer {
+        font-size: var(--title-3);
+      }
+
+      .optionsCard__container {
+        max-width: 100%;
+      }
+    }
+
     .formContainer {
       display: flex;
       flex-direction: column;
@@ -90,9 +104,10 @@ export const StyledLoginPage = styled.div`
     flex-direction: column;
     gap: 30px;
     width: 380px;
+    padding: 0px 20px;
 
     .titleOptionsContainer {
-      font-size: 1.75rem;
+      font-size: var(--tittle-3);
       font-weight: var(--weight-3);
       color: var(--grey-2);
 
@@ -103,6 +118,7 @@ export const StyledLoginPage = styled.div`
     }
 
     .optionsCard__container {
+      max-width: 100%;
       display: flex;
       gap: 10px;
     }
@@ -151,7 +167,15 @@ export const StyledLoginPage = styled.div`
 
       .optionsContainer {
         align-self: center;
-        max-width: 90%;
+        width: 100%;
+
+        .titleOptionsContainer {
+          text-align: center;
+        }
+
+        .optionsCard__container {
+          align-self: center;
+        }
       }
     }
   }
@@ -159,6 +183,17 @@ export const StyledLoginPage = styled.div`
   @media (min-width: 768px) {
     .header__login {
       display: none;
+    }
+
+    .titleOptionsContainer {
+      font-size: var(--title-3);
+      font-weight: var(--weight-3);
+      color: var(--grey-2);
+
+      span {
+        color: var(--brand-1);
+        font-weight: var(--weight-2);
+      }
     }
   }
 `;

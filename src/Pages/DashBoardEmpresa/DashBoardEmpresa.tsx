@@ -71,7 +71,6 @@ export const DashEmpresas = () => {
         }
         secondChildren={
           <AsideContainer>
-            <h3>Entregas aceitas</h3>
             {aceptedJobEmpresas.length > 0 ? (
               aceptedJobEmpresas.map((job) => {
                 return (

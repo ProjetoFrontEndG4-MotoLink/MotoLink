@@ -27,7 +27,6 @@ export const UpdateModalMotoboy = () => {
   } = useForm<IupdateMotoboy>({ resolver: zodResolver(UpdateMotoboy) });
 
   const submit: SubmitHandler<IupdateMotoboy> = (formData) => {
-    console.log(formData);
     editProfileMotoboy(formData);
   };
 

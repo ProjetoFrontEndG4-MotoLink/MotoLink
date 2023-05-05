@@ -42,7 +42,10 @@ export const DashEmpresas = () => {
                     </div>
                     <div className="Card__Info__Detail">
                       <h5>Taxa/entrega</h5>
-                      <p>{`R$: ${job.price.toFixed(2)}`}</p>
+                      <p>{`${job.price.toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: "BRL",
+                      })}`}</p>
                     </div>
                     <div className="interactionButtonsContainer">
                       <ButtonDefault

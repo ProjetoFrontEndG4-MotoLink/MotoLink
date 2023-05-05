@@ -46,7 +46,7 @@ interface IUser {
   CNH: string;
   plate: string;
   model: string;
- 
+
   telefone: string;
   setor: string;
 }
@@ -123,7 +123,6 @@ export const UserProvider = ({ children }: IUserProvider) => {
         navigate("/dashboardemotoboy");
       }
     } catch (error: AxiosError<APIError> | any) {
-      console.log(error);
       toast.error(error.response?.data);
     } finally {
       setLoading(false);
@@ -150,8 +149,8 @@ export const UserProvider = ({ children }: IUserProvider) => {
       });
       setUser(response.data);
       toast.success("Perfil atualizado com sucesso!");
-    } catch (error) {
-      console.error(error);
+    } catch (error: AxiosError<APIError> | any) {
+      toast.error(error.response?.data);
     } finally {
       setOpenModal(false);
     }
@@ -164,7 +163,6 @@ export const UserProvider = ({ children }: IUserProvider) => {
       toast.success("Empresa cadastrada com sucesso!");
       navigate("/");
     } catch (error: AxiosError<APIError> | any) {
-      console.log(error);
       toast.error(error.response?.data);
     } finally {
       setLoad(false);

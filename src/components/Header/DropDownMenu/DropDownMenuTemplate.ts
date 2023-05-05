@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { animationDropDown } from "../../../styles/animations";
 
 export const DropDownMenuTemplate = styled.div`
   display: block;
@@ -9,6 +10,8 @@ export const DropDownMenuTemplate = styled.div`
   width: 100%;
 
   background-color: red;
+
+  animation: ${animationDropDown} 1s ease;
 
   ul {
     margin: 0;

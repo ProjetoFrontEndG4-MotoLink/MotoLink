@@ -40,3 +40,12 @@ export const AnimationFadeIn3 = keyframes`
         opacity: 1;
     }
 `
+
+export const animationDropDown = keyframes`
+from {
+        transform: translateY(10%);
+        opacity: 0;
+    } to {
+        opacity: 1;
+    }
+`

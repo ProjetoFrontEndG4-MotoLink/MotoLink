@@ -17,6 +17,7 @@ export const AsideStyle = styled.aside`
     overflow-y: auto;
     display: flex;
     flex-direction: column;
+    padding-right: 10px;
     gap: 10px;
 
     ::-webkit-scrollbar {

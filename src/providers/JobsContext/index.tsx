@@ -128,7 +128,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
         {
           local: formData.local,
           companyId: Number(id),
-          price: formData.price,
+          price: Number(formData.price),
           status: true,
           companyName: user?.name,
         },
@@ -172,7 +172,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
     const id = currentJob?.id;
 
     try {
-      const response = await Api.patch(`/jobs/${id}`, formData, {
+      const response = await Api.patch(`/jobs/${id}`,{local:formData.local,price:Number(formData.price)}, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

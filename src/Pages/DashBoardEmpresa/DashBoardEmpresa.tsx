@@ -71,17 +71,19 @@ export const DashEmpresas = () => {
         }
         secondChildren={
           <AsideContainer>
-            <h3>Entregas aceitas</h3>
             {aceptedJobEmpresas.length > 0 ? (
               aceptedJobEmpresas.map((job) => {
                 return (
                   <AsideCard key={job.id}>
-                    <p className="textDefaultBold">Motoboy: {job.name}</p>
-
-                   
-
-                    <p className="textSmallBold">Endereço: {job.local}</p>
-    <p>Placa da Moto: {job.plate}</p>
+                    <p className="textDefaultBold">{job.name}</p>
+                    <div className="Card__Info__Detail">
+                      <h5 className="textSmallBold">Endereço</h5>
+                      <p className="textSmall">{job.local}</p>
+                    </div>
+                    <div className="Card__Info__Detail">
+                      <h5 className="textSmallBold">Placa da Moto</h5>
+                      <p className="textSmall">{job.plate}</p>
+                    </div>
                   </AsideCard>
                 );
               })

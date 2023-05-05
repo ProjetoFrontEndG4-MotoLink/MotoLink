@@ -11,7 +11,7 @@ export const UserDashboardInfoMotoboy = () => {
         <UserDashboardMotoboy>
             <div className="UserInfoDetails--name">
                 <h1>{user?.name}</h1>
-                <h2>{`R$${priceTotal.toFixed(2)}`} </h2>
+                <h2>{`R$: ${priceTotal.toFixed(2)}`} </h2>
             </div>
             <div className="UserInfoDetails">
                 <h3>Email: {user?.email}</h3>

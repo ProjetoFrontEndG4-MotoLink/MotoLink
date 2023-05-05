@@ -42,7 +42,7 @@ export const DashEmpresas = () => {
                     </div>
                     <div className="Card__Info__Detail">
                       <h5>Taxa/entrega</h5>
-                      <p>{`R$${job.price}`}</p>
+                      <p>{`R$: ${job.price.toFixed(2)}`}</p>
                     </div>
                     <div className="interactionButtonsContainer">
                       <ButtonDefault

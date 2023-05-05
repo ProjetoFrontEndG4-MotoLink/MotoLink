@@ -33,10 +33,9 @@ interface IUserContext {
 export interface IupdateMotoboy {
   name: string;
   email: string;
-  setor: string;
   telefone: string;
-  CNH: number;
-  plate: string;
+  CNH: number | string;
+  plate?: string;
 }
 
 interface IUser {
@@ -44,7 +43,7 @@ interface IUser {
   name: string;
   id: number;
   userType: string;
-  cnh: number;
+  CNH: string;
   plate: string;
   model: string;
   avatar: string;
@@ -124,8 +123,8 @@ export const UserProvider = ({ children }: IUserProvider) => {
         navigate("/dashboardemotoboy");
       }
     } catch (error: AxiosError<APIError> | any) {
-      console.log(error.response?.data);
-      toast.error("Ops... Algo deu errado, tente novamente!");
+      console.log(error);
+      toast.error(error.response?.data);
     } finally {
       setLoading(false);
     }
@@ -136,6 +135,8 @@ export const UserProvider = ({ children }: IUserProvider) => {
     localStorage.removeItem("@USERID");
     setUser(null);
     navigate("/");
+    setOpenModalMoto(false);
+    setOpenModal(false);
   };
 
   const editProfile = async (formData: IupdateEmpresas) => {
@@ -150,7 +151,7 @@ export const UserProvider = ({ children }: IUserProvider) => {
       setUser(response.data);
       toast.success("Perfil atualizado com sucesso!");
     } catch (error) {
-      toast.error("Ops... Algo deu errado, tente novamente!");
+      console.error(error);
     } finally {
       setOpenModal(false);
     }
@@ -163,7 +164,8 @@ export const UserProvider = ({ children }: IUserProvider) => {
       toast.success("Empresa cadastrada com sucesso!");
       navigate("/");
     } catch (error: AxiosError<APIError> | any) {
-      console.log(error.response?.data);
+      console.log(error);
+      toast.error(error.response?.data);
     } finally {
       setLoad(false);
     }
@@ -176,7 +178,7 @@ export const UserProvider = ({ children }: IUserProvider) => {
       toast.success("Usuário cadastrado com sucesso!");
       navigate("/");
     } catch (error: AxiosError<APIError> | any) {
-      console.log(error.response?.data);
+      toast.error(error.response?.data);
     } finally {
       setLoad(false);
     }
@@ -185,6 +187,7 @@ export const UserProvider = ({ children }: IUserProvider) => {
   const editProfileMotoboy = async (formData: IupdateMotoboy) => {
     const id = localStorage.getItem("@USERID");
     const token = localStorage.getItem("@TOKEN");
+    console.log("teste");
     try {
       const response = await Api.patch(`/users/${id}`, formData, {
         headers: {

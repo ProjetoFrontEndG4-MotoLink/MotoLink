@@ -5,6 +5,7 @@ import { MainStyle } from "./dashboardTemplate";
 import { UserDashboardInfo } from "./UserDashboardInfo";
 import { useContext } from "react";
 import { JobsContext } from "../../providers/JobsContext";
+import { UserDashboardInfoMotoboy } from "./UserDashboardInfoMotoboy";
 
 interface IDashboardTemplateProps {
   buttonAddJob?: true;
@@ -24,7 +25,9 @@ export const DashboardTemplate = ({
       <DashboardHeader />
       <MainStyle className="container">
         <div className="main__column1">
-          <UserDashboardInfo />
+          {window.location.pathname === "/dashboardempresas" ? <UserDashboardInfo/> : (
+            <UserDashboardInfoMotoboy/>
+          )}
           <div className="JobsListContainer">
             <div className="JobsListContainer__header">
               <h2>Entregas Publicadas</h2>

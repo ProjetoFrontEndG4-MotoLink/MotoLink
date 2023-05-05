@@ -1,8 +1,9 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { Api } from "../../services/Api";
 import { IAddNewJob } from "../../Pages/DashBoardEmpresa/ModalAddNewJobs";
 import { IUpJob } from "../../Pages/DashBoardEmpresa/ModalUpdateJobs";
 import { toast } from "react-toastify";
+import { UserContext } from "../UserContext";
 
 interface IJobsContext {
   setOpenModalAddJob: React.Dispatch<React.SetStateAction<boolean>>;
@@ -20,6 +21,7 @@ interface IJobsContext {
   jobsNotAccept: IJobs[];
   jobsAccept: IJobs[];
   aceptedJobEmpresas: IJobs[];
+  priceTotal: number;
 }
 
 interface IJobsProvider {
@@ -45,12 +47,15 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
   const [jobsList, setJobsList] = useState<IJobs[]>([]);
   const [jobById, setJobById] = useState<IJobs[]>([]);
   const [jobsAccept, setJobsAccept] = useState<IJobs[]>([]);
+  const [jobsAcceptByMoto, setJobsAcceptByMoto] = useState<IJobs[]>([]);
   const [jobsNotAccept, setJobsNotAccept] = useState<IJobs[]>([]);
   const [aceptedJobEmpresas, setAceptedJobEmpresa] = useState<IJobs[]>([]);
+  const [priceTotal, setPriceTotal] = useState(0);
   const [openModalAddJob, setOpenModalAddJob] = useState(false);
   const [openModalUpJob, setOpenModalUpJob] = useState(false);
   const [currentJob, setCurrentJob] = useState<IJobs | null>(null);
 
+  const { user } = useContext(UserContext);
   useEffect(() => {
     const token = localStorage.getItem("@TOKEN");
 
@@ -64,7 +69,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
 
         setJobsList(response.data);
       } catch (error) {
-        toast.error("Ops... Algo deu errado, tente novamente!");
+        console.error(error);
       }
     };
     getAllJobs();
@@ -80,12 +85,16 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
             Authorization: `Bearer ${token}`,
           },
         });
-        setJobsAccept(response.data);
+        setJobsAcceptByMoto(response.data);
 
-        const jobMotoBoy = jobsAccept.filter((job) => {
+        const jobMotoBoy = jobsAcceptByMoto.filter((job) => {
           return job.idUser == Number(id);
         });
-        setJobsAccept([...response.data, jobMotoBoy]);
+        setJobsAccept(jobMotoBoy);
+        const totalPriceJob = jobsAccept.reduce((count, price) => {
+          return count + Number(price.price);
+        }, 0);
+        setPriceTotal(totalPriceJob);
       } catch (error) {
         console.log(error);
       }
@@ -121,6 +130,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
           companyId: Number(id),
           price: formData.price,
           status: true,
+          companyName: user?.name,
         },
         {
           headers: {
@@ -132,7 +142,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
       setJobsList([...jobsList, response.data]);
       toast.success("Entrega publicada com sucesso!");
     } catch (error) {
-      toast.error("Ops... Algo deu errado, tente novamente!");
+      console.log(error);
     } finally {
       setOpenModalAddJob(false);
     }
@@ -153,7 +163,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
       toast.success("Entrega deletada com sucesso!");
       setJobsList([...newJobList]);
     } catch (error) {
-      toast.error("Ops... Algo deu errado, tente novamente!");
+      console.log(error);
     }
   };
 
@@ -175,7 +185,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
       toast.success("Entrega modificada com sucesso!");
       setJobsList([...newJobList, response.data]);
     } catch (error) {
-      toast.error("Ops... Algo deu errado, tente novamente!");
+      console.log(error);
     } finally {
       setOpenModalUpJob(false);
     }
@@ -188,7 +198,12 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
     try {
       await Api.patch(
         `/jobs/${id}`,
-        { idUser: user_id, status: false },
+        {
+          idUser: user_id,
+          status: false,
+          name: user?.name,
+          plate: user?.plate,
+        },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -197,7 +212,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
       );
       toast.success("Entrega aceita com sucesso!");
     } catch (error) {
-      toast.error("Ops... Algo deu errado, tente novamente!");
+      console.log(error);
     }
   };
 
@@ -227,6 +242,7 @@ export const JobsProvider = ({ children }: IJobsProvider) => {
         jobsNotAccept,
         jobsAccept,
         aceptedJobEmpresas,
+        priceTotal,
       }}
     >
       {children}

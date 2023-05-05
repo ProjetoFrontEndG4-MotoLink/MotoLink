@@ -10,13 +10,14 @@ export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export const Input = forwardRef(
   (
-    { label, error, ...rest }: IInputProps,
+    { label, error,value,  ...rest}: IInputProps,
     ref: ForwardedRef<HTMLInputElement>
   ) => (
     <StyledInputContainer>
       {label ? <label>{label}</label> : null}
-      <input ref={ref} {...rest} />
+      <input ref={ref} {...rest} value={value}/>
       {error ? <p className="error">{error.message}</p> : null}
+
     </StyledInputContainer>
   )
 );

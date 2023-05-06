@@ -41,16 +41,16 @@ Com o aumento do consumo de produtos por delivery da população cresce também 
 
 ## Tecnologias utilizadas
 ### Front end
-JSON Server
-React
-ContextAPI
-React-Hook-Form
-Typescript
-Zod
-Resolver
-Axios
-Styled-Componentes
-Toastify
+- JSON Server
+- React
+- ContextAPI
+- React-Hook-Form
+- Typescript
+- Zod
+- Resolver
+- Axios
+- Styled-Componentes
+- Toastify
 
 ### Implantação em produção
 Front end web: Vercel

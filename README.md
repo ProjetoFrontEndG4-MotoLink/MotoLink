@@ -3,6 +3,8 @@ MotoLink é uma aplicação front end web responsiva, construída em grupo duran
 
 > A motolink conecta as melhores empresas aos motoboys mais rápidos do mercado.
 
+![GitLab](https://img.shields.io/github/license/ProjetoFrontEndG4-MotoLink/MotoLink)
+
 ## Sobre o projeto
 ### A ideia do projeto é:
 > *"Conectar empresas delivery e motoboys facilitando parcerias de longa data"*
